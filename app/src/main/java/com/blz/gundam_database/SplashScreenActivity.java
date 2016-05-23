@@ -15,7 +15,6 @@ import com.blz.gundam_database.entities.SplashScreenEntity;
 import com.blz.gundam_database.impl.presenters.SplashScreenPresenterImpl;
 import com.blz.gundam_database.interfaces.presenters.SplashScreenPresenter;
 import com.blz.gundam_database.interfaces.views.SplashScreenView;
-import com.blz.gundam_database.view.activity.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
