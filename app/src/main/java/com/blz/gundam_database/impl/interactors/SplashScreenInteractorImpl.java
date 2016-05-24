@@ -41,6 +41,9 @@ public class SplashScreenInteractorImpl extends FindCallback<AVObject> implement
         if (entityList.size() >= 1) {
             entity = entityList.get(0);
         }
+        if (entity == null){
+            entity = new SplashScreenEntity("http://tu.webps.cn/tb/img/4/TB1d.rBGpXXXXa9XpXXXXXXXXXX_%21%210-item_pic.jpg");
+        }
         return entity;
     }
 

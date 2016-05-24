@@ -1,16 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <!--<item name="android:actionOverflowMenuStyle" tools:targetApi="lollipop">@style/CustomOverFlow</item>-->
-        <item name="android:actionOverflowButtonStyle">@style/CustomOverFlow</item>
-        <item name="android:windowIsTranslucent">true</item>
-    </style>
-
+    <!-- 主要样式，没有ActionBar -->
     <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -19,9 +9,28 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <!-- 首页的样式 -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="android:actionOverflowMenuStyle" tools:targetApi="lollipop">@style/CustomOverFlow</item>-->
+        <item name="android:actionOverflowButtonStyle">@style/CustomOverFlow</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:actionBarStyle">@style/AppTheme.ActionBarWithNoTitle</item>
+    </style>
+
+    <!-- 首页右侧隐藏按钮的样式 -->
     <style name="CustomOverFlow">
         <item name="android:src">@mipmap/moreoverflow</item>
         <item name="android:paddingRight">10dp</item>
+    </style>
+
+    <!-- 首页显示文字为首页 -->
+    <style name="AppTheme.ActionBarWithNoTitle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:text">首页</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 </resources>
