@@ -1,5 +1,6 @@
 package com.blz.gundam_database;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.blz.gundam_database.views.activitys.AboutActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.menu_about://关于
-                startActivity();
+                startActivity(new Intent(this, AboutActivity.class));
                 break;
         }
         return b;

@@ -8,7 +8,7 @@
     android:background="@color/colorPrimary"
     tools:context="com.blz.gundam_database.SplashScreenActivity">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,11 +20,11 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/top_story_title_bg"/>
 
-    </FrameLayout>
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"

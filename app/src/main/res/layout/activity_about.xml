@@ -4,20 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.blz.gundam_database.views.activitys.AboutActivity">
-    <android.support.v7.widget.Toolbar
+
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimary">
-        <LinearLayout
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:scaleType="centerCrop"
+            android:alpha="0.8"
+            android:src="@mipmap/about_bg"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/top_story_title_bg"/>
+        <TextView
+            android:id="@+id/about_tvEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="邮箱：bulingzhuang@foxmail.com"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/about_tvSina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/about_tvEmail"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="新浪微博：BankSteel_卜令壮"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+        <RelativeLayout
+            android:id="@+id/about_head_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="8dp"
+                android:contentDescription="@string/back"
                 android:src="@mipmap/ic_back_white"/>
-        </LinearLayout>
-    </android.support.v7.widget.Toolbar>
+        </RelativeLayout>
+    </RelativeLayout>
+
 </LinearLayout>
