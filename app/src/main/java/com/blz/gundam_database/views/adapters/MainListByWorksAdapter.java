@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blz.gundam_database.R;
+import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MainListByWorkEntity;
 import com.squareup.picasso.Picasso;
 
@@ -27,7 +29,7 @@ import java.util.Map;
  */
 public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
-    private List<MainListByWorkEntity> mList;
+    private List<Object> mList;
     private Map<Type, Integer> mMap;
 
     public MainListByWorksAdapter(Context context, Map<Type, Integer> map) {
@@ -36,9 +38,10 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         mList = new ArrayList<>();
     }
 
-    public void addAll(Collection<? extends MainListByWorkEntity> collection) {
+    public void addAll(Collection<?> collection) {
         mList.clear();
         mList.addAll(collection);
+        mList.add(new EmptyEntity());
         notifyDataSetChanged();
     }
 
@@ -48,6 +51,8 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         switch (viewType) {
             case R.layout.adapter_main_grid:
                 return new MainListByWorksAdapterViewHolder(inflate);
+            case R.layout.adapter_main_empty:
+                return new MainEmptyViewHolder(inflate);
         }
         return null;
     }
@@ -56,11 +61,17 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case R.layout.adapter_main_grid:
-                MainListByWorkEntity entity = mList.get(position);
+                final MainListByWorkEntity entity = (MainListByWorkEntity) mList.get(position);
                 MainListByWorksAdapterViewHolder viewHolder = (MainListByWorksAdapterViewHolder) holder;
-                Picasso.with(mContext).load(entity.getIcon()).error(R.mipmap.ic_launcher).placeholder(R.mipmap.ic_launcher).into(viewHolder.mIvIcon);
+                Picasso.with(mContext).load(entity.getIcon()).error(R.mipmap.menu_icon).placeholder(R.mipmap.menu_icon).into(viewHolder.mIvIcon);
                 viewHolder.mTvOriginalName.setText(entity.getOriginalName());
                 viewHolder.mTvStoryYear.setText(entity.getStoryYear());
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(mContext,entity.getWorkId(),Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
         }
     }
@@ -80,14 +91,19 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         private final ImageView mIvIcon;
         private final TextView mTvOriginalName;
         private final TextView mTvStoryYear;
-        private final CardView mCv;
 
         public MainListByWorksAdapterViewHolder(View itemView) {
             super(itemView);
-            mCv = (CardView) itemView.findViewById(R.id.item_main_cv);
             mIvIcon = (ImageView) itemView.findViewById(R.id.item_main_iv);
             mTvOriginalName = (TextView) itemView.findViewById(R.id.item_main_tvOriginalName);
             mTvStoryYear = (TextView) itemView.findViewById(R.id.item_main_tvStoryYear);
+        }
+    }
+
+    public static class MainEmptyViewHolder extends RecyclerView.ViewHolder{
+
+        public MainEmptyViewHolder(View itemView) {
+            super(itemView);
         }
     }
 }

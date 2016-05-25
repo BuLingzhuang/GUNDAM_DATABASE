@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MainListByWorkEntity;
 import com.blz.gundam_database.impl.presenters.MainPresenterImpl;
 import com.blz.gundam_database.interfaces.presenters.MainPresenter;
@@ -88,7 +89,19 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
 
         HashMap<Type, Integer> map = new HashMap<>();
         map.put(MainListByWorkEntity.class,R.layout.adapter_main_grid);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        map.put(EmptyEntity.class,R.layout.adapter_main_empty);
+        GridLayoutManager layout = new GridLayoutManager(this, 2);
+        layout.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position+1 == mAdapter.getItemCount()){
+                    return 2;
+                }else {
+                    return 1;
+                }
+            }
+        });
+        mRecyclerView.setLayoutManager(layout);
         mAdapter = new MainListByWorksAdapter(this, map);
         mRecyclerView.setAdapter(mAdapter);
 
