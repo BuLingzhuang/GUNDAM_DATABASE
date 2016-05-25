@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/item_main_cv"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="213dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="16dp"
+    app:cardCornerRadius="3dp"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/item_main_iv"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/menu_icon"
+            android:contentDescription="icon"/>
+        <TextView
+            android:id="@+id/item_main_tvOriginalName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="9dp"
+            android:text="機動戦士ガンダム00"
+            android:lines="1"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#1e1e1e"
+            android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/item_main_tvStoryYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:text="C.E. 70"
+            android:lines="1"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/gray"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
+    <!--</RelativeLayout>-->

@@ -1,7 +1,8 @@
 package com.blz.gundam_database.views.activitys;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,7 +24,9 @@ public class AboutActivity extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
     }
@@ -36,7 +39,6 @@ public class AboutActivity extends SwipeBackActivity {
     @Override
     public void onBackPressed() {
         finish();
-        //Genymotion上alpha动画好象有显示问题
         overridePendingTransition(0, R.anim.finish_activity_alpha);
     }
 }

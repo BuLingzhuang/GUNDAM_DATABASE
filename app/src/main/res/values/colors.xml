@@ -6,4 +6,6 @@
 
     <color name="gray">#767676</color>
     <color name="white">#fff</color>
+
+    <color name="setting_bg">#f8f8f8</color>
 </resources>

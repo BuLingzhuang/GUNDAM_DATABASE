@@ -15,6 +15,14 @@ public class MyClass {
         Entity splashScreenEntity = schema.addEntity("SplashScreenEntity");
         splashScreenEntity.addStringProperty("imgUrl");
 
+        Entity mainListByWorkEntity = schema.addEntity("MainListByWorkEntity");
+        mainListByWorkEntity.addStringProperty("workId");
+        mainListByWorkEntity.addStringProperty("name");
+        mainListByWorkEntity.addStringProperty("originalName");
+        mainListByWorkEntity.addStringProperty("englishName");
+        mainListByWorkEntity.addStringProperty("storyYear");
+        mainListByWorkEntity.addStringProperty("icon");
+
         try {
             new DaoGenerator().generateAll(schema,"lib/java-gen");
         } catch (Exception e) {
