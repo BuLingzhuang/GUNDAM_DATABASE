@@ -48,7 +48,7 @@
 
     <!-- 机体列表页标题文字样式 -->
     <style name="ExpandedAppBarTitleStyle">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:textColor">#fff</item>
     </style>
 

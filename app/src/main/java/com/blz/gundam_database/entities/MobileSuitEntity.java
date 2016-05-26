@@ -15,6 +15,7 @@ public class MobileSuitEntity {
     private String launchDate;
     private String price;
     private String images;
+    private String headImage;
 
     public MobileSuitEntity() {
     }
@@ -23,7 +24,7 @@ public class MobileSuitEntity {
         this.objectId = objectId;
     }
 
-    public MobileSuitEntity(String objectId, String workId, String originalName, String modelSeries, String scale, String itemNo, String launchDate, String price, String images) {
+    public MobileSuitEntity(String objectId, String workId, String originalName, String modelSeries, String scale, String itemNo, String launchDate, String price, String images, String headImage) {
         this.objectId = objectId;
         this.workId = workId;
         this.originalName = originalName;
@@ -33,6 +34,7 @@ public class MobileSuitEntity {
         this.launchDate = launchDate;
         this.price = price;
         this.images = images;
+        this.headImage = headImage;
     }
 
     public String getObjectId() {
@@ -105,6 +107,14 @@ public class MobileSuitEntity {
 
     public void setImages(String images) {
         this.images = images;
+    }
+
+    public String getHeadImage() {
+        return headImage;
+    }
+
+    public void setHeadImage(String headImage) {
+        this.headImage = headImage;
     }
 
 }

@@ -42,11 +42,12 @@ public class MobileSuitInteractorImpl extends FindCallback<AVObject> implements 
                 entity.setLaunchDate(obj.getString("launchDate"));
                 entity.setPrice(obj.getString("price"));
                 entity.setImages(obj.getString("images"));
+                entity.setHeadImage(obj.getString("headImage"));
 
                 entityList.add(entity);
             }
             mListener.myResponse(entityList);
-        } else if(list == null){
+        } else {
             mListener.myError("无数据");
         }
     }

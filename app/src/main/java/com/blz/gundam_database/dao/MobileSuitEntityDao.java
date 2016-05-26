@@ -32,6 +32,7 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
         public final static Property LaunchDate = new Property(6, String.class, "launchDate", false, "LAUNCH_DATE");
         public final static Property Price = new Property(7, String.class, "price", false, "PRICE");
         public final static Property Images = new Property(8, String.class, "images", false, "IMAGES");
+        public final static Property HeadImage = new Property(9, String.class, "headImage", false, "HEAD_IMAGE");
     };
 
 
@@ -55,7 +56,8 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
                 "\"ITEM_NO\" TEXT," + // 5: itemNo
                 "\"LAUNCH_DATE\" TEXT," + // 6: launchDate
                 "\"PRICE\" TEXT," + // 7: price
-                "\"IMAGES\" TEXT);"); // 8: images
+                "\"IMAGES\" TEXT," + // 8: images
+                "\"HEAD_IMAGE\" TEXT);"); // 9: headImage
     }
 
     /** Drops the underlying database table. */
@@ -113,6 +115,11 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
         if (images != null) {
             stmt.bindString(9, images);
         }
+ 
+        String headImage = entity.getHeadImage();
+        if (headImage != null) {
+            stmt.bindString(10, headImage);
+        }
     }
 
     /** @inheritdoc */
@@ -133,7 +140,8 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // itemNo
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // launchDate
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // price
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // images
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // images
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // headImage
         );
         return entity;
     }
@@ -150,6 +158,7 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
         entity.setLaunchDate(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setPrice(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setImages(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setHeadImage(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
      }
     
     /** @inheritdoc */

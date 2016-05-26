@@ -31,6 +31,7 @@ public class MobileSuitPresenterImpl implements MobileSuitPresenter, MobileSuitI
     @Override
     public void myResponse(List<MobileSuitEntity> mList) {
         mView.updateData(mList);
+        mView.uploading(false);
     }
 
     @Override

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="3dp"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/item_mobile_suit_iv"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/menu_icon"
+            android:contentDescription="@string/gundam_img"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/item_mobile_suit_tvOriginalName"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="型号：Mobile Suit GNT-0000"
+                android:textColor="@color/black_light"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                tools:ignore="NestedWeights"/>
+
+            <TextView
+                android:id="@+id/item_mobile_suit_tvModelSeries"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="系列：MG"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textColor="@color/black_light"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/item_mobile_suit_tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="价格（含税）：4500円"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textColor="@color/black_light"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/item_mobile_suit_tvLaunchDate"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="发布时间：2010-11"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textColor="@color/black_light"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>
+    <!--</RelativeLayout>-->

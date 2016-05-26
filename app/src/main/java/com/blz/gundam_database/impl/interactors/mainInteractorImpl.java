@@ -15,7 +15,7 @@ import java.util.List;
  * on 2016/5/24
  * E-mail bulingzhuang@foxmail.com
  */
-public class MainInteractorImpl extends FindCallback<AVObject> implements MainInteractor{
+public class MainInteractorImpl extends FindCallback<AVObject> implements MainInteractor {
 
     private CallResponseListener mListener;
 
@@ -29,7 +29,7 @@ public class MainInteractorImpl extends FindCallback<AVObject> implements MainIn
 
     @Override
     public void done(List<AVObject> list, AVException e) {
-        if (list.size() >=1) {
+        if (list.size() >= 1) {
             ArrayList<MainListByWorkEntity> mEntityList = new ArrayList<>();
             for (AVObject obj : list) {
                 MainListByWorkEntity entity = new MainListByWorkEntity();
@@ -42,8 +42,8 @@ public class MainInteractorImpl extends FindCallback<AVObject> implements MainIn
                 mEntityList.add(entity);
             }
             mListener.myResponse(mEntityList);
-        }else {
-            mListener.myError("加载数据失败");
+        } else {
+            mListener.myError("无数据");
         }
     }
 }

@@ -33,6 +33,7 @@ public class MyClass {
         mobileSuitEntity.addStringProperty("launchDate");
         mobileSuitEntity.addStringProperty("price");
         mobileSuitEntity.addStringProperty("images");
+        mobileSuitEntity.addStringProperty("headImage");
 
         try {
             new DaoGenerator().generateAll(schema,"lib/java-gen");
