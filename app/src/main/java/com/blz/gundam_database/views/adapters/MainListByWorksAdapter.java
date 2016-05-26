@@ -1,6 +1,7 @@
 package com.blz.gundam_database.views.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MainListByWorkEntity;
+import com.blz.gundam_database.views.activitys.MobileSuitActivity;
 import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
@@ -69,7 +71,9 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(mContext,entity.getWorkId(),Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(mContext, MobileSuitActivity.class);
+                        intent.putExtra("MainListByWorkEntity",entity);
+                        mContext.startActivity(intent);
                     }
                 });
                 break;

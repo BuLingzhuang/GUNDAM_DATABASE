@@ -38,11 +38,18 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <!-- 右滑回退页面样式 -->
     <style name="SwipeBackLayout">
         <item name="edge_size">50dp</item>
         <item name="shadow_left">@drawable/shadow_left</item>
         <item name="shadow_right">@drawable/shadow_right</item>
         <item name="shadow_bottom">@drawable/shadow_bottom</item>
+    </style>
+
+    <!-- 机体列表页标题文字样式 -->
+    <style name="ExpandedAppBarTitleStyle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#fff</item>
     </style>
 
 </resources>

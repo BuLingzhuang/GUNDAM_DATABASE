@@ -23,6 +23,17 @@ public class MyClass {
         mainListByWorkEntity.addStringProperty("storyYear");
         mainListByWorkEntity.addStringProperty("icon");
 
+        Entity mobileSuitEntity = schema.addEntity("MobileSuitEntity");
+        mobileSuitEntity.addStringProperty("objectId").primaryKey();
+        mobileSuitEntity.addStringProperty("workId");
+        mobileSuitEntity.addStringProperty("originalName");
+        mobileSuitEntity.addStringProperty("modelSeries");
+        mobileSuitEntity.addStringProperty("scale");
+        mobileSuitEntity.addStringProperty("itemNo");
+        mobileSuitEntity.addStringProperty("launchDate");
+        mobileSuitEntity.addStringProperty("price");
+        mobileSuitEntity.addStringProperty("images");
+
         try {
             new DaoGenerator().generateAll(schema,"lib/java-gen");
         } catch (Exception e) {
