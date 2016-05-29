@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'blz'
+            keyPassword 'blz19930915'
+            storeFile file('C:/Users/q1376/Desktop/GUNDAM_DATABASE/GUNDAM_DATABASE.jks')
+            storePassword 'blz19930915'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
-
     defaultConfig {
         applicationId "com.blz.gundam_database"
         minSdkVersion 16
@@ -15,6 +22,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
 }
@@ -33,4 +44,5 @@ dependencies {
     compile files('libs/httpmime-4.2.4.jar')
     compile files('libs/okhttp-2.6.0-leancloud.jar')
     compile files('libs/okio-1.6.0-leancloud.jar')
+    compile project(':qAMasterSDK')
 }

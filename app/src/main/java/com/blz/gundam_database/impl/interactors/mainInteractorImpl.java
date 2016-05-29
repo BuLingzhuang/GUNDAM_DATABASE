@@ -29,21 +29,25 @@ public class MainInteractorImpl extends FindCallback<AVObject> implements MainIn
 
     @Override
     public void done(List<AVObject> list, AVException e) {
-        if (list.size() >= 1) {
-            ArrayList<MainListByWorkEntity> mEntityList = new ArrayList<>();
-            for (AVObject obj : list) {
-                MainListByWorkEntity entity = new MainListByWorkEntity();
-                entity.setName(obj.getString("name"));
-                entity.setEnglishName(obj.getString("englishName"));
-                entity.setOriginalName(obj.getString("originalName"));
-                entity.setIcon(obj.getString("icon"));
-                entity.setWorkId(obj.getString("workId"));
-                entity.setStoryYear(obj.getString("storyYear"));
-                mEntityList.add(entity);
+        if (list != null) {
+            if (list.size() >= 1){
+                ArrayList<MainListByWorkEntity> mEntityList = new ArrayList<>();
+                for (AVObject obj : list) {
+                    MainListByWorkEntity entity = new MainListByWorkEntity();
+                    entity.setName(obj.getString("name"));
+                    entity.setEnglishName(obj.getString("englishName"));
+                    entity.setOriginalName(obj.getString("originalName"));
+                    entity.setIcon(obj.getString("icon"));
+                    entity.setWorkId(obj.getString("workId"));
+                    entity.setStoryYear(obj.getString("storyYear"));
+                    mEntityList.add(entity);
+                }
+                mListener.myResponse(mEntityList);
+            }else {
+                mListener.myError("无数据");
             }
-            mListener.myResponse(mEntityList);
         } else {
-            mListener.myError("无数据");
+            mListener.myError("网络错误");
         }
     }
 }

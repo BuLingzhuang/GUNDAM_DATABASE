@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-land\\qamaster_header_normal.xml",
+        "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\layout-land\\qamaster_header_normal.xml"
+    },
+    {
+        "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-land\\qamaster_login_normal.xml",
+        "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\layout-land\\qamaster_login_normal.xml"
+    },
+    {
+        "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-land\\qamaster_header_quick.xml",
+        "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\layout-land\\qamaster_header_quick.xml"
+    },
+    {
+        "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-land\\qamaster_feedback.xml",
+        "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\layout-land\\qamaster_feedback.xml"
+    }
+]

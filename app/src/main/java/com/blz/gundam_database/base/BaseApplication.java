@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.avos.avoscloud.AVOSCloud;
 import com.blz.gundam_database.utils.DBUtils;
+import com.testin.agent.TestinAgent;
 
 /**
  * Created by BuLingzhuang
@@ -16,5 +17,6 @@ public class BaseApplication extends Application{
         super.onCreate();
         DBUtils.initialize(this);
         AVOSCloud.initialize(this,"f3kcniWbbAvyxysaypyeCkjV-gzGzoHsz","LAx4i7JNDiv7kcNxTP4pypMO");
+        TestinAgent.init(this,"1bdc21864f994261ae52e69c78ee3e2b","Celestial Being");
     }
 }

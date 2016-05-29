@@ -41,7 +41,7 @@ public class SplashScreenInteractorImpl extends FindCallback<AVObject> implement
         if (entityList.size() >= 1) {
             entity = entityList.get(0);
         }
-        if (entity == null){
+        if (entity == null) {
             entity = new SplashScreenEntity("http://tu.webps.cn/tb/img/4/TB1d.rBGpXXXXa9XpXXXXXXXXXX_%21%210-item_pic.jpg");
         }
         return entity;
@@ -59,7 +59,7 @@ public class SplashScreenInteractorImpl extends FindCallback<AVObject> implement
 
     @Override
     public void done(List<AVObject> list, AVException e) {
-        if (list.size() >= 1) {
+        if (list != null && list.size() >= 1) {
             AVObject avObject = list.get(0);
             String imgUrl = avObject.getString("imgUrl");
             SplashScreenEntityDao dao = DBUtils.getDaoSession().getSplashScreenEntityDao();
@@ -67,7 +67,7 @@ public class SplashScreenInteractorImpl extends FindCallback<AVObject> implement
             dao.insertOrReplaceInTx(new SplashScreenEntity(imgUrl));
             Tools.showLogE(this, "网络请求成功，图片地址：" + imgUrl);
         } else {
-            Tools.showSnackBar(mContext, "网络访问失败", mGenView);
+            Tools.showSnackBar(mContext, "网络错误", mGenView);
         }
     }
 }
