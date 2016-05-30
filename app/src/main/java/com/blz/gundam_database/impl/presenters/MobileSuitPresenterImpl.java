@@ -46,6 +46,10 @@ public class MobileSuitPresenterImpl implements MobileSuitPresenter, CallRespons
             entity.setPrice(obj.getString("price"));
             entity.setImages(obj.getString("images"));
             entity.setHeadImage(obj.getString("headImage"));
+            entity.setVersion(obj.getString("version"));
+            entity.setManufacturer(obj.getString("manufacturer"));
+            entity.setPrototypeMaster(obj.getString("prototypeMaster"));
+            entity.setBoxImage(obj.getString("boxImage"));
 
             entityList.add(entity);
         }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.blz.gundam_database.views.activitys.MSDetailActivity">
+    <include layout="@layout/head_toolbar"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/msdetail_boxImage"
+                    android:layout_width="140dp"
+                    android:layout_height="217dp"
+                    android:contentDescription="@string/boxImage"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="217dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/msdetail_tvOriginalName"
+                        style="@style/msdetail_tv_style"
+                        android:text="型号：Mobile Suit GNT-0000"/>
+
+                    <TextView
+                        android:id="@+id/msdetail_tvVersion"
+                        style="@style/msdetail_tv_style"
+                        android:text="版本：普通版"/>
+
+                    <TextView
+                        android:id="@+id/msdetail_tvModelSeries"
+                        style="@style/msdetail_tv_style"
+                        android:text="系列：MG"/>
+
+                    <TextView
+                        android:id="@+id/msdetail_tvScale"
+                        style="@style/msdetail_tv_style"
+                        android:text="比例：1/100"/>
+
+                    <TextView
+                        android:id="@+id/msdetail_tvPrice"
+                        style="@style/msdetail_tv_style"
+                        android:text="价格：4500円"/>
+
+                    <TextView
+                        android:id="@+id/msdetail_tvManufacturer"
+                        style="@style/msdetail_tv_style"
+                        android:text="厂商：万代"/>
+
+                    <TextView
+                        android:id="@+id/msdetail_tvPrototypeMaster"
+                        style="@style/msdetail_tv_style"
+                        android:text="原型师：未知"/>
+
+                    <TextView
+                        android:id="@+id/msdetail_tvItemNo"
+                        style="@style/msdetail_tv_style"
+                        android:text="编号：4543112-65654-4"/>
+
+                    <TextView
+                        android:id="@+id/msdetail_tvLaunchDate"
+                        style="@style/msdetail_tv_style"
+                        android:text="发售时间：NOV 2010"/>
+                </LinearLayout>
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

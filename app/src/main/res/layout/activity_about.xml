@@ -53,8 +53,8 @@
             android:layout_height="36dp"
             android:layout_centerVertical="true"
             android:layout_margin="8dp"
-            android:contentDescription="@string/back"
-            android:src="@mipmap/ic_back_white"/>
+            android:contentDescription="@string/back_text"
+            android:src="@mipmap/back"/>
     </RelativeLayout>
 
 </RelativeLayout>

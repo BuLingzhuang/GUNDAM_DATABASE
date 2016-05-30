@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">GUNDAM模型资料库</string>
-    <string name="back">后退</string>
     <string name="mobile_suit_title_img">标题图片</string>
     <string name="gundam_img">机体图片</string>
+    <string name="msd_title_bg">机体详情标题背景图</string>
+    <string name="boxImage">盒照</string>
+    <string name="back_text">返回</string>
 </resources>

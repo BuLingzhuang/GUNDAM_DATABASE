@@ -34,6 +34,10 @@ public class MyClass {
         mobileSuitEntity.addStringProperty("price");
         mobileSuitEntity.addStringProperty("images");
         mobileSuitEntity.addStringProperty("headImage");
+        mobileSuitEntity.addStringProperty("version");
+        mobileSuitEntity.addStringProperty("manufacturer");
+        mobileSuitEntity.addStringProperty("prototypeMaster");
+        mobileSuitEntity.addStringProperty("boxImage");
 
         try {
             new DaoGenerator().generateAll(schema,"lib/java-gen");

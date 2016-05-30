@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name=".base.BaseApplication"
@@ -33,6 +33,8 @@
         <activity android:name=".views.activitys.AboutActivity">
         </activity>
         <activity android:name=".views.activitys.MobileSuitActivity">
+        </activity>
+        <activity android:name=".views.activitys.MSDetailActivity">
         </activity>
     </application>
 

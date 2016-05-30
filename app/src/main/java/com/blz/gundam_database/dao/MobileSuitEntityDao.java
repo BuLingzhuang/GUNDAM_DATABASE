@@ -33,6 +33,10 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
         public final static Property Price = new Property(7, String.class, "price", false, "PRICE");
         public final static Property Images = new Property(8, String.class, "images", false, "IMAGES");
         public final static Property HeadImage = new Property(9, String.class, "headImage", false, "HEAD_IMAGE");
+        public final static Property Version = new Property(10, String.class, "version", false, "VERSION");
+        public final static Property Manufacturer = new Property(11, String.class, "manufacturer", false, "MANUFACTURER");
+        public final static Property PrototypeMaster = new Property(12, String.class, "prototypeMaster", false, "PROTOTYPE_MASTER");
+        public final static Property BoxImage = new Property(13, String.class, "boxImage", false, "BOX_IMAGE");
     };
 
 
@@ -57,7 +61,11 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
                 "\"LAUNCH_DATE\" TEXT," + // 6: launchDate
                 "\"PRICE\" TEXT," + // 7: price
                 "\"IMAGES\" TEXT," + // 8: images
-                "\"HEAD_IMAGE\" TEXT);"); // 9: headImage
+                "\"HEAD_IMAGE\" TEXT," + // 9: headImage
+                "\"VERSION\" TEXT," + // 10: version
+                "\"MANUFACTURER\" TEXT," + // 11: manufacturer
+                "\"PROTOTYPE_MASTER\" TEXT," + // 12: prototypeMaster
+                "\"BOX_IMAGE\" TEXT);"); // 13: boxImage
     }
 
     /** Drops the underlying database table. */
@@ -120,6 +128,26 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
         if (headImage != null) {
             stmt.bindString(10, headImage);
         }
+ 
+        String version = entity.getVersion();
+        if (version != null) {
+            stmt.bindString(11, version);
+        }
+ 
+        String manufacturer = entity.getManufacturer();
+        if (manufacturer != null) {
+            stmt.bindString(12, manufacturer);
+        }
+ 
+        String prototypeMaster = entity.getPrototypeMaster();
+        if (prototypeMaster != null) {
+            stmt.bindString(13, prototypeMaster);
+        }
+ 
+        String boxImage = entity.getBoxImage();
+        if (boxImage != null) {
+            stmt.bindString(14, boxImage);
+        }
     }
 
     /** @inheritdoc */
@@ -141,7 +169,11 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // launchDate
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // price
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // images
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // headImage
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // headImage
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // version
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // manufacturer
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // prototypeMaster
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13) // boxImage
         );
         return entity;
     }
@@ -159,6 +191,10 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
         entity.setPrice(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setImages(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setHeadImage(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setVersion(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setManufacturer(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setPrototypeMaster(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setBoxImage(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
      }
     
     /** @inheritdoc */

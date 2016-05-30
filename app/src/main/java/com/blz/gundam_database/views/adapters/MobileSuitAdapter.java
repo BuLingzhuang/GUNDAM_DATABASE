@@ -2,6 +2,7 @@ package com.blz.gundam_database.views.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MobileSuitEntity;
 import com.blz.gundam_database.utils.Tools;
+import com.blz.gundam_database.views.activitys.MSDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
@@ -62,13 +64,21 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case R.layout.adapter_mobile_suit:
-                MobileSuitEntity entity = (MobileSuitEntity) mList.get(position);
+                final MobileSuitEntity entity = (MobileSuitEntity) mList.get(position);
                 MobileSuitAdapterDefaultViewHolder viewHolder = (MobileSuitAdapterDefaultViewHolder) holder;
                 Picasso.with(mContext).load(entity.getHeadImage()).error(R.mipmap.menu_icon).placeholder(R.mipmap.menu_icon).into(viewHolder.mIv);
                 viewHolder.mTvOriginalName.setText("型号："+entity.getOriginalName());
                 viewHolder.mTvModelSeries.setText("系列："+entity.getModelSeries());
                 viewHolder.mTvPrice.setText("价格（含税）："+entity.getPrice());
                 viewHolder.mTvLaunchDate.setText("发布时间："+entity.getLaunchDate());
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, MSDetailActivity.class);
+                        intent.putExtra("MobileSuitEntity",entity);
+                        mContext.startActivity(intent);
+                    }
+                });
                 break;
         }
     }
