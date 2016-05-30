@@ -1,6 +1,7 @@
 package com.blz.gundam_database.interfaces.interactors;
 
 import com.blz.gundam_database.entities.MainListByWorkEntity;
+import com.blz.gundam_database.interfaces.CallResponseListener;
 
 import java.util.List;
 
@@ -11,8 +12,8 @@ import java.util.List;
  */
 public interface MainInteractor {
     void getData(CallResponseListener listener);
-    interface CallResponseListener{
-        void myResponse(List<MainListByWorkEntity> mList);
-        void myError(String eText);
-    }
+//    interface CallResponseListener{
+//        void myResponse(List<MainListByWorkEntity> mList);
+//        void myError(String eText);
+//    }
 }

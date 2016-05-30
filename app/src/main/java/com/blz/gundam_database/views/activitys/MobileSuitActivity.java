@@ -67,6 +67,7 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
 
     private void init() {
         mPresenter = new MobileSuitPresenterImpl(this);
+        mProgressBar.setDrawingCacheBackgroundColor(Tools.getColor(this,R.color.colorPrimary));
 
         //设置回退按钮
         setSupportActionBar(mToolbar);

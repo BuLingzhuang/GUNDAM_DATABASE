@@ -1,5 +1,6 @@
 package com.blz.gundam_database.views.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -56,14 +57,14 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return null;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case R.layout.adapter_mobile_suit:
                 MobileSuitEntity entity = (MobileSuitEntity) mList.get(position);
                 MobileSuitAdapterDefaultViewHolder viewHolder = (MobileSuitAdapterDefaultViewHolder) holder;
-                Tools.showLogE(this,entity.getHeadImage());
-                Picasso.with(mContext).load("http://s3.actoys.net/pcdata/attachment/album/201106/10/1046508yf8wcls6cqp73pf.jpg").error(R.mipmap.menu_icon).placeholder(R.mipmap.menu_icon).into(viewHolder.mIv);
+                Picasso.with(mContext).load(entity.getHeadImage()).error(R.mipmap.menu_icon).placeholder(R.mipmap.menu_icon).into(viewHolder.mIv);
                 viewHolder.mTvOriginalName.setText("型号："+entity.getOriginalName());
                 viewHolder.mTvModelSeries.setText("系列："+entity.getModelSeries());
                 viewHolder.mTvPrice.setText("价格（含税）："+entity.getPrice());

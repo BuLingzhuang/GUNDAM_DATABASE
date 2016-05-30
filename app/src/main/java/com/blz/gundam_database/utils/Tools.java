@@ -27,12 +27,18 @@ public class Tools {
         Snackbar snackbar = Snackbar.make(genView, text, Snackbar.LENGTH_LONG);
         //白底的SnackBar样式的方法
         Snackbar.SnackbarLayout snackBarLayout = (Snackbar.SnackbarLayout) snackbar.getView();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            snackBarLayout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary, null));
-        } else {
-            snackBarLayout.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
-        }
+        snackBarLayout.setBackgroundColor(getColor(context, R.color.colorPrimary));
         ((TextView) snackBarLayout.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(Color.WHITE);
         snackbar.show();
+    }
+
+    public static int getColor(Context context, int RColor) {
+        int color;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            color = context.getResources().getColor(RColor, null);
+        } else {
+            color = context.getResources().getColor(RColor);
+        }
+        return color;
     }
 }
