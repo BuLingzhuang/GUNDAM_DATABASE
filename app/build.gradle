@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'blz'
             keyPassword 'blz19930915'
-            storeFile file('C:/Users/q1376/Desktop/GUNDAM_DATABASE/GUNDAM_DATABASE.jks')
+            storeFile file('GUNDAM_DATABASE.jks')
             storePassword 'blz19930915'
         }
     }
