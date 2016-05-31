@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="6dp">
 
                 <ImageView
                     android:id="@+id/msdetail_boxImage"
@@ -84,8 +84,16 @@
                 </LinearLayout>
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/msdetail_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"/>
+                android:layout_height="220dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text=""/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
