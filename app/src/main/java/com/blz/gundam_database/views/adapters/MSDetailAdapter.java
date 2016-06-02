@@ -14,6 +14,7 @@ import com.blz.gundam_database.views.activitys.ImageBrowseActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by BuLingzhuang
@@ -35,6 +36,12 @@ public class MSDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public void add(MSDetailImageEntity entity) {
         mList.add(entity);
+        notifyDataSetChanged();
+    }
+
+    public void addAll(Collection<? extends MSDetailImageEntity> entities) {
+        mList.clear();
+        mList.addAll(entities);
         notifyDataSetChanged();
     }
 

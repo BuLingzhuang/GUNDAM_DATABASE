@@ -2,15 +2,12 @@ package com.blz.gundam_database.views.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.EmptyEntity;
@@ -72,7 +69,7 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(mContext, MobileSuitActivity.class);
-                        intent.putExtra("MainListByWorkEntity",entity);
+                        intent.putExtra("MainListByWorkEntity", entity);
                         mContext.startActivity(intent);
                     }
                 });
@@ -104,7 +101,7 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    public static class MainEmptyViewHolder extends RecyclerView.ViewHolder{
+    public static class MainEmptyViewHolder extends RecyclerView.ViewHolder {
 
         public MainEmptyViewHolder(View itemView) {
             super(itemView);

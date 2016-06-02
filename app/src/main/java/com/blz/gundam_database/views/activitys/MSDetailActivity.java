@@ -1,29 +1,25 @@
 package com.blz.gundam_database.views.activitys;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.MSDetailImageEntity;
 import com.blz.gundam_database.entities.MobileSuitEntity;
 import com.blz.gundam_database.utils.DividerItemDecoration;
-import com.blz.gundam_database.utils.RecyclerViewDivider;
-import com.blz.gundam_database.utils.Tools;
 import com.blz.gundam_database.views.adapters.MSDetailAdapter;
-import com.blz.gundam_database.views.swipebacklayout.SwipeBackActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
@@ -64,14 +60,9 @@ public class MSDetailActivity extends AppCompatActivity {
     TextView mHeadToolbarTitle;
     @Bind(R.id.msdetail_recyclerView)
     RecyclerView mMsdetailRecyclerView;
+    @Bind(R.id.msdetail_progressBar)
+    ProgressBar mMsdetailProgressBar;
     private MSDetailAdapter mAdapter;
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            mAdapter.add((MSDetailImageEntity) msg.obj);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,57 +88,22 @@ public class MSDetailActivity extends AppCompatActivity {
         mMsdetailTvLaunchDate.setText("发售时间：" + data.getLaunchDate());
         Picasso.with(this).load(data.getBoxImage()).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).into(mMsdetailBoxImage);
 
-        mAdapter = new MSDetailAdapter(this,data.getOriginalName(),data.getImages());
+        mAdapter = new MSDetailAdapter(this, data.getOriginalName(), data.getImages());
         mMsdetailRecyclerView.setAdapter(mAdapter);
 
         prepareImageList(data.getImages());
     }
 
     private void prepareImageList(String images) {
-        ArrayList<String> imageList = new ArrayList<>();
-        String[] split = images.split(",");
-        Collections.addAll(imageList, split);
-
-        for (String imageUrl : imageList) {
-            loadImage(imageUrl);
-        }
-    }
-
-    private void loadImage(final String imageUri) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                loadImageFromNetwork(imageUri);
-            }
-        }).start();
-    }
-
-
-    private void loadImageFromNetwork(String url) {
-        try {
-            URL m_url = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) m_url.openConnection();
-            InputStream in = con.getInputStream();
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(in, null, options);
-            float density = getResources().getDisplayMetrics().density;
-            int height = (int) (220*density);
-            int width = (int) ((220*density)/options.outHeight*options.outWidth);
-            in.close();
-            MSDetailImageEntity entity = new MSDetailImageEntity(url, height, width);
-            Message message = new Message();
-            message.obj = entity;
-            mHandler.sendMessage(message);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        isUploading(true);
+        MSDetailAsyncTask msDetailAsyncTask = new MSDetailAsyncTask(this);
+        msDetailAsyncTask.execute(images);
     }
 
     private void init() {
         mHeadToolbarTitle.setText("机体详情");
-        mMsdetailRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
-        mMsdetailRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL_LIST));
+        mMsdetailRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mMsdetailRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
     }
 
     @Override
@@ -159,5 +115,55 @@ public class MSDetailActivity extends AppCompatActivity {
     @OnClick(R.id.head_toolbar_back)
     public void onClick() {
         onBackPressed();
+    }
+
+    private void isUploading(boolean b) {
+        if (b) {
+            mMsdetailProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mMsdetailProgressBar.setVisibility(View.GONE);
+        }
+    }
+
+
+    class MSDetailAsyncTask extends AsyncTask<String, String, ArrayList<MSDetailImageEntity>> {
+        private Context mContext;
+
+        public MSDetailAsyncTask(Context context) {
+            mContext = context;
+        }
+
+        @Override
+        protected final ArrayList<MSDetailImageEntity> doInBackground(String... params) {
+            ArrayList<MSDetailImageEntity> entityList = new ArrayList<>();
+            String str = params[0];
+            ArrayList<String> imageList = new ArrayList<>();
+            String[] split = str.split(",");
+            Collections.addAll(imageList, split);
+            for (String url : imageList) {
+                try {
+                    URL m_url = new URL(url);
+                    HttpURLConnection con = (HttpURLConnection) m_url.openConnection();
+                    InputStream in = con.getInputStream();
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inJustDecodeBounds = true;
+                    BitmapFactory.decodeStream(in, null, options);
+                    float density = mContext.getResources().getDisplayMetrics().density;
+                    int height = (int) (220 * density);
+                    int width = (int) ((220 * density) / options.outHeight * options.outWidth);
+                    in.close();
+                    entityList.add(new MSDetailImageEntity(url, height, width));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return entityList;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<MSDetailImageEntity> msDetailImageEntities) {
+            mAdapter.addAll(msDetailImageEntities);
+            isUploading(false);
+        }
     }
 }

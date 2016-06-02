@@ -3,7 +3,6 @@ package com.blz.gundam_database.views.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MobileSuitEntity;
-import com.blz.gundam_database.utils.Tools;
 import com.blz.gundam_database.views.activitys.MSDetailActivity;
 import com.squareup.picasso.Picasso;
 
