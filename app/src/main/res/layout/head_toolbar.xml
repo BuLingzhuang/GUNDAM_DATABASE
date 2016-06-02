@@ -9,25 +9,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <ImageButton
             android:id="@+id/head_toolbar_back"
-            android:layout_width="50dp"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_centerInParent="true"
-                android:contentDescription="@string/back_text"
-                android:src="@mipmap/back"/>
-        </RelativeLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:scaleType="center"
+            android:src="@mipmap/back"/>
 
         <TextView
             android:id="@+id/head_toolbar_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="关于"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold"/>

@@ -5,9 +5,13 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,7 +36,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MSDetailActivity extends SwipeBackActivity {
+public class MSDetailActivity extends AppCompatActivity {
 
     @Bind(R.id.msdetail_boxImage)
     ImageView mMsdetailBoxImage;
@@ -55,12 +59,19 @@ public class MSDetailActivity extends SwipeBackActivity {
     @Bind(R.id.msdetail_tvLaunchDate)
     TextView mMsdetailTvLaunchDate;
     @Bind(R.id.head_toolbar_back)
-    RelativeLayout mHeadToolbarBack;
+    ImageButton mHeadToolbarBack;
     @Bind(R.id.head_toolbar_title)
     TextView mHeadToolbarTitle;
     @Bind(R.id.msdetail_recyclerView)
     RecyclerView mMsdetailRecyclerView;
     private MSDetailAdapter mAdapter;
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            mAdapter.add((MSDetailImageEntity) msg.obj);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +95,10 @@ public class MSDetailActivity extends SwipeBackActivity {
         mMsdetailTvPrototypeMaster.setText("原型师：" + data.getPrototypeMaster());
         mMsdetailTvItemNo.setText("编号：" + data.getItemNo());
         mMsdetailTvLaunchDate.setText("发售时间：" + data.getLaunchDate());
-        Picasso.with(this).load(data.getBoxImage()).placeholder(R.mipmap.menu_icon).error(R.mipmap.menu_icon).into(mMsdetailBoxImage);
+        Picasso.with(this).load(data.getBoxImage()).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).into(mMsdetailBoxImage);
+
+        mAdapter = new MSDetailAdapter(this,data.getOriginalName(),data.getImages());
+        mMsdetailRecyclerView.setAdapter(mAdapter);
 
         prepareImageList(data.getImages());
     }
@@ -122,7 +136,9 @@ public class MSDetailActivity extends SwipeBackActivity {
             int width = (int) ((220*density)/options.outHeight*options.outWidth);
             in.close();
             MSDetailImageEntity entity = new MSDetailImageEntity(url, height, width);
-            mAdapter.add(entity);
+            Message message = new Message();
+            message.obj = entity;
+            mHandler.sendMessage(message);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,8 +148,6 @@ public class MSDetailActivity extends SwipeBackActivity {
         mHeadToolbarTitle.setText("机体详情");
         mMsdetailRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
         mMsdetailRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL_LIST));
-        mAdapter = new MSDetailAdapter(this);
-        mMsdetailRecyclerView.setAdapter(mAdapter);
     }
 
     @Override

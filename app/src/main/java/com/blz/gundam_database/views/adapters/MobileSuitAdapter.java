@@ -66,7 +66,7 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case R.layout.adapter_mobile_suit:
                 final MobileSuitEntity entity = (MobileSuitEntity) mList.get(position);
                 MobileSuitAdapterDefaultViewHolder viewHolder = (MobileSuitAdapterDefaultViewHolder) holder;
-                Picasso.with(mContext).load(entity.getHeadImage()).error(R.mipmap.menu_icon).placeholder(R.mipmap.menu_icon).into(viewHolder.mIv);
+                Picasso.with(mContext).load(entity.getHeadImage()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).into(viewHolder.mIv);
                 viewHolder.mTvOriginalName.setText("型号："+entity.getOriginalName());
                 viewHolder.mTvModelSeries.setText("系列："+entity.getModelSeries());
                 viewHolder.mTvPrice.setText("价格（含税）："+entity.getPrice());

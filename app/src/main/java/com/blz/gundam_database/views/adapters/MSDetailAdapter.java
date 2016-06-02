@@ -1,50 +1,41 @@
 package com.blz.gundam_database.views.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.MSDetailImageEntity;
-import com.blz.gundam_database.utils.Tools;
+import com.blz.gundam_database.views.activitys.ImageBrowseActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by BuLingzhuang
  * on 2016/5/31
  * E-mail bulingzhuang@foxmail.com
  */
-public class MSDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    private List<MSDetailImageEntity> mList;
+public class MSDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private ArrayList<MSDetailImageEntity> mList;
     private Context mContext;
+    private String mOriginalName;
+    private String mImages;
 
-    public MSDetailAdapter(Context context) {
+    public MSDetailAdapter(Context context,String originalName,String images) {
         mContext = context;
         mList = new ArrayList<>();
+        mOriginalName = originalName;
+        mImages = images;
     }
 
-    public void addAll(Collection<? extends MSDetailImageEntity> collection){
-        mList.clear();
-        mList.addAll(collection);
-        notifyDataSetChanged();
-    }
-
-    public void add(MSDetailImageEntity entity){
+    public void add(MSDetailImageEntity entity) {
         mList.add(entity);
-        notifyItemInserted(mList.size()-1);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -54,10 +45,10 @@ public class MSDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder,int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         MSDetailImageEntity entity = mList.get(position);
         MSDetailAdapterViewHolder viewHolder = (MSDetailAdapterViewHolder) holder;
-        Picasso.with(mContext).load(entity.getImageUri()).placeholder(R.mipmap.menu_icon).error(R.mipmap.menu_icon).into(viewHolder.mImage);
+        Picasso.with(mContext).load(entity.getImageUri()).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).into(viewHolder.mImage);
 
         ViewGroup.LayoutParams params = viewHolder.itemView.getLayoutParams();
         params.height = entity.getHeight();
@@ -67,6 +58,11 @@ public class MSDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(mContext, ImageBrowseActivity.class);
+                intent.putExtra("originalName",mOriginalName);
+                intent.putExtra("images",mImages);
+                intent.putExtra("position",holder.getAdapterPosition());
+                mContext.startActivity(intent);
             }
         });
     }
@@ -76,7 +72,7 @@ public class MSDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return mList.size();
     }
 
-    private class MSDetailAdapterViewHolder extends RecyclerView.ViewHolder{
+    private class MSDetailAdapterViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView mImage;
 

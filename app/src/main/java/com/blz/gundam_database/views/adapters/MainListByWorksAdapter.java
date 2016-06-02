@@ -65,7 +65,7 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             case R.layout.adapter_main_grid:
                 final MainListByWorkEntity entity = (MainListByWorkEntity) mList.get(position);
                 MainListByWorksAdapterViewHolder viewHolder = (MainListByWorksAdapterViewHolder) holder;
-                Picasso.with(mContext).load(entity.getIcon()).error(R.mipmap.menu_icon).placeholder(R.mipmap.menu_icon).into(viewHolder.mIvIcon);
+                Picasso.with(mContext).load(entity.getIcon()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).into(viewHolder.mIvIcon);
                 viewHolder.mTvOriginalName.setText(entity.getOriginalName());
                 viewHolder.mTvStoryYear.setText(entity.getStoryYear());
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

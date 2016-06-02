@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
-            android:src="@mipmap/menu_icon"
+            android:src="@mipmap/default_placeholder"
             android:contentDescription="@string/gundam_img"/>
         <LinearLayout
             android:layout_width="0dp"

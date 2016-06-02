@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blz.gundam_database.R;
 
@@ -30,6 +31,10 @@ public class Tools {
         snackBarLayout.setBackgroundColor(getColor(context, R.color.colorPrimary));
         ((TextView) snackBarLayout.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(Color.WHITE);
         snackbar.show();
+    }
+
+    public static void showToast(Context context,String str){
+        Toast.makeText(context,str,Toast.LENGTH_SHORT).show();
     }
 
     public static int getColor(Context context, int RColor) {

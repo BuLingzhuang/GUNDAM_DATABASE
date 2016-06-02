@@ -22,7 +22,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
-            android:src="@mipmap/menu_icon"
+            android:src="@mipmap/default_placeholder"
             android:contentDescription="icon"/>
         <TextView
             android:id="@+id/item_main_tvOriginalName"

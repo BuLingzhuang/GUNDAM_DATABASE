@@ -5,4 +5,6 @@
     <string name="msd_title_bg">机体详情标题背景图</string>
     <string name="boxImage">盒照</string>
     <string name="back_text">返回</string>
+    <string name="about">关于</string>
+    <string name="message">消息</string>
 </resources>
