@@ -150,9 +150,9 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
                             }
                             fos.close();
                             is.close();
-                            message.obj = "保存成功\n"+file.getAbsolutePath();
+                            message.obj = "保存成功，"+file.getAbsolutePath();
                         } else {
-                            message.obj = "以保存\n"+file.getAbsolutePath();
+                            message.obj = "以保存，"+file.getAbsolutePath();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
