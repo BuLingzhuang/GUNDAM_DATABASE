@@ -62,4 +62,9 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="popupWindow_sh_anim_style">
+        <item name="android:windowEnterAnimation">@anim/pop_show_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_hidden_anim</item>
+    </style>
+
 </resources>

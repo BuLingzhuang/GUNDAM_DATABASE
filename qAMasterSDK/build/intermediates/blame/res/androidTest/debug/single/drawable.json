@@ -4,12 +4,12 @@
         "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\qamaster_report_feedback_circle.xml"
     },
     {
-        "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\qamaster_dialog_footer_background.xml",
-        "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\qamaster_dialog_footer_background.xml"
-    },
-    {
         "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\qamaster_star.xml",
         "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\qamaster_star.xml"
+    },
+    {
+        "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\qamaster_dialog_footer_background.xml",
+        "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\qamaster_dialog_footer_background.xml"
     },
     {
         "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\qamaster_beta_dialog_header_background.xml",
@@ -28,12 +28,12 @@
         "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\qamaster_button_problem.xml"
     },
     {
-        "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\qamaster_button.xml",
-        "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\qamaster_button.xml"
-    },
-    {
         "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\pencil.png",
         "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\pencil.png"
+    },
+    {
+        "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\qamaster_button.xml",
+        "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\qamaster_button.xml"
     },
     {
         "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\qamaster_dialog_header_background.xml",

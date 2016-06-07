@@ -22,6 +22,7 @@ public class MyClass {
         mainListByWorkEntity.addStringProperty("englishName");
         mainListByWorkEntity.addStringProperty("storyYear");
         mainListByWorkEntity.addStringProperty("icon");
+        mainListByWorkEntity.addStringProperty("webUrl");
 
         Entity mobileSuitEntity = schema.addEntity("MobileSuitEntity");
         mobileSuitEntity.addStringProperty("objectId").primaryKey();

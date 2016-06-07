@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -62,6 +63,8 @@ public class MSDetailActivity extends AppCompatActivity {
     RecyclerView mMsdetailRecyclerView;
     @Bind(R.id.msdetail_progressBar)
     ProgressBar mMsdetailProgressBar;
+    @Bind(R.id.msdetail_a)
+    TextView mMsdetailA;
     private MSDetailAdapter mAdapter;
 
     @Override
@@ -104,17 +107,14 @@ public class MSDetailActivity extends AppCompatActivity {
         mHeadToolbarTitle.setText("机体详情");
         mMsdetailRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mMsdetailRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
+
+        mMsdetailA.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
     public void onBackPressed() {
         finish();
         overridePendingTransition(0, R.anim.finish_activity_alpha);
-    }
-
-    @OnClick(R.id.head_toolbar_back)
-    public void onClick() {
-        onBackPressed();
     }
 
     private void isUploading(boolean b) {
@@ -125,6 +125,17 @@ public class MSDetailActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick({R.id.head_toolbar_back, R.id.msdetail_a})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.head_toolbar_back:
+                onBackPressed();
+                break;
+            case R.id.msdetail_a:
+
+                break;
+        }
+    }
 
     class MSDetailAsyncTask extends AsyncTask<String, String, ArrayList<MSDetailImageEntity>> {
         private Context mContext;

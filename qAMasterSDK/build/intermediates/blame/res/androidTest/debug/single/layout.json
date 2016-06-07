@@ -12,12 +12,12 @@
         "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\layout\\qamaster_problem_header.xml"
     },
     {
-        "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\qamaster_beta_login_page.xml",
-        "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\layout\\qamaster_beta_login_page.xml"
-    },
-    {
         "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\qamaster_report_success.xml",
         "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\layout\\qamaster_report_success.xml"
+    },
+    {
+        "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\qamaster_beta_login_page.xml",
+        "source": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\bundles\\debug\\res\\layout\\qamaster_beta_login_page.xml"
     },
     {
         "merged": "F:\\workspace4AndroidStudio\\GUNDAM_DATABASE\\qAMasterSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\qamaster_login_normal.xml",

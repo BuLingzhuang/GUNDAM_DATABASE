@@ -29,6 +29,7 @@ public class MainListByWorkEntityDao extends AbstractDao<MainListByWorkEntity, V
         public final static Property EnglishName = new Property(3, String.class, "englishName", false, "ENGLISH_NAME");
         public final static Property StoryYear = new Property(4, String.class, "storyYear", false, "STORY_YEAR");
         public final static Property Icon = new Property(5, String.class, "icon", false, "ICON");
+        public final static Property WebUrl = new Property(6, String.class, "webUrl", false, "WEB_URL");
     };
 
 
@@ -49,7 +50,8 @@ public class MainListByWorkEntityDao extends AbstractDao<MainListByWorkEntity, V
                 "\"ORIGINAL_NAME\" TEXT," + // 2: originalName
                 "\"ENGLISH_NAME\" TEXT," + // 3: englishName
                 "\"STORY_YEAR\" TEXT," + // 4: storyYear
-                "\"ICON\" TEXT);"); // 5: icon
+                "\"ICON\" TEXT," + // 5: icon
+                "\"WEB_URL\" TEXT);"); // 6: webUrl
     }
 
     /** Drops the underlying database table. */
@@ -92,6 +94,11 @@ public class MainListByWorkEntityDao extends AbstractDao<MainListByWorkEntity, V
         if (icon != null) {
             stmt.bindString(6, icon);
         }
+ 
+        String webUrl = entity.getWebUrl();
+        if (webUrl != null) {
+            stmt.bindString(7, webUrl);
+        }
     }
 
     /** @inheritdoc */
@@ -109,7 +116,8 @@ public class MainListByWorkEntityDao extends AbstractDao<MainListByWorkEntity, V
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // originalName
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // englishName
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // storyYear
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // icon
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // icon
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // webUrl
         );
         return entity;
     }
@@ -123,6 +131,7 @@ public class MainListByWorkEntityDao extends AbstractDao<MainListByWorkEntity, V
         entity.setEnglishName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setStoryYear(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setIcon(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setWebUrl(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     /** @inheritdoc */

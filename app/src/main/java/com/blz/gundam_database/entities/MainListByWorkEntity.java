@@ -15,17 +15,19 @@ public class MainListByWorkEntity implements Serializable{
     private String englishName;
     private String storyYear;
     private String icon;
+    private String webUrl;
 
     public MainListByWorkEntity() {
     }
 
-    public MainListByWorkEntity(String workId, String name, String originalName, String englishName, String storyYear, String icon) {
+    public MainListByWorkEntity(String workId, String name, String originalName, String englishName, String storyYear, String icon, String webUrl) {
         this.workId = workId;
         this.name = name;
         this.originalName = originalName;
         this.englishName = englishName;
         this.storyYear = storyYear;
         this.icon = icon;
+        this.webUrl = webUrl;
     }
 
     public String getWorkId() {
@@ -74,6 +76,14 @@ public class MainListByWorkEntity implements Serializable{
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getWebUrl() {
+        return webUrl;
+    }
+
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
     }
 
 }

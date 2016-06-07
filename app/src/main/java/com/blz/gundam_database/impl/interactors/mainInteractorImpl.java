@@ -26,7 +26,7 @@ public class MainInteractorImpl extends BaseFindCallback implements MainInteract
     @Override
     public void getData(CallResponseListener listener) {
         AVQuery<AVObject> query = new AVQuery<>("MainListByWorks");
-        query.orderByAscending("workId");
+        query.orderByAscending("workIds");
         query.findInBackground(this);
     }
 

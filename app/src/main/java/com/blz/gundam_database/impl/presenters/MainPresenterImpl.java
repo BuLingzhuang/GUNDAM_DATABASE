@@ -42,6 +42,7 @@ public class MainPresenterImpl implements MainPresenter, CallResponseListener {
             entity.setIcon(obj.getString("icon"));
             entity.setWorkId(obj.getString("workId"));
             entity.setStoryYear(obj.getString("storyYear"));
+            entity.setWebUrl(obj.getString("webUrl"));
             mEntityList.add(entity);
         }
         mView.updateMainList(mEntityList);
