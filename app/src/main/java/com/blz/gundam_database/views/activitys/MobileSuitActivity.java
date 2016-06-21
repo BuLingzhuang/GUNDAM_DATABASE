@@ -154,8 +154,6 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
     private void showPopupWindow(View view) {
         mMobileSuitBtnContent.setImageResource(R.mipmap.btn_hidden);
         @SuppressLint("InflateParams") View inflate = LayoutInflater.from(this).inflate(R.layout.popup_window_mobile_suit, null);
-//        TextView tvContent = (TextView) inflate.findViewById(R.id.popup_window_mobile_suit_tvContent);
-//        tvContent.setText("最新剧场版是00的完结篇，正式命名为《机动战士高达00：A wakening of the Trailblazer（先驱者的觉醒）》。最新剧场版内容是：变革者事件结束后，世界又恢复了和平。但是，这样的和平并没有持续多久。地球联邦发现的外星未知金属【联邦政府将其命名为：地外变异性金属生命体(Extraterrestrial Living-metal Shapeshifter)，简称ELS】开始向地球发起进攻，并且目标都是变革者。在最终决战时，刹那终于又醒了过来，并在洛克昂、阿雷路亚等人的帮助下成功进入大型ELS内部，开始对话，也阻止了ELS的进攻......50年后，经过量子跳跃的量子型00回到地球，刹那也再次与玛丽娜相见，达成相互理解的共识。西历2307年，由于化石燃料的枯竭，人类开始寻找全新形式的能源——由3条巨大的轨道式升降梯所组成的巨型太阳能发电系统。然而，能够分享这一能源的，只有世界上的一部分大国及其同盟国。拥有3条巨大的轨道式升降梯的3个超大国及其联盟：以「美利坚合众国」为中央政府领导的的「UNION（世界经济联合）」，以「中国」、「俄罗斯」、「印度」为中心的「人类革新联盟」，以及以欧洲为中心的「AEU（新欧盟共同体）」。各大国家联盟为了各自的威信和繁荣，开展了庞大的争霸游戏。没错，即使历史的滚轮驶入了24世纪，人类依然保持着四分五裂的状态。在这个战争终日不绝的世界，一个宣称“以武力根绝战争”的私人武装组织出现了。拥有机动战士「高达」的他们，名为「天人（Celestial Being）」。凭借高达强大的性能，他们开始对各国纷争进行武力介入，最终三大阵营在天人和另外三台非天人（THRONE）高达的威胁下被迫联合成为国联，世界第一次走向联合，此时天人开始怀疑自己在伊奥利亚计划中应以被消灭为结局，最终在决战中天人遭重创。");
         WebView webView = (WebView) inflate.findViewById(R.id.popup_window_mobile_suit_webView);
         ImageView imageView = (ImageView) inflate.findViewById(R.id.popup_window_mobile_suit_iv);
         if (mWebUrl.endsWith(".jpg")) {
