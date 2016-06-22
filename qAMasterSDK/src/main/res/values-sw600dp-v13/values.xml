@@ -3,7 +3,4 @@
 
     <eat-comment />
 
-    <dimen name="qamaster_dialog_horizontal_margin">120dp</dimen>
-    <dimen name="qamaster_dialog_vertical_margin">40dp</dimen>
-
 </resources>

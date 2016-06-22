@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MainListByWorkEntity;
 import com.blz.gundam_database.impl.presenters.MainPresenterImpl;
@@ -145,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
 
                 break;
             case R.id.menu_about://关于
+                AVAnalytics.onEvent(this, "查看关于");
                 startActivity(new Intent(this, AboutActivity.class));
                 break;
         }

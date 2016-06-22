@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.utils.Tools;
 import com.blz.gundam_database.views.adapters.ImageBrowseAdapter;
@@ -151,6 +152,7 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
                             fos.close();
                             is.close();
                             message.obj = "保存成功，"+file.getAbsolutePath();
+                            AVAnalytics.onEvent(ImageBrowseActivity.this, "下载了："+ mOriginalName);
                         } else {
                             message.obj = "以保存，"+file.getAbsolutePath();
                         }

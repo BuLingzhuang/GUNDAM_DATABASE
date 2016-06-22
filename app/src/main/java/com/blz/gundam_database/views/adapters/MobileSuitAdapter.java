@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MobileSuitEntity;
@@ -72,6 +73,7 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        AVAnalytics.onEvent(mContext, "查看机体,属于："+entity.getWorkId());
                         Intent intent = new Intent(mContext, MSDetailActivity.class);
                         intent.putExtra("MobileSuitEntity",entity);
                         mContext.startActivity(intent);

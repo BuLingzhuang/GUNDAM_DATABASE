@@ -34,7 +34,11 @@ public class Tools {
     }
 
     public static void showToast(Context context,String str){
-        Toast.makeText(context,str,Toast.LENGTH_SHORT).show();
+        showToast(context,str,Toast.LENGTH_SHORT);
+    }
+
+    public static void showToast(Context context,String str,int time){
+        Toast.makeText(context,str,time).show();
     }
 
     public static int getColor(Context context, int RColor) {

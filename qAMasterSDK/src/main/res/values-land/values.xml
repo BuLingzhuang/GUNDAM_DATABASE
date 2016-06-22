@@ -3,6 +3,4 @@
 
     <eat-comment />
 
-    <dimen name="qamaster_report_dialog_buttons_distance">36dp</dimen>
-
 </resources>

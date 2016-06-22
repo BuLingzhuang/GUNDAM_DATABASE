@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MainListByWorkEntity;
@@ -68,6 +69,7 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        AVAnalytics.onEvent(mContext, "查看系列："+entity.getOriginalName());
                         Intent intent = new Intent(mContext, MobileSuitActivity.class);
                         intent.putExtra("MainListByWorkEntity", entity);
                         mContext.startActivity(intent);
