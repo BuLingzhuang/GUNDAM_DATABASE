@@ -39,9 +39,16 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         mList = new ArrayList<>();
     }
 
-    public void addAll(Collection<?> collection){
-        mList.clear();
+    public void addAll(Collection<?> collection,boolean isRefresh){
+        if (isRefresh){
+            mList.clear();
+        }
         mList.addAll(collection);
+        mList.add(new EmptyEntity());
+        notifyDataSetChanged();
+    }
+
+    public void addFoot(){
         mList.add(new EmptyEntity());
         notifyDataSetChanged();
     }

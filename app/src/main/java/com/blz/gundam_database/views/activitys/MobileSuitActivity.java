@@ -9,6 +9,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -20,7 +21,6 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.EmptyEntity;
@@ -64,6 +64,10 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
     private MobileSuitAdapter mAdapter;
     private PopupWindow mPopupWindow;
     private String mWebUrl;
+    private int lastVisibleItem;
+    private MainListByWorkEntity mMainListByWorkEntity;
+    private int lastPullTimes = 0;
+    private boolean hasNext = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +80,11 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
 
     private void initData() {
         Intent intent = getIntent();
-        MainListByWorkEntity mainListByWorkEntity = (MainListByWorkEntity) intent.getSerializableExtra("MainListByWorkEntity");
-        mWebUrl = mainListByWorkEntity.getWebUrl();
-        mPresenter.gatMobileSuitEntityData(mainListByWorkEntity.getWorkId());
-        mCtl.setTitle(mainListByWorkEntity.getOriginalName());
-        Picasso.with(this).load(mainListByWorkEntity.getIcon()).into(mToolbarImg);
+        mMainListByWorkEntity = (MainListByWorkEntity) intent.getSerializableExtra("MainListByWorkEntity");
+        mWebUrl = mMainListByWorkEntity.getWebUrl();
+        mPresenter.getData(mMainListByWorkEntity.getWorkId());
+        mCtl.setTitle(mMainListByWorkEntity.getOriginalName());
+        Picasso.with(this).load(mMainListByWorkEntity.getIcon()).into(mToolbarImg);
     }
 
     private void init() {
@@ -106,6 +110,27 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
         mAdapter = new MobileSuitAdapter(this, map);
         mRv.setAdapter(mAdapter);
 
+        //RecyclerView的上拉加载
+        mRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                //判断是不是向下滑动 且 当前显示的最下面那一项是不是adapter中最后一个
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mAdapter.getItemCount() && hasNext) {
+                    lastPullTimes++;
+                    mPresenter.getData(mMainListByWorkEntity.getWorkId(), lastPullTimes * 10);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                //滑动屏幕，最下面出现新的一条的时候，记录为lastVisibleItem
+                lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+            }
+        });
+
     }
 
     @Override
@@ -115,14 +140,18 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
     }
 
     @Override
-    public void updateData(List<MobileSuitEntity> mList) {
-        mAdapter.addAll(mList);
+    public void updateData(List<MobileSuitEntity> mList, boolean isRefresh) {
+        mAdapter.addAll(mList, isRefresh);
     }
 
     @Override
     public void updateError(String eText) {
 //        Tools.showSnackBar(this, eText, mParent);
-        Tools.showToast(this,eText);
+        if (eText.equals("无数据") && lastPullTimes >= 0) {
+            eText = "已加载全部";
+            hasNext = false;
+        }
+        Tools.showToast(this, eText);
     }
 
     @Override
@@ -160,7 +189,7 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
             imageView.setVisibility(View.VISIBLE);
             webView.setVisibility(View.GONE);
             Picasso.with(this).load(mWebUrl).error(R.mipmap.ic_launcher_black).placeholder(R.mipmap.ic_launcher_black).into(imageView);
-        }else {
+        } else {
             imageView.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
             webView.getSettings().setJavaScriptEnabled(true);

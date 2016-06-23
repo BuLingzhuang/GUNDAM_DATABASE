@@ -28,9 +28,22 @@ public class MobileSuitInteractorImpl extends BaseFindCallback implements Mobile
 
     @Override
     public void getData(CallResponseListener listener, String workId) {
+        getData(listener,workId,true,0);
+    }
+
+    @Override
+    public void getData(CallResponseListener listener, String workId, int skip) {
+        getData(listener, workId,false, skip);
+    }
+
+    @Override
+    public void getData(CallResponseListener listener, String workId, boolean isRefresh, int skip) {
+        setRefresh(isRefresh);
         AVQuery<AVObject> query = new AVQuery<>("MobileSuitEntity");
         query.whereEqualTo("workId", workId);
         query.orderByDescending("launchDate");
+        query.limit(10);
+        query.skip(skip);
         query.findInBackground(this);
     }
 //

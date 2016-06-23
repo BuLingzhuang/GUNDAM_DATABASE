@@ -10,7 +10,7 @@ import java.util.List;
  * E-mail bulingzhuang@foxmail.com
  */
 public interface MobileSuitView {
-    void updateData(List<MobileSuitEntity> mList);
+    void updateData(List<MobileSuitEntity> mList,boolean isRefresh);
 
     void updateError(String eText);
 

@@ -6,5 +6,7 @@ package com.blz.gundam_database.interfaces.presenters;
  * E-mail bulingzhuang@foxmail.com
  */
 public interface MobileSuitPresenter {
-    void gatMobileSuitEntityData(String workId);
+    void getData(String workId);
+    void getData(String workId, int skip);
+    void getData(String workId, boolean isRefresh, int skip);
 }

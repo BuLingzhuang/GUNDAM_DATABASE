@@ -10,7 +10,7 @@ import java.util.List;
  * E-mail bulingzhuang@foxmail.com
  */
 public interface CallResponseListener {
-    void myResponse(List<AVObject> list);
+    void myResponse(List<AVObject> list,boolean isRefresh);
 
     void myError(String eText);
 }

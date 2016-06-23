@@ -32,7 +32,7 @@ public class MainPresenterImpl implements MainPresenter, CallResponseListener {
     }
 
     @Override
-    public void myResponse(List<AVObject> list) {
+    public void myResponse(List<AVObject> list,boolean isRefresh) {
         ArrayList<MainListByWorkEntity> mEntityList = new ArrayList<>();
         for (AVObject obj : list) {
             MainListByWorkEntity entity = new MainListByWorkEntity();
