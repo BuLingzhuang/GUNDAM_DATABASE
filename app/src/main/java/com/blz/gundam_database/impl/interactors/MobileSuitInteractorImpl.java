@@ -3,11 +3,13 @@ package com.blz.gundam_database.impl.interactors;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.CountCallback;
 import com.avos.avoscloud.FindCallback;
 import com.blz.gundam_database.base.BaseFindCallback;
 import com.blz.gundam_database.entities.MobileSuitEntity;
 import com.blz.gundam_database.interfaces.CallResponseListener;
 import com.blz.gundam_database.interfaces.interactors.MobileSuitInteractor;
+import com.blz.gundam_database.utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,7 @@ public class MobileSuitInteractorImpl extends BaseFindCallback implements Mobile
     public void getData(CallResponseListener listener, String workId) {
         AVQuery<AVObject> query = new AVQuery<>("MobileSuitEntity");
         query.whereEqualTo("workId", workId);
+        query.orderByDescending("launchDate");
         query.findInBackground(this);
     }
 //
