@@ -2,6 +2,7 @@ package com.blz.gundam_database.views.activitys;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -112,7 +113,7 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_GROUP_STORAGE);
         } else {
-            save2SDCard();
+            Tools.save2SDCard(this,mHandler,mImageUrl,mOriginalName,mCurrentItem);
         }
     }
 
@@ -121,49 +122,11 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
         Tools.showLogE(this,grantResults.length+""+ Arrays.toString(permissions));
         if (requestCode == MY_PERMISSIONS_REQUEST_GROUP_STORAGE) {
             if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                save2SDCard();
+                Tools.save2SDCard(this,mHandler,mImageUrl,mOriginalName,mCurrentItem);
             }
             return;
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    private void save2SDCard() {
-        if (mImageUrl != null) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    Message message = new Message();
-                    try {
-                        URL m_url = new URL(mImageUrl);
-                        HttpURLConnection con = (HttpURLConnection) m_url.openConnection();
-                        InputStream is = con.getInputStream();
-                        File directory = Environment.getExternalStorageDirectory();
-                        File file = new File(directory, mOriginalName + "_" + (mCurrentItem+1) + ".jpg");
-                        boolean b = file.createNewFile();
-                        FileOutputStream fos;
-                        if (b) {
-                            fos = new FileOutputStream(file);
-                            byte[] bytes = new byte[1024];
-                            int len;
-                            while ((len = is.read(bytes)) != -1) {
-                                fos.write(bytes, 0, len);
-                            }
-                            fos.close();
-                            is.close();
-                            message.obj = "保存成功，"+file.getAbsolutePath();
-                            AVAnalytics.onEvent(ImageBrowseActivity.this, "下载了："+ mOriginalName);
-                        } else {
-                            message.obj = "以保存，"+file.getAbsolutePath();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        message.obj = "保存失败";
-                    }
-                    mHandler.sendMessage(message);
-                }
-            }).start();
-        }
     }
 
     @Override

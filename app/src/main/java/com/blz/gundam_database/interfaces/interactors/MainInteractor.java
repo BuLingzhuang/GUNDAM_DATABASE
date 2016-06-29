@@ -1,6 +1,5 @@
 package com.blz.gundam_database.interfaces.interactors;
 
-import com.blz.gundam_database.entities.MainListByWorkEntity;
 import com.blz.gundam_database.interfaces.CallResponseListener;
 
 import java.util.List;

@@ -26,23 +26,23 @@ public class MobileSuitPresenterImpl implements MobileSuitPresenter, CallRespons
     }
 
     @Override
-    public void getData(String workId) {
-        getData(workId,true,0);
+    public void getData(String workId, String modelSeries) {
+        getData(workId, modelSeries, true, 0);
     }
 
     @Override
-    public void getData(String workId, int skip) {
-        getData(workId,false,skip);
+    public void getData(String workId, String modelSeries, int skip) {
+        getData(workId, modelSeries, false, skip);
     }
 
     @Override
-    public void getData(String workId, boolean isRefresh, int skip) {
+    public void getData(String workId, String modelSeries, boolean isRefresh, int skip) {
         mView.uploading(true);
-        mInteractor.getData(this, workId,isRefresh,skip);
+        mInteractor.getData(workId, modelSeries, isRefresh, skip);
     }
 
     @Override
-    public void myResponse(List<AVObject> list,boolean isRefresh) {
+    public void myResponse(List<AVObject> list, boolean isRefresh) {
         ArrayList<MobileSuitEntity> entityList = new ArrayList<>();
         for (AVObject obj : list) {
             MobileSuitEntity entity = new MobileSuitEntity();
@@ -63,7 +63,7 @@ public class MobileSuitPresenterImpl implements MobileSuitPresenter, CallRespons
 
             entityList.add(entity);
         }
-        mView.updateData(entityList,isRefresh);
+        mView.updateData(entityList, isRefresh);
         mView.uploading(false);
     }
 

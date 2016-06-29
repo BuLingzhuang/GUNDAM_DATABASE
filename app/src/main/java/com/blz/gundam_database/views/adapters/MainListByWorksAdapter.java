@@ -13,6 +13,7 @@ import com.avos.avoscloud.AVAnalytics;
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MainListByWorkEntity;
+import com.blz.gundam_database.views.activitys.MSTypeActivity;
 import com.blz.gundam_database.views.activitys.MobileSuitActivity;
 import com.squareup.picasso.Picasso;
 
@@ -69,9 +70,9 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AVAnalytics.onEvent(mContext, "查看系列："+entity.getOriginalName());
-                        Intent intent = new Intent(mContext, MobileSuitActivity.class);
-                        intent.putExtra("MainListByWorkEntity", entity);
+                        AVAnalytics.onEvent(mContext, "查看系列：" + entity.getOriginalName());
+                        Intent intent = new Intent(mContext, MSTypeActivity.class);
+                        intent.putExtra(MainListByWorkEntity.class.getName(), entity);
                         mContext.startActivity(intent);
                     }
                 });

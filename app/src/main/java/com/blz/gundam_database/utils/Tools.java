@@ -3,13 +3,24 @@ package com.blz.gundam_database.utils;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.blz.gundam_database.R;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by BuLingzhuang
@@ -33,12 +44,12 @@ public class Tools {
         snackbar.show();
     }
 
-    public static void showToast(Context context,String str){
-        showToast(context,str,Toast.LENGTH_SHORT);
+    public static void showToast(Context context, String str) {
+        showToast(context, str, Toast.LENGTH_SHORT);
     }
 
-    public static void showToast(Context context,String str,int time){
-        Toast.makeText(context,str,time).show();
+    public static void showToast(Context context, String str, int time) {
+        Toast.makeText(context, str, time).show();
     }
 
     public static int getColor(Context context, int RColor) {
@@ -59,5 +70,43 @@ public class Tools {
     public static int px2dp(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    public static void save2SDCard(final Context context, final Handler handler, final String imageUrl, final String originalName, final int currentItem) {
+        if (imageUrl != null) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Message message = new Message();
+                    try {
+                        URL m_url = new URL(imageUrl);
+                        HttpURLConnection con = (HttpURLConnection) m_url.openConnection();
+                        InputStream is = con.getInputStream();
+                        File directory = Environment.getExternalStorageDirectory();
+                        File file = new File(directory, originalName + "_" + (currentItem + 1) + ".jpg");
+                        boolean b = file.createNewFile();
+                        FileOutputStream fos;
+                        if (b) {
+                            fos = new FileOutputStream(file);
+                            byte[] bytes = new byte[1024];
+                            int len;
+                            while ((len = is.read(bytes)) != -1) {
+                                fos.write(bytes, 0, len);
+                            }
+                            fos.close();
+                            is.close();
+                            message.obj = "保存成功，" + file.getAbsolutePath();
+                            AVAnalytics.onEvent(context, "下载了：" + originalName);
+                        } else {
+                            message.obj = "以保存，" + file.getAbsolutePath();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        message.obj = "保存失败";
+                    }
+                    handler.sendMessage(message);
+                }
+            }).start();
+        }
     }
 }

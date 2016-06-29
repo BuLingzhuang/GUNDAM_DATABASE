@@ -12,6 +12,7 @@ import com.blz.gundam_database.interfaces.interactors.MobileSuitInteractor;
 import com.blz.gundam_database.utils.Tools;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,21 +27,17 @@ public class MobileSuitInteractorImpl extends BaseFindCallback implements Mobile
         super(listener);
     }
 
-    @Override
-    public void getData(CallResponseListener listener, String workId) {
-        getData(listener,workId,true,0);
-    }
 
     @Override
-    public void getData(CallResponseListener listener, String workId, int skip) {
-        getData(listener, workId,false, skip);
-    }
-
-    @Override
-    public void getData(CallResponseListener listener, String workId, boolean isRefresh, int skip) {
+    public void getData(String workId, String modelSeries, boolean isRefresh, int skip) {
         setRefresh(isRefresh);
-        AVQuery<AVObject> query = new AVQuery<>("MobileSuitEntity");
-        query.whereEqualTo("workId", workId);
+        AVQuery<AVObject> query1 = new AVQuery<>("MobileSuitEntity");
+        query1.whereEqualTo("workId", workId);
+
+        AVQuery<AVObject> query2 = new AVQuery<>("MobileSuitEntity");
+        query2.whereEqualTo("modelSeries", modelSeries);
+
+        AVQuery<AVObject> query = AVQuery.and(Arrays.asList(query1, query2));
         query.orderByDescending("launchDate");
         query.limit(10);
         query.skip(skip);

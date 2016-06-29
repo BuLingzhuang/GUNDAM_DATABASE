@@ -28,10 +28,10 @@ import java.util.Map;
  * on 2016/5/26
  * E-mail bulingzhuang@foxmail.com
  */
-public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<Object> mList;
-    private Map<Type,Integer> mMap;
+    private Map<Type, Integer> mMap;
 
     public MobileSuitAdapter(Context context, Map<Type, Integer> map) {
         mContext = context;
@@ -39,8 +39,8 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         mList = new ArrayList<>();
     }
 
-    public void addAll(Collection<?> collection,boolean isRefresh){
-        if (isRefresh){
+    public void addAll(Collection<?> collection, boolean isRefresh) {
+        if (isRefresh) {
             mList.clear();
         }
         mList.addAll(collection);
@@ -48,7 +48,7 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         notifyDataSetChanged();
     }
 
-    public void addFoot(){
+    public void addFoot() {
         mList.add(new EmptyEntity());
         notifyDataSetChanged();
     }
@@ -73,16 +73,16 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 final MobileSuitEntity entity = (MobileSuitEntity) mList.get(position);
                 MobileSuitAdapterDefaultViewHolder viewHolder = (MobileSuitAdapterDefaultViewHolder) holder;
                 Picasso.with(mContext).load(entity.getHeadImage()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).into(viewHolder.mIv);
-                viewHolder.mTvOriginalName.setText("型号："+entity.getOriginalName());
-                viewHolder.mTvModelSeries.setText("系列："+entity.getModelSeries());
-                viewHolder.mTvPrice.setText("价格（含税）："+entity.getPrice());
-                viewHolder.mTvLaunchDate.setText("发布时间："+entity.getLaunchDate());
+                viewHolder.mTvOriginalName.setText("型号：" + entity.getOriginalName());
+                viewHolder.mTvModelSeries.setText("系列：" + entity.getModelSeries());
+                viewHolder.mTvPrice.setText("价格（含税）：" + entity.getPrice());
+                viewHolder.mTvLaunchDate.setText("发布时间：" + entity.getLaunchDate());
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AVAnalytics.onEvent(mContext, "查看机体,属于："+entity.getWorkId());
+                        AVAnalytics.onEvent(mContext, "查看机体,属于：" + entity.getWorkId());
                         Intent intent = new Intent(mContext, MSDetailActivity.class);
-                        intent.putExtra("MobileSuitEntity",entity);
+                        intent.putExtra("MobileSuitEntity", entity);
                         mContext.startActivity(intent);
                     }
                 });
@@ -100,7 +100,7 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return mMap.get(mList.get(position).getClass());
     }
 
-    private class MobileSuitAdapterDefaultViewHolder extends RecyclerView.ViewHolder{
+    private class MobileSuitAdapterDefaultViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView mIv;
         private final TextView mTvOriginalName;

@@ -68,6 +68,7 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
     private MainListByWorkEntity mMainListByWorkEntity;
     private int lastPullTimes = 0;
     private boolean hasNext = true;
+    private String mModelSeries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +81,10 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
 
     private void initData() {
         Intent intent = getIntent();
-        mMainListByWorkEntity = (MainListByWorkEntity) intent.getSerializableExtra("MainListByWorkEntity");
+        mMainListByWorkEntity = (MainListByWorkEntity) intent.getSerializableExtra(MainListByWorkEntity.class.getName());
+        mModelSeries = intent.getStringExtra("modelSeries");
         mWebUrl = mMainListByWorkEntity.getWebUrl();
-        mPresenter.getData(mMainListByWorkEntity.getWorkId());
+        mPresenter.getData(mMainListByWorkEntity.getWorkId(), mModelSeries);
         mCtl.setTitle(mMainListByWorkEntity.getOriginalName());
         Picasso.with(this).load(mMainListByWorkEntity.getIcon()).into(mToolbarImg);
     }
@@ -118,7 +120,7 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
                 //判断是不是向下滑动 且 当前显示的最下面那一项是不是adapter中最后一个
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mAdapter.getItemCount() && hasNext) {
                     lastPullTimes++;
-                    mPresenter.getData(mMainListByWorkEntity.getWorkId(), lastPullTimes * 10);
+                    mPresenter.getData(mMainListByWorkEntity.getWorkId(),mModelSeries, lastPullTimes * 10);
                 }
             }
 

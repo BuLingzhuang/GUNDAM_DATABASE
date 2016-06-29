@@ -11,9 +11,7 @@ import java.util.List;
  * E-mail bulingzhuang@foxmail.com
  */
 public interface MobileSuitInteractor {
-    void getData(CallResponseListener listener, String workId);
-    void getData(CallResponseListener listener, String workId,int skip);
-    void getData(CallResponseListener listener, String workId, boolean isRefresh, int skip);
+    void getData(String workId,String modelSeries, boolean isRefresh, int skip);
 
 //    interface CallResponseListener {
 //        void myResponse(List<MobileSuitEntity> mList);
