@@ -13,6 +13,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -35,26 +36,6 @@ import butterknife.OnClick;
 
 public class MSDetailActivity extends AppCompatActivity {
 
-    @Bind(R.id.msdetail_boxImage)
-    ImageView mMsdetailBoxImage;
-    @Bind(R.id.msdetail_tvOriginalName)
-    TextView mMsdetailTvOriginalName;
-    @Bind(R.id.msdetail_tvVersion)
-    TextView mMsdetailTvVersion;
-    @Bind(R.id.msdetail_tvModelSeries)
-    TextView mMsdetailTvModelSeries;
-    @Bind(R.id.msdetail_tvScale)
-    TextView mMsdetailTvScale;
-    @Bind(R.id.msdetail_tvPrice)
-    TextView mMsdetailTvPrice;
-    @Bind(R.id.msdetail_tvManufacturer)
-    TextView mMsdetailTvManufacturer;
-    @Bind(R.id.msdetail_tvPrototypeMaster)
-    TextView mMsdetailTvPrototypeMaster;
-    @Bind(R.id.msdetail_tvItemNo)
-    TextView mMsdetailTvItemNo;
-    @Bind(R.id.msdetail_tvLaunchDate)
-    TextView mMsdetailTvLaunchDate;
     @Bind(R.id.head_toolbar_back)
     ImageButton mHeadToolbarBack;
     @Bind(R.id.head_toolbar_title)
@@ -65,6 +46,20 @@ public class MSDetailActivity extends AppCompatActivity {
     ProgressBar mMsdetailProgressBar;
     @Bind(R.id.msdetail_a)
     TextView mMsdetailA;
+    @Bind(R.id.msdetail_H_ll)
+    LinearLayout mMsdetailHLl;
+    @Bind(R.id.msdetail_V_ll)
+    LinearLayout mMsdetailVLl;
+    private TextView mMsdetailTvOriginalName;
+    private TextView mMsdetailTvVersion;
+    private TextView mMsdetailTvModelSeries;
+    private TextView mMsdetailTvScale;
+    private TextView mMsdetailTvPrice;
+    private TextView mMsdetailTvManufacturer;
+    private TextView mMsdetailTvPrototypeMaster;
+    private TextView mMsdetailTvItemNo;
+    private TextView mMsdetailTvLaunchDate;
+    private ImageView mMsdetailBoxImage;
     private MSDetailAdapter mAdapter;
 
     @Override
@@ -72,14 +67,12 @@ public class MSDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_msdetail);
         ButterKnife.bind(this);
-        init();
-        initData();
+        MobileSuitEntity data = init();
+        initData(data);
     }
 
     @SuppressLint("SetTextI18n")
-    private void initData() {
-        Intent intent = getIntent();
-        MobileSuitEntity data = (MobileSuitEntity) intent.getSerializableExtra("MobileSuitEntity");
+    private void initData(MobileSuitEntity data) {
         mMsdetailTvOriginalName.setText("型号：" + data.getOriginalName());
         mMsdetailTvVersion.setText("版本：" + data.getVersion());
         mMsdetailTvModelSeries.setText("系列：" + data.getModelSeries());
@@ -103,12 +96,49 @@ public class MSDetailActivity extends AppCompatActivity {
         msDetailAsyncTask.execute(images);
     }
 
-    private void init() {
+    private MobileSuitEntity init() {
         mHeadToolbarTitle.setText("机体详情");
         mMsdetailRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mMsdetailRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
 
         mMsdetailA.setMovementMethod(LinkMovementMethod.getInstance());
+        Intent intent = getIntent();
+        MobileSuitEntity data = (MobileSuitEntity) intent.getSerializableExtra("MobileSuitEntity");
+        changeLayout(data.getLlType());
+        return data;
+    }
+
+    private void changeLayout(String type) {
+        switch (type) {
+            case "1":
+                mMsdetailVLl.setVisibility(View.VISIBLE);
+                mMsdetailHLl.setVisibility(View.GONE);
+                mMsdetailTvOriginalName = (TextView) findViewById(R.id.msdetail_tvOriginalName);
+                mMsdetailTvVersion = (TextView) findViewById(R.id.msdetail_tvVersion);
+                mMsdetailTvModelSeries = (TextView) findViewById(R.id.msdetail_tvModelSeries);
+                mMsdetailTvScale = (TextView) findViewById(R.id.msdetail_tvScale);
+                mMsdetailTvPrice = (TextView) findViewById(R.id.msdetail_tvPrice);
+                mMsdetailTvManufacturer = (TextView) findViewById(R.id.msdetail_tvManufacturer);
+                mMsdetailTvPrototypeMaster = (TextView) findViewById(R.id.msdetail_tvPrototypeMaster);
+                mMsdetailTvItemNo = (TextView) findViewById(R.id.msdetail_tvItemNo);
+                mMsdetailTvLaunchDate = (TextView) findViewById(R.id.msdetail_tvLaunchDate);
+                mMsdetailBoxImage = (ImageView) findViewById(R.id.msdetail_boxImage);
+                break;
+            case "2":
+                mMsdetailVLl.setVisibility(View.GONE);
+                mMsdetailHLl.setVisibility(View.VISIBLE);
+                mMsdetailTvOriginalName = (TextView) findViewById(R.id.msdetail_H_tvOriginalName);
+                mMsdetailTvVersion = (TextView) findViewById(R.id.msdetail_H_tvVersion);
+                mMsdetailTvModelSeries = (TextView) findViewById(R.id.msdetail_H_tvModelSeries);
+                mMsdetailTvScale = (TextView) findViewById(R.id.msdetail_H_tvScale);
+                mMsdetailTvPrice = (TextView) findViewById(R.id.msdetail_H_tvPrice);
+                mMsdetailTvManufacturer = (TextView) findViewById(R.id.msdetail_H_tvManufacturer);
+                mMsdetailTvPrototypeMaster = (TextView) findViewById(R.id.msdetail_H_tvPrototypeMaster);
+                mMsdetailTvItemNo = (TextView) findViewById(R.id.msdetail_H_tvItemNo);
+                mMsdetailTvLaunchDate = (TextView) findViewById(R.id.msdetail_H_tvLaunchDate);
+                mMsdetailBoxImage = (ImageView) findViewById(R.id.msdetail_H_boxImage);
+                break;
+        }
     }
 
     @Override

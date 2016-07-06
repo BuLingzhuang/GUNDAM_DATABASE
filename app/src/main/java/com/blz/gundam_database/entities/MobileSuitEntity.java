@@ -23,6 +23,7 @@ public class MobileSuitEntity implements Serializable{
     private String manufacturer;
     private String prototypeMaster;
     private String boxImage;
+    private String llType;//1代表竖版 2代表横版
 
     public MobileSuitEntity() {
     }
@@ -31,7 +32,7 @@ public class MobileSuitEntity implements Serializable{
         this.objectId = objectId;
     }
 
-    public MobileSuitEntity(String objectId, String workId, String originalName, String modelSeries, String scale, String itemNo, String launchDate, String price, String images, String headImage, String version, String manufacturer, String prototypeMaster, String boxImage) {
+    public MobileSuitEntity(String objectId, String workId, String originalName, String modelSeries, String scale, String itemNo, String launchDate, String price, String images, String headImage, String version, String manufacturer, String prototypeMaster, String boxImage, String llType) {
         this.objectId = objectId;
         this.workId = workId;
         this.originalName = originalName;
@@ -46,6 +47,7 @@ public class MobileSuitEntity implements Serializable{
         this.manufacturer = manufacturer;
         this.prototypeMaster = prototypeMaster;
         this.boxImage = boxImage;
+        this.llType = llType;
     }
 
     public String getObjectId() {
@@ -158,6 +160,14 @@ public class MobileSuitEntity implements Serializable{
 
     public void setBoxImage(String boxImage) {
         this.boxImage = boxImage;
+    }
+
+    public String getLlType() {
+        return llType;
+    }
+
+    public void setLlType(String llType) {
+        this.llType = llType;
     }
 
 }

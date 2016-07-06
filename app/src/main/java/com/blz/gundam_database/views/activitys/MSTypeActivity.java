@@ -18,12 +18,8 @@ import com.blz.gundam_database.interfaces.views.MSTypeView;
 import com.blz.gundam_database.utils.Constants;
 import com.blz.gundam_database.utils.Tools;
 
-import java.io.Serializable;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,9 +31,9 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
     RelativeLayout mRlMG;
     @Bind(R.id.mstype_rlHG)
     RelativeLayout mRlHG;
-    @Bind(R.id.mstype_rlPG)
-    RelativeLayout mRlPG;
     @Bind(R.id.mstype_rlRG)
+    RelativeLayout mRlPG;
+    @Bind(R.id.mstype_rlPG)
     RelativeLayout mRlRG;
     @Bind(R.id.mstype_rlOther)
     RelativeLayout mRlOther;
@@ -81,7 +77,7 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
         presenter.getDataMap(mBooleanMap, mEntity.getWorkId());
     }
 
-    @OnClick({R.id.mstype_rlMG, R.id.mstype_rlHG, R.id.mstype_rlPG, R.id.mstype_rlRG, R.id.mstype_rlOther, R.id.mstype_btnBack})
+    @OnClick({R.id.mstype_rlMG, R.id.mstype_rlHG, R.id.mstype_rlRG, R.id.mstype_rlPG, R.id.mstype_rlOther, R.id.mstype_btnBack})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mstype_rlMG:
@@ -90,11 +86,11 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
             case R.id.mstype_rlHG:
                 start4MSA(Constants.MS_MODEL_SERIES_HG);
                 break;
-            case R.id.mstype_rlPG:
-                start4MSA(Constants.MS_MODEL_SERIES_PG);
-                break;
             case R.id.mstype_rlRG:
                 start4MSA(Constants.MS_MODEL_SERIES_RG);
+                break;
+            case R.id.mstype_rlPG:
+                start4MSA(Constants.MS_MODEL_SERIES_PG);
                 break;
             case R.id.mstype_rlOther:
                 start4MSA(Constants.MS_MODEL_SERIES_OTHER);

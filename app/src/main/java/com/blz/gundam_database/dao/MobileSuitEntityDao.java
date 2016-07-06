@@ -37,6 +37,7 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
         public final static Property Manufacturer = new Property(11, String.class, "manufacturer", false, "MANUFACTURER");
         public final static Property PrototypeMaster = new Property(12, String.class, "prototypeMaster", false, "PROTOTYPE_MASTER");
         public final static Property BoxImage = new Property(13, String.class, "boxImage", false, "BOX_IMAGE");
+        public final static Property LlType = new Property(14, String.class, "llType", false, "LL_TYPE");
     };
 
 
@@ -65,7 +66,8 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
                 "\"VERSION\" TEXT," + // 10: version
                 "\"MANUFACTURER\" TEXT," + // 11: manufacturer
                 "\"PROTOTYPE_MASTER\" TEXT," + // 12: prototypeMaster
-                "\"BOX_IMAGE\" TEXT);"); // 13: boxImage
+                "\"BOX_IMAGE\" TEXT," + // 13: boxImage
+                "\"LL_TYPE\" TEXT);"); // 14: llType
     }
 
     /** Drops the underlying database table. */
@@ -148,6 +150,11 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
         if (boxImage != null) {
             stmt.bindString(14, boxImage);
         }
+ 
+        String llType = entity.getLlType();
+        if (llType != null) {
+            stmt.bindString(15, llType);
+        }
     }
 
     /** @inheritdoc */
@@ -173,7 +180,8 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // version
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // manufacturer
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // prototypeMaster
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13) // boxImage
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // boxImage
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // llType
         );
         return entity;
     }
@@ -195,6 +203,7 @@ public class MobileSuitEntityDao extends AbstractDao<MobileSuitEntity, String> {
         entity.setManufacturer(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
         entity.setPrototypeMaster(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setBoxImage(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setLlType(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
      }
     
     /** @inheritdoc */

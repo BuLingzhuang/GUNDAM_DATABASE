@@ -82,7 +82,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/mstype_rlPG"
+                android:id="@+id/mstype_rlRG"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="10dp"
@@ -112,7 +112,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/mstype_rlRG"
+                android:id="@+id/mstype_rlPG"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="10dp"
