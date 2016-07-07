@@ -22,7 +22,7 @@ import com.blz.gundam_database.impl.presenters.SplashScreenPresenterImpl;
 import com.blz.gundam_database.interfaces.presenters.SplashScreenPresenter;
 import com.blz.gundam_database.interfaces.views.SplashScreenView;
 import com.blz.gundam_database.utils.Tools;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.Arrays;
 
@@ -59,7 +59,7 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
     @Override
     public void startAnim(SplashScreenEntity entity) {
         if (entity != null) {
-            Picasso.with(this).load(entity.getImgUrl()).into(mImgBG);
+            Glide.with(this).load(entity.getImgUrl()).into(mImgBG);
         }
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.enlarge);
         animation.setFillAfter(true);

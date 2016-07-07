@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.utils.Tools;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -42,7 +42,7 @@ public class ImageBrowseAdapter extends PagerAdapter {
         final Context context = container.getContext();
         PhotoView photoView = new PhotoView(context);
         photoView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        Picasso.with(context).load(mList.get(position)).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).into(photoView);
+        Glide.with(context).load(mList.get(position)).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).into(photoView);
         container.addView(photoView);
         container.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -15,7 +15,7 @@ import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MobileSuitEntity;
 import com.blz.gundam_database.views.activitys.MSDetailActivity;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case R.layout.adapter_mobile_suit:
                 final MobileSuitEntity entity = (MobileSuitEntity) mList.get(position);
                 MobileSuitAdapterDefaultViewHolder viewHolder = (MobileSuitAdapterDefaultViewHolder) holder;
-                Picasso.with(mContext).load(entity.getHeadImage()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).into(viewHolder.mIv);
+                Glide.with(mContext).load(entity.getHeadImage()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).into(viewHolder.mIv);
                 viewHolder.mTvOriginalName.setText("型号：" + entity.getOriginalName());
                 viewHolder.mTvModelSeries.setText("系列：" + entity.getModelSeries());
                 viewHolder.mTvPrice.setText("价格（含税）：" + entity.getPrice());

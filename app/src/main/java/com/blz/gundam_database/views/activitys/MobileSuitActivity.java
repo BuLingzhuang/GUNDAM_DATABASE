@@ -31,7 +31,7 @@ import com.blz.gundam_database.interfaces.presenters.MobileSuitPresenter;
 import com.blz.gundam_database.interfaces.views.MobileSuitView;
 import com.blz.gundam_database.utils.Tools;
 import com.blz.gundam_database.views.adapters.MobileSuitAdapter;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -86,7 +86,7 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
         mWebUrl = mMainListByWorkEntity.getWebUrl();
         mPresenter.getData(mMainListByWorkEntity.getWorkId(), mModelSeries);
         mCtl.setTitle(mMainListByWorkEntity.getOriginalName());
-        Picasso.with(this).load(mMainListByWorkEntity.getIcon()).into(mToolbarImg);
+        Glide.with(this).load(mMainListByWorkEntity.getIcon()).into(mToolbarImg);
     }
 
     private void init() {
@@ -190,7 +190,7 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
         if (mWebUrl.endsWith(".jpg")) {
             imageView.setVisibility(View.VISIBLE);
             webView.setVisibility(View.GONE);
-            Picasso.with(this).load(mWebUrl).error(R.mipmap.ic_launcher_black).placeholder(R.mipmap.ic_launcher_black).into(imageView);
+            Glide.with(this).load(mWebUrl).error(R.mipmap.ic_launcher_black).placeholder(R.mipmap.ic_launcher_black).into(imageView);
         } else {
             imageView.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);

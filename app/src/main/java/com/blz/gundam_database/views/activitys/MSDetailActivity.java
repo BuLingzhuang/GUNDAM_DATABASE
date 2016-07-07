@@ -22,7 +22,7 @@ import com.blz.gundam_database.entities.MSDetailImageEntity;
 import com.blz.gundam_database.entities.MobileSuitEntity;
 import com.blz.gundam_database.utils.DividerItemDecoration;
 import com.blz.gundam_database.views.adapters.MSDetailAdapter;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -82,7 +82,7 @@ public class MSDetailActivity extends AppCompatActivity {
         mMsdetailTvPrototypeMaster.setText("原型师：" + data.getPrototypeMaster());
         mMsdetailTvItemNo.setText("编号：" + data.getItemNo());
         mMsdetailTvLaunchDate.setText("发售时间：" + data.getLaunchDate());
-        Picasso.with(this).load(data.getBoxImage()).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).into(mMsdetailBoxImage);
+        Glide.with(this).load(data.getBoxImage()).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).into(mMsdetailBoxImage);
 
         mAdapter = new MSDetailAdapter(this, data.getOriginalName(), data.getImages());
         mMsdetailRecyclerView.setAdapter(mAdapter);
