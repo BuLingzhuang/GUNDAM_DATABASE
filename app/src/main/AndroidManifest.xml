@@ -41,7 +41,7 @@
 
         <meta-data
             android:name="Channel ID"
-            android:value="Celestial Being"/>
+            android:value="${CHANNEL_VALUE}"/>
 
         <activity android:name=".views.activitys.MSTypeActivity">
         </activity>

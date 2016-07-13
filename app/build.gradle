@@ -17,6 +17,7 @@ android {
         targetSdkVersion 24
         versionCode 3
         versionName "1.2"
+        manifestPlaceholders = [CHANNEL_VALUE: "default_channel"]
     }
     buildTypes {
         release {
@@ -28,7 +29,20 @@ android {
             signingConfig signingConfigs.config
         }
     }
+    productFlavors {
+        default_channel{}
+        wandoujia {}
+        baidu {}
+        tencent {}
+        smartisan {}
+    }
+    productFlavors.all {
+        flavor ->
+            flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
+    }
 }
+
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -47,3 +61,4 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     compile 'com.github.bumptech.glide:glide:3.7.0'
 }
+apply plugin: 'announce'
