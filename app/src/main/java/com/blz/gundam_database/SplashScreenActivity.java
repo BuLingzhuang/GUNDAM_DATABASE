@@ -59,7 +59,8 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
     @Override
     public void startAnim(SplashScreenEntity entity) {
         if (entity != null) {
-            Glide.with(this).load(entity.getImgUrl()).into(mImgBG);
+            // TODO: 2016/12/22 暂时不做网络动态图片
+//            Glide.with(this).load(entity.getImgUrl()).placeholder(R.mipmap.splash_bg).error(R.mipmap.splash_bg).into(mImgBG);
         }
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.enlarge);
         animation.setFillAfter(true);

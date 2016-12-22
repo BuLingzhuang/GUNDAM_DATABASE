@@ -2,10 +2,13 @@ package com.blz.gundam_database.views.activitys;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,7 +19,9 @@ import com.blz.gundam_database.impl.presenters.MSTypePresenterImpl;
 import com.blz.gundam_database.interfaces.presenters.MSTypePresenter;
 import com.blz.gundam_database.interfaces.views.MSTypeView;
 import com.blz.gundam_database.utils.Constants;
+import com.blz.gundam_database.utils.SystemStatusManager;
 import com.blz.gundam_database.utils.Tools;
+import com.bumptech.glide.Glide;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +56,8 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
     TextView mTvOther;
     @Bind(R.id.mstype_progressBar)
     ProgressBar mMstypeProgressBar;
+    @Bind(R.id.mstype_imHeader)
+    ImageView mImHeader;
     private HashMap<String, Boolean> mBooleanMap;
     private MainListByWorkEntity mEntity;
 
@@ -58,6 +65,12 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mstype);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            SystemStatusManager statusManager = new SystemStatusManager(this);
+            statusManager.setStatusBarTintEnabled(true);
+            statusManager.setStatusBarAlpha(0);
+        }
         ButterKnife.bind(this);
         init();
     }
@@ -74,6 +87,7 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
 
         Intent intent = getIntent();
         mEntity = (MainListByWorkEntity) intent.getSerializableExtra(MainListByWorkEntity.class.getName());
+        Glide.with(this).load(mEntity.getIcon()).error(R.mipmap.default_placeholder).into(mImHeader);
         presenter.getDataMap(mBooleanMap, mEntity.getWorkId());
     }
 
@@ -103,7 +117,7 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
 
     private void start4MSA(String modelSeries) {
         Intent intent = new Intent(this, MobileSuitActivity.class);
-        intent.putExtra(MainListByWorkEntity.class.getName(),mEntity);
+        intent.putExtra(MainListByWorkEntity.class.getName(), mEntity);
         intent.putExtra("modelSeries", modelSeries);
         startActivity(intent);
     }
@@ -111,7 +125,7 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
     @Override
     public void onBackPressed() {
         finish();
-        overridePendingTransition(0, R.anim.finish_activity_alpha);
+//        overridePendingTransition(0, R.anim.finish_activity_alpha);
     }
 
     @SuppressLint("DefaultLocale")

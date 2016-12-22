@@ -38,7 +38,7 @@
         android:layout_above="@id/about_tvEmail"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="新浪微博：BankSteel_卜令壮"
+        android:text="新浪微博：卜令壮_hhy"
         android:textColor="@android:color/white"
         android:textSize="14sp"/>
 

@@ -5,8 +5,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_green2white"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.blz.gundam_database.views.activitys.MSTypeActivity">
+
+    <ImageView
+        android:id="@+id/mstype_imHeader"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:scaleType="centerCrop"
+        android:transitionName="Image_MSType_Header"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:transitionName="LinearLayout_MSType_bottom">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="200dp"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_transparent2white"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/setting_bg_alpha"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,7 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/bg_dark_blue"
+                android:layout_marginTop="300dp"
+                android:background="@drawable/bg_yellow"
                 android:foreground="?attr/selectableItemBackground"
                 android:padding="10dp">
 
@@ -56,8 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="10dp"
-                android:foreground="?attr/selectableItemBackground"
                 android:background="@drawable/bg_red"
+                android:foreground="?attr/selectableItemBackground"
                 android:padding="10dp">
 
                 <TextView
@@ -86,8 +113,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_dark_blue"
                 android:foreground="?attr/selectableItemBackground"
-                android:background="@drawable/bg_yellow"
                 android:padding="10dp">
 
                 <TextView
@@ -116,8 +143,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="10dp"
-                android:foreground="?attr/selectableItemBackground"
                 android:background="@drawable/bg_cyan"
+                android:foreground="?attr/selectableItemBackground"
                 android:padding="10dp">
 
                 <TextView
@@ -146,8 +173,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="10dp"
-                android:foreground="?attr/selectableItemBackground"
                 android:background="@drawable/bg_black"
+                android:foreground="?attr/selectableItemBackground"
                 android:padding="10dp">
 
                 <TextView
@@ -173,22 +200,26 @@
         </LinearLayout>
     </ScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/mstype_btnBack"
+    <RelativeLayout
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:src="@mipmap/back"
-        app:fabSize="normal"/>
-    <ImageView
-        android:layout_width="61dp"
-        android:layout_height="68dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/float_btn_bg"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/float_btn_bg_90"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/mstype_btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:src="@mipmap/back_mst"
+            app:fabSize="normal"/>
+    </RelativeLayout>
 
     <ProgressBar
         android:id="@+id/mstype_progressBar"

@@ -12,6 +12,7 @@
     app:cardElevation="2dp">
 
     <LinearLayout
+        android:id="@+id/item_main_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

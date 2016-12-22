@@ -1,12 +1,17 @@
 package com.blz.gundam_database.views.adapters;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVAnalytics;
@@ -62,7 +67,7 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         switch (holder.getItemViewType()) {
             case R.layout.adapter_main_grid:
                 final MainListByWorkEntity entity = (MainListByWorkEntity) mList.get(position);
-                MainListByWorksAdapterViewHolder viewHolder = (MainListByWorksAdapterViewHolder) holder;
+                final MainListByWorksAdapterViewHolder viewHolder = (MainListByWorksAdapterViewHolder) holder;
                 Glide.with(mContext).load(entity.getIcon()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).into(viewHolder.mIvIcon);
                 viewHolder.mTvOriginalName.setText(entity.getOriginalName());
                 viewHolder.mTvStoryYear.setText(entity.getStoryYear());
@@ -72,7 +77,13 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         AVAnalytics.onEvent(mContext, "查看系列：" + entity.getOriginalName());
                         Intent intent = new Intent(mContext, MSTypeActivity.class);
                         intent.putExtra(MainListByWorkEntity.class.getName(), entity);
-                        mContext.startActivity(intent);
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+
+                            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation((AppCompatActivity) mContext, new Pair<View, String>(viewHolder.mIvIcon, "Image_MSType_Header"),new Pair<View, String>(viewHolder.mLl, "LinearLayout_MSType_bottom")).toBundle();
+                            mContext.startActivity(intent, bundle);
+                        } else {
+                            mContext.startActivity(intent);
+                        }
                     }
                 });
                 break;
@@ -91,12 +102,14 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     public static class MainListByWorksAdapterViewHolder extends RecyclerView.ViewHolder {
 
+        private final LinearLayout mLl;
         private final ImageView mIvIcon;
         private final TextView mTvOriginalName;
         private final TextView mTvStoryYear;
 
         public MainListByWorksAdapterViewHolder(View itemView) {
             super(itemView);
+            mLl = (LinearLayout) itemView.findViewById(R.id.item_main_ll);
             mIvIcon = (ImageView) itemView.findViewById(R.id.item_main_iv);
             mTvOriginalName = (TextView) itemView.findViewById(R.id.item_main_tvOriginalName);
             mTvStoryYear = (TextView) itemView.findViewById(R.id.item_main_tvStoryYear);

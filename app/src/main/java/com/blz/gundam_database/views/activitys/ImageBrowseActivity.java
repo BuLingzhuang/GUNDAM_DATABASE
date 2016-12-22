@@ -16,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.avos.avoscloud.AVAnalytics;
 import com.blz.gundam_database.R;
@@ -58,7 +59,7 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
     private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            Tools.showToast(getApplicationContext(),(String) msg.obj);
+            Tools.showToast(getApplicationContext(),(String) msg.obj, Toast.LENGTH_LONG);
         }
     };
 
@@ -83,6 +84,7 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
         ImageBrowseAdapter adapter = new ImageBrowseAdapter(mImageList);
         mViewPager.setAdapter(adapter);
         mViewPager.setCurrentItem(position);
+        mTvPageNumber.setText((position+1)+"/"+mImageList.size());
     }
 
     private void init() {
