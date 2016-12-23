@@ -149,8 +149,8 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
     @Override
     public void updateError(String eText) {
 //        Tools.showSnackBar(this, eText, mParent);
-        if (eText.equals("无数据") && lastPullTimes >= 0) {
-            eText = "已加载全部";
+        if (eText.equals(getString(R.string.base_no_data)) && lastPullTimes >= 0) {
+            eText = getString(R.string.mobile_load_all);
             hasNext = false;
         }
         Tools.showToast(this, eText);

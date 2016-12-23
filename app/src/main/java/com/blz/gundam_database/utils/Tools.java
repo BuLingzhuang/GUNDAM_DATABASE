@@ -95,14 +95,14 @@ public class Tools {
                             }
                             fos.close();
                             is.close();
-                            message.obj = "保存成功，" + file.getAbsolutePath();
-                            AVAnalytics.onEvent(context, "下载了：" + originalName);
+                            message.obj =  context.getString(R.string.tools_save_success)+ file.getAbsolutePath();
+                            AVAnalytics.onEvent(context, context.getString(R.string.tools_download) + originalName);
                         } else {
-                            message.obj = "以保存，" + file.getAbsolutePath();
+                            message.obj = context.getString(R.string.tools_saved) + file.getAbsolutePath();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
-                        message.obj = "保存失败";
+                        message.obj = context.getString(R.string.tools_save_failed);
                     }
                     handler.sendMessage(message);
                 }

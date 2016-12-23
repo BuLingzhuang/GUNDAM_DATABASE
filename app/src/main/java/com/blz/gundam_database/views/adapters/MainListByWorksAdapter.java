@@ -74,7 +74,7 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AVAnalytics.onEvent(mContext, "查看系列：" + entity.getOriginalName());
+                        AVAnalytics.onEvent(mContext, mContext.getString(R.string.main_see_series) + entity.getOriginalName());
                         Intent intent = new Intent(mContext, MSTypeActivity.class);
                         intent.putExtra(MainListByWorkEntity.class.getName(), entity);
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {

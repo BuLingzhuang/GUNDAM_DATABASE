@@ -131,7 +131,7 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
     @SuppressLint("DefaultLocale")
     @Override
     public void updateData(String modelSeries, int count) {
-        String str = String.format("已收录：%d 款", count);
+        String str = String.format(getString(R.string.mst_included), count);
         switch (modelSeries) {
             case Constants.MS_MODEL_SERIES_MG:
                 mTvMG.setText(str);
@@ -149,7 +149,7 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
                 mTvOther.setText(str);
                 break;
             default:
-                Tools.showToast(this, "错误的查询：" + modelSeries);
+                Tools.showToast(this, getString(R.string.mst_wrong_query) + modelSeries);
                 break;
         }
         mBooleanMap.put(modelSeries, true);

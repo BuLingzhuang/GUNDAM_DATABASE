@@ -5,6 +5,7 @@ import com.blz.gundam_database.interfaces.interactors.MSTypeInteractor;
 import com.blz.gundam_database.interfaces.presenters.MSTypePresenter;
 import com.blz.gundam_database.interfaces.views.MSTypeView;
 import com.blz.gundam_database.utils.Constants;
+import com.blz.gundam_database.views.activitys.MSTypeActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,9 +19,9 @@ public class MSTypePresenterImpl implements MSTypePresenter, MSTypeInteractor.Re
     private MSTypeView mView;
     private MSTypeInteractor mInteractor;
 
-    public MSTypePresenterImpl(MSTypeView view) {
+    public MSTypePresenterImpl(MSTypeActivity view) {
         mView = view;
-        mInteractor = new MSTypeIneactorImpl(this);
+        mInteractor = new MSTypeIneactorImpl(this,view);
     }
 
     @Override

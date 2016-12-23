@@ -9,6 +9,7 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.FindCallback;
+import com.blz.gundam_database.R;
 import com.blz.gundam_database.dao.SplashScreenEntityDao;
 import com.blz.gundam_database.entities.SplashScreenEntity;
 import com.blz.gundam_database.interfaces.interactors.SplashScreenInteractor;
@@ -65,9 +66,9 @@ public class SplashScreenInteractorImpl extends FindCallback<AVObject> implement
             SplashScreenEntityDao dao = DBUtils.getDaoSession().getSplashScreenEntityDao();
             dao.deleteAll();
             dao.insertOrReplaceInTx(new SplashScreenEntity(imgUrl));
-            Tools.showLogE(this, "网络请求成功，图片地址：" + imgUrl);
+            Tools.showLogE(this, "Request Successful，imgUrl：" + imgUrl);
         } else {
-            Tools.showSnackBar(mContext, "网络错误", mGenView);
+            Tools.showSnackBar(mContext, mContext.getString(R.string.base_network_error), mGenView);
         }
     }
 }

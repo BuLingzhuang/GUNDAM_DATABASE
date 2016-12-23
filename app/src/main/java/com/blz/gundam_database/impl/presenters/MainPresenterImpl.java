@@ -1,6 +1,9 @@
 package com.blz.gundam_database.impl.presenters;
 
+import android.content.Context;
+
 import com.avos.avoscloud.AVObject;
+import com.blz.gundam_database.MainActivity;
 import com.blz.gundam_database.entities.MainListByWorkEntity;
 import com.blz.gundam_database.impl.interactors.MainInteractorImpl;
 import com.blz.gundam_database.interfaces.CallResponseListener;
@@ -20,9 +23,9 @@ public class MainPresenterImpl implements MainPresenter, CallResponseListener {
     private MainView mView;
     private MainInteractor mInteractor;
 
-    public MainPresenterImpl(MainView view) {
+    public MainPresenterImpl(MainActivity view) {
         mView = view;
-        mInteractor = new MainInteractorImpl(this);
+        mInteractor = new MainInteractorImpl(this,view);
     }
 
     @Override

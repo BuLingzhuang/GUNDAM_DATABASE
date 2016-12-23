@@ -94,7 +94,7 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
         Tools.showLogE(this, grantResults.length + "" + Arrays.toString(permissions));
         if (requestCode == MY_PERMISSIONS_REQUEST_GROUP_STORAGE) {
             if (!(grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                Tools.showToast(this, "请在下次启动时允许权限", Toast.LENGTH_LONG);
+                Tools.showToast(this, getString(R.string.splash_permissions), Toast.LENGTH_LONG);
             }
             intent2Main();
             return;

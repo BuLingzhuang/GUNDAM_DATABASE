@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
 
                 break;
             case R.id.menu_about://关于
-                AVAnalytics.onEvent(this, "查看关于");
+                AVAnalytics.onEvent(this, getString(R.string.main_see_about));
                 startActivity(new Intent(this, AboutActivity.class));
                 break;
         }
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
             long currentTime = System.currentTimeMillis();
             if (currentTime - firstTime >= 2000L) {
                 invalidateOptionsMenu();
-                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.main_again_touch), Toast.LENGTH_SHORT).show();
                 firstTime = currentTime;
             } else {
                 finish();
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
         }
         if (mRefresh.isRefreshing()) {
             mRefresh.setRefreshing(false);
-            Tools.showSnackBar(this,"刷新成功",mDrawerLayout);
+            Tools.showSnackBar(this,getString(R.string.main_refresh_succeed),mDrawerLayout);
         }
     }
 

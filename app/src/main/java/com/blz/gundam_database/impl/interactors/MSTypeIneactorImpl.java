@@ -1,9 +1,12 @@
 package com.blz.gundam_database.impl.interactors;
 
+import android.content.Context;
+
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.CountCallback;
+import com.blz.gundam_database.R;
 import com.blz.gundam_database.interfaces.interactors.MSTypeInteractor;
 import com.blz.gundam_database.utils.Constants;
 
@@ -17,9 +20,11 @@ import java.util.HashMap;
  */
 public class MSTypeIneactorImpl implements MSTypeInteractor {
     private ResponseListener mListener;
+    private Context mContext;
 
-    public MSTypeIneactorImpl(ResponseListener listener) {
+    public MSTypeIneactorImpl(ResponseListener listener,Context context) {
         mListener = listener;
+        mContext = context;
     }
 
     @Override
@@ -35,7 +40,7 @@ public class MSTypeIneactorImpl implements MSTypeInteractor {
                 if (e == null) {
                     mListener.myResponse(modelSeries,i);
                 }else {
-                    mListener.myError("获取数据失败："+modelSeries);
+                    mListener.myError(mContext.getString(R.string.mst_failed_get_data)+modelSeries);
                 }
             }
         });

@@ -1,5 +1,7 @@
 package com.blz.gundam_database.impl.interactors;
 
+import android.content.Context;
+
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
@@ -23,8 +25,8 @@ import java.util.List;
 public class MobileSuitInteractorImpl extends BaseFindCallback implements MobileSuitInteractor {
 
 
-    public MobileSuitInteractorImpl(CallResponseListener listener) {
-        super(listener);
+    public MobileSuitInteractorImpl(CallResponseListener listener, Context context) {
+        super(listener,context);
     }
 
 

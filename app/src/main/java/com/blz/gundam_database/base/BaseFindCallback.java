@@ -1,8 +1,11 @@
 package com.blz.gundam_database.base;
 
+import android.content.Context;
+
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.FindCallback;
+import com.blz.gundam_database.R;
 import com.blz.gundam_database.interfaces.CallResponseListener;
 
 import java.util.List;
@@ -14,6 +17,7 @@ import java.util.List;
  */
 public abstract class BaseFindCallback extends FindCallback<AVObject> {
     private CallResponseListener mListener;
+    private Context mContext;
     private boolean b = true;
 
     public boolean isRefresh() {
@@ -24,8 +28,9 @@ public abstract class BaseFindCallback extends FindCallback<AVObject> {
         b = refresh;
     }
 
-    public BaseFindCallback(CallResponseListener listener) {
+    public BaseFindCallback(CallResponseListener listener, Context context) {
         mListener = listener;
+        mContext = context;
     }
 
 
@@ -36,10 +41,10 @@ public abstract class BaseFindCallback extends FindCallback<AVObject> {
             if (list.size() >= 1){
                 mListener.myResponse(list,b);
             } else {
-                mListener.myError("无数据");
+                mListener.myError(mContext.getString(R.string.base_no_data));
             }
         } else {
-            mListener.myError("网络错误");
+            mListener.myError(mContext.getString(R.string.base_network_error));
         }
     }
 }

@@ -73,14 +73,14 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 final MobileSuitEntity entity = (MobileSuitEntity) mList.get(position);
                 MobileSuitAdapterDefaultViewHolder viewHolder = (MobileSuitAdapterDefaultViewHolder) holder;
                 Glide.with(mContext).load(entity.getHeadImage()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).into(viewHolder.mIv);
-                viewHolder.mTvOriginalName.setText("型号：" + entity.getOriginalName());
-                viewHolder.mTvModelSeries.setText("系列：" + entity.getModelSeries());
-                viewHolder.mTvPrice.setText("价格（含税）：" + entity.getPrice());
-                viewHolder.mTvLaunchDate.setText("发布时间：" + entity.getLaunchDate());
+                viewHolder.mTvOriginalName.setText(mContext.getString(R.string.mobile_type) + entity.getOriginalName());
+                viewHolder.mTvModelSeries.setText(mContext.getString(R.string.mobile_model_series) + entity.getModelSeries());
+                viewHolder.mTvPrice.setText(mContext.getString(R.string.mobile_price) + entity.getPrice());
+                viewHolder.mTvLaunchDate.setText(mContext.getString(R.string.mobile_launch_date) + entity.getLaunchDate());
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AVAnalytics.onEvent(mContext, "查看机体,属于：" + entity.getWorkId());
+                        AVAnalytics.onEvent(mContext, mContext.getString(R.string.mobile_see_belong) + entity.getWorkId());
                         Intent intent = new Intent(mContext, MSDetailActivity.class);
                         intent.putExtra("MobileSuitEntity", entity);
                         mContext.startActivity(intent);

@@ -27,7 +27,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="邮箱：bulingzhuang@foxmail.com"
+        android:text="@string/about_email"
         android:textColor="@android:color/white"
         android:textSize="14sp"/>
 
@@ -38,7 +38,7 @@
         android:layout_above="@id/about_tvEmail"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="新浪微博：卜令壮_hhy"
+        android:text="@string/sina_weibo"
         android:textColor="@android:color/white"
         android:textSize="14sp"/>
 

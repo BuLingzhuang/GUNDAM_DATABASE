@@ -1,5 +1,7 @@
 package com.blz.gundam_database.impl.interactors;
 
+import android.content.Context;
+
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
@@ -19,8 +21,8 @@ import java.util.List;
  */
 public class MainInteractorImpl extends BaseFindCallback implements MainInteractor {
 
-    public MainInteractorImpl(CallResponseListener listener) {
-        super(listener);
+    public MainInteractorImpl(CallResponseListener listener, Context context) {
+        super(listener,context);
     }
 
     @Override

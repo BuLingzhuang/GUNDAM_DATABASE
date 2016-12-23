@@ -7,6 +7,7 @@ import com.blz.gundam_database.interfaces.CallResponseListener;
 import com.blz.gundam_database.interfaces.interactors.MobileSuitInteractor;
 import com.blz.gundam_database.interfaces.presenters.MobileSuitPresenter;
 import com.blz.gundam_database.interfaces.views.MobileSuitView;
+import com.blz.gundam_database.views.activitys.MobileSuitActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +21,9 @@ public class MobileSuitPresenterImpl implements MobileSuitPresenter, CallRespons
     private MobileSuitView mView;
     private MobileSuitInteractor mInteractor;
 
-    public MobileSuitPresenterImpl(MobileSuitView view) {
+    public MobileSuitPresenterImpl(MobileSuitActivity view) {
         mView = view;
-        mInteractor = new MobileSuitInteractorImpl(this);
+        mInteractor = new MobileSuitInteractorImpl(this,view);
     }
 
     @Override
