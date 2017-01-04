@@ -2,34 +2,37 @@ package com.blz.gundam_database.views.activitys;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.Interpolator;
+import android.view.animation.OvershootInterpolator;
+import android.view.animation.ScaleAnimation;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.avos.avoscloud.AVAnalytics;
+import com.avos.avoscloud.LogUtil;
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.utils.Tools;
 import com.blz.gundam_database.views.adapters.ImageBrowseAdapter;
 import com.blz.gundam_database.views.swipebacklayout.SwipeBackActivity;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -51,21 +54,55 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
     TextView mTvOriginalName;
     @Bind(R.id.image_browse_tvPageNumber)
     TextView mTvPageNumber;
+    @Bind(R.id.rl_header)
+    RelativeLayout rlHeader;
+    @Bind(R.id.rl_footer)
+    RelativeLayout rlFooter;
+    @Bind(R.id.fl_content)
+    FrameLayout flContent;
     private ArrayList<String> mImageList;
     private String mOriginalName;
     private String mImageUrl;
     private int mCurrentItem;
+    private boolean isVis = true;
     @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            Tools.showToast(getApplicationContext(),(String) msg.obj, Toast.LENGTH_LONG);
+            Tools.showToast(getApplicationContext(), (String) msg.obj, Toast.LENGTH_LONG);
+        }
+    };
+
+    private Animation.AnimationListener mAnimationListener = new Animation.AnimationListener() {
+        @Override
+        public void onAnimationStart(Animation animation) {
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            if (isVis) {
+                rlHeader.setVisibility(View.VISIBLE);
+                rlFooter.setVisibility(View.VISIBLE);
+                mBack.setVisibility(View.VISIBLE);
+                mDownload.setVisibility(View.VISIBLE);
+            } else {
+                rlHeader.setVisibility(View.GONE);
+                rlFooter.setVisibility(View.GONE);
+                mBack.setVisibility(View.GONE);
+                mDownload.setVisibility(View.GONE);
+            }
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_image_browse);
         ButterKnife.bind(this);
         init();
@@ -81,16 +118,70 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
         String[] split = images.split(",");
         Collections.addAll(mImageList, split);
         int position = intent.getIntExtra("position", 0);
-        ImageBrowseAdapter adapter = new ImageBrowseAdapter(mImageList);
+        ImageBrowseAdapter adapter = new ImageBrowseAdapter(this, mImageList);
         mViewPager.setAdapter(adapter);
         mViewPager.setCurrentItem(position);
-        mTvPageNumber.setText((position+1)+"/"+mImageList.size());
+        mTvPageNumber.setText((position + 1) + "/" + mImageList.size());
     }
 
     private void init() {
-        mBack.setOnClickListener(this);
-        mDownload.setOnClickListener(this);
         mViewPager.addOnPageChangeListener(this);
+    }
+
+    public void hideOShowHF() {
+        Log.e("blz","进来判断");
+
+        if (isVis) {
+            Log.e("blz","应该显示");
+            isVis = false;
+            AnimationSet headerSet = new AnimationSet(true);
+            AnimationSet footerSet = new AnimationSet(true);
+            AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+            ScaleAnimation headerAnim = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
+            ScaleAnimation footerAnim = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
+            headerAnim.setDuration(200);
+            headerAnim.setFillAfter(true);
+            footerAnim.setDuration(200);
+            footerAnim.setFillAfter(true);
+            alphaAnimation.setDuration(200);
+            alphaAnimation.setFillAfter(true);
+            headerAnim.setInterpolator(new OvershootInterpolator());
+            footerAnim.setInterpolator(new OvershootInterpolator());
+            alphaAnimation.setInterpolator(new OvershootInterpolator());
+            headerSet.setAnimationListener(mAnimationListener);
+            footerSet.setAnimationListener(mAnimationListener);
+            headerSet.addAnimation(headerAnim);
+            headerSet.addAnimation(alphaAnimation);
+            footerSet.addAnimation(footerAnim);
+            footerSet.addAnimation(alphaAnimation);
+            rlHeader.startAnimation(headerSet);
+            rlFooter.startAnimation(footerSet);
+        } else {
+            Log.e("blz","应该隐藏");
+            isVis = true;
+            AnimationSet headerSet = new AnimationSet(true);
+            AnimationSet footerSet = new AnimationSet(true);
+            AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+            ScaleAnimation headerAnim = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
+            ScaleAnimation footerAnim = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
+            headerAnim.setDuration(200);
+            headerAnim.setFillAfter(true);
+            footerAnim.setDuration(200);
+            footerAnim.setFillAfter(true);
+            alphaAnimation.setDuration(200);
+            alphaAnimation.setFillAfter(true);
+            headerAnim.setInterpolator(new OvershootInterpolator());
+            footerAnim.setInterpolator(new OvershootInterpolator());
+            alphaAnimation.setInterpolator(new OvershootInterpolator());
+            headerSet.setAnimationListener(mAnimationListener);
+            footerSet.setAnimationListener(mAnimationListener);
+            headerSet.addAnimation(headerAnim);
+            headerSet.addAnimation(alphaAnimation);
+            footerSet.addAnimation(footerAnim);
+            footerSet.addAnimation(alphaAnimation);
+            rlHeader.startAnimation(headerSet);
+            rlFooter.startAnimation(footerSet);
+        }
     }
 
     @OnClick({R.id.image_browse_back, R.id.image_browse_download})
@@ -115,16 +206,16 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_GROUP_STORAGE);
         } else {
-            Tools.save2SDCard(this,mHandler,mImageUrl,mOriginalName,mCurrentItem);
+            Tools.save2SDCard(this, mHandler, mImageUrl, mOriginalName, mCurrentItem);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Tools.showLogE(this,grantResults.length+""+ Arrays.toString(permissions));
+        Tools.showLogE(this, grantResults.length + "" + Arrays.toString(permissions));
         if (requestCode == MY_PERMISSIONS_REQUEST_GROUP_STORAGE) {
             if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Tools.save2SDCard(this,mHandler,mImageUrl,mOriginalName,mCurrentItem);
+                Tools.save2SDCard(this, mHandler, mImageUrl, mOriginalName, mCurrentItem);
             }
             return;
         }
@@ -146,7 +237,7 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
     @SuppressLint("SetTextI18n")
     @Override
     public void onPageSelected(int position) {
-        mTvPageNumber.setText((position+1)+"/"+mImageList.size());
+        mTvPageNumber.setText((position + 1) + "/" + mImageList.size());
     }
 
     @Override
