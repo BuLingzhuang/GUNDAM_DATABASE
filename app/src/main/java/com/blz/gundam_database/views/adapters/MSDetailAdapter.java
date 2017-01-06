@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.MSDetailImageEntity;
@@ -55,7 +56,8 @@ public class MSDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         MSDetailImageEntity entity = mList.get(position);
         MSDetailAdapterViewHolder viewHolder = (MSDetailAdapterViewHolder) holder;
-        Glide.with(mContext).load(entity.getImageUri()).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).into(viewHolder.mImage);
+
+        Glide.with(mContext).load(entity.getImageUri()).placeholder(R.mipmap.default_placeholder).crossFade().error(R.mipmap.default_placeholder).into(viewHolder.mImage);
 
         ViewGroup.LayoutParams params = viewHolder.itemView.getLayoutParams();
         params.height = entity.getHeight();

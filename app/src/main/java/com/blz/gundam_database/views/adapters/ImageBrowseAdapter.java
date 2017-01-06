@@ -26,24 +26,13 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class ImageBrowseAdapter extends PagerAdapter {
 
     private ArrayList<PhotoView> mPhotoViewList;
-    private ImageBrowseActivity mActivity;
 
-    public ImageBrowseAdapter(ImageBrowseActivity activity,ArrayList<String> list) {
-        mActivity = activity;
+    public ImageBrowseAdapter(Context context, ArrayList<String> list) {
         mPhotoViewList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            PhotoView photoView = new PhotoView(activity);
+            PhotoView photoView = new PhotoView(context);
             photoView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
-                @Override
-                public void onPhotoTap(View view, float x, float y) {
-                    Log.e("blz","点击了");
-                    if (mActivity != null) {
-                        mActivity.hideOShowHF();
-                    }
-                }
-            });
-            Glide.with(activity).load(list.get(i)).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).crossFade().into(photoView);
+            Glide.with(context).load(list.get(i)).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).crossFade().into(photoView);
             mPhotoViewList.add(photoView);
         }
     }
@@ -59,8 +48,23 @@ public class ImageBrowseAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container,int position) {
+    public Object instantiateItem(ViewGroup container, int position) {
         PhotoView photoView = mPhotoViewList.get(position);
+//        PhotoViewAttacher.OnViewTapListener tapListener = photoView.getOnViewTapListener();
+//        if (tapListener != null) {
+//            Log.e("卜令壮","listener不为空,"+position);
+//        }else {
+//            Log.e("卜令壮","listener为空,"+position);
+//        }
+//        photoView.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
+//            @Override
+//            public void onViewTap(View view, float x, float y) {
+//                Log.e("卜令壮","点击了ViewTap");
+//                if (mActivity != null) {
+//                    mActivity.hideOShowHF();
+//                }
+//            }
+//        });
         container.addView(photoView);
         return photoView;
     }

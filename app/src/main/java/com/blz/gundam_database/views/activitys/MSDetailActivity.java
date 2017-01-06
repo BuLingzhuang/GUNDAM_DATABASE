@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.MSDetailImageEntity;
 import com.blz.gundam_database.entities.MobileSuitEntity;
-import com.blz.gundam_database.utils.DividerItemDecoration;
 import com.blz.gundam_database.views.adapters.MSDetailAdapter;
 import com.bumptech.glide.Glide;
 
@@ -50,6 +49,8 @@ public class MSDetailActivity extends AppCompatActivity {
     LinearLayout mMsdetailHLl;
     @Bind(R.id.msdetail_V_ll)
     LinearLayout mMsdetailVLl;
+    @Bind(R.id.msdetail_bgImage)
+    ImageView mBgImage;
     private TextView mMsdetailTvOriginalName;
     private TextView mMsdetailTvVersion;
     private TextView mMsdetailTvModelSeries;
@@ -82,7 +83,10 @@ public class MSDetailActivity extends AppCompatActivity {
         mMsdetailTvPrototypeMaster.setText("原型师：" + data.getPrototypeMaster());
         mMsdetailTvItemNo.setText("编号：" + data.getItemNo());
         mMsdetailTvLaunchDate.setText("发售时间：" + data.getLaunchDate());
-        Glide.with(this).load(data.getBoxImage()).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).into(mMsdetailBoxImage);
+        mMsdetailBoxImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        Glide.with(this).load(data.getBoxImage()).crossFade().placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).into(mMsdetailBoxImage);
+        Glide.with(this).load(data.getBoxImage()).crossFade().into(mBgImage);
+        mBgImage.setAlpha(.075f);
 
         mAdapter = new MSDetailAdapter(this, data.getOriginalName(), data.getImages());
         mMsdetailRecyclerView.setAdapter(mAdapter);
@@ -99,7 +103,8 @@ public class MSDetailActivity extends AppCompatActivity {
     private MobileSuitEntity init() {
         mHeadToolbarTitle.setText("机体详情");
         mMsdetailRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mMsdetailRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
+        //RecyclerView间隔着色
+//        mMsdetailRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
 
         mMsdetailA.setMovementMethod(LinkMovementMethod.getInstance());
         Intent intent = getIntent();
@@ -110,7 +115,7 @@ public class MSDetailActivity extends AppCompatActivity {
 
     private void changeLayout(String type) {
         switch (type) {
-            case "1":
+            case "2":
                 mMsdetailVLl.setVisibility(View.VISIBLE);
                 mMsdetailHLl.setVisibility(View.GONE);
                 mMsdetailTvOriginalName = (TextView) findViewById(R.id.msdetail_tvOriginalName);
@@ -124,7 +129,7 @@ public class MSDetailActivity extends AppCompatActivity {
                 mMsdetailTvLaunchDate = (TextView) findViewById(R.id.msdetail_tvLaunchDate);
                 mMsdetailBoxImage = (ImageView) findViewById(R.id.msdetail_boxImage);
                 break;
-            case "2":
+            case "1":
                 mMsdetailVLl.setVisibility(View.GONE);
                 mMsdetailHLl.setVisibility(View.VISIBLE);
                 mMsdetailTvOriginalName = (TextView) findViewById(R.id.msdetail_H_tvOriginalName);
@@ -141,11 +146,12 @@ public class MSDetailActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        overridePendingTransition(0, R.anim.finish_activity_alpha);
-    }
+    //返回时Activity销毁动画
+//    @Override
+//    public void onBackPressed() {
+//        finish();
+//        overridePendingTransition(0, R.anim.finish_activity_alpha);
+//    }
 
     private void isUploading(boolean b) {
         if (b) {
@@ -159,7 +165,8 @@ public class MSDetailActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.head_toolbar_back:
-                onBackPressed();
+//                onBackPressed();
+                finish();
                 break;
             case R.id.msdetail_a:
 

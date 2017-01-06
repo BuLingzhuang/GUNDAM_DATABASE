@@ -128,61 +128,61 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
         mViewPager.addOnPageChangeListener(this);
     }
 
-    public void hideOShowHF() {
-        Log.e("blz","进来判断");
-
-        if (isVis) {
-            Log.e("blz","应该显示");
-            isVis = false;
-            AnimationSet headerSet = new AnimationSet(true);
-            AnimationSet footerSet = new AnimationSet(true);
-            AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
-            ScaleAnimation headerAnim = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
-            ScaleAnimation footerAnim = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
-            headerAnim.setDuration(200);
-            headerAnim.setFillAfter(true);
-            footerAnim.setDuration(200);
-            footerAnim.setFillAfter(true);
-            alphaAnimation.setDuration(200);
-            alphaAnimation.setFillAfter(true);
-            headerAnim.setInterpolator(new OvershootInterpolator());
-            footerAnim.setInterpolator(new OvershootInterpolator());
-            alphaAnimation.setInterpolator(new OvershootInterpolator());
-            headerSet.setAnimationListener(mAnimationListener);
-            footerSet.setAnimationListener(mAnimationListener);
-            headerSet.addAnimation(headerAnim);
-            headerSet.addAnimation(alphaAnimation);
-            footerSet.addAnimation(footerAnim);
-            footerSet.addAnimation(alphaAnimation);
-            rlHeader.startAnimation(headerSet);
-            rlFooter.startAnimation(footerSet);
-        } else {
-            Log.e("blz","应该隐藏");
-            isVis = true;
-            AnimationSet headerSet = new AnimationSet(true);
-            AnimationSet footerSet = new AnimationSet(true);
-            AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
-            ScaleAnimation headerAnim = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
-            ScaleAnimation footerAnim = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
-            headerAnim.setDuration(200);
-            headerAnim.setFillAfter(true);
-            footerAnim.setDuration(200);
-            footerAnim.setFillAfter(true);
-            alphaAnimation.setDuration(200);
-            alphaAnimation.setFillAfter(true);
-            headerAnim.setInterpolator(new OvershootInterpolator());
-            footerAnim.setInterpolator(new OvershootInterpolator());
-            alphaAnimation.setInterpolator(new OvershootInterpolator());
-            headerSet.setAnimationListener(mAnimationListener);
-            footerSet.setAnimationListener(mAnimationListener);
-            headerSet.addAnimation(headerAnim);
-            headerSet.addAnimation(alphaAnimation);
-            footerSet.addAnimation(footerAnim);
-            footerSet.addAnimation(alphaAnimation);
-            rlHeader.startAnimation(headerSet);
-            rlFooter.startAnimation(footerSet);
-        }
-    }
+    /**
+     * 显隐Header和Footer的方法
+     * @param view
+     */
+//    public void hideOShowHF() {
+//        if (isVis) {
+//            isVis = false;
+//            AnimationSet headerSet = new AnimationSet(true);
+//            AnimationSet footerSet = new AnimationSet(true);
+//            AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+//            ScaleAnimation headerAnim = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
+//            ScaleAnimation footerAnim = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
+//            headerAnim.setDuration(200);
+//            headerAnim.setFillAfter(true);
+//            footerAnim.setDuration(200);
+//            footerAnim.setFillAfter(true);
+//            alphaAnimation.setDuration(200);
+//            alphaAnimation.setFillAfter(true);
+//            headerAnim.setInterpolator(new OvershootInterpolator());
+//            footerAnim.setInterpolator(new OvershootInterpolator());
+//            alphaAnimation.setInterpolator(new OvershootInterpolator());
+//            headerSet.setAnimationListener(mAnimationListener);
+//            footerSet.setAnimationListener(mAnimationListener);
+//            headerSet.addAnimation(headerAnim);
+//            headerSet.addAnimation(alphaAnimation);
+//            footerSet.addAnimation(footerAnim);
+//            footerSet.addAnimation(alphaAnimation);
+//            rlHeader.startAnimation(headerSet);
+//            rlFooter.startAnimation(footerSet);
+//        } else {
+//            isVis = true;
+//            AnimationSet headerSet = new AnimationSet(true);
+//            AnimationSet footerSet = new AnimationSet(true);
+//            AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+//            ScaleAnimation headerAnim = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
+//            ScaleAnimation footerAnim = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
+//            headerAnim.setDuration(200);
+//            headerAnim.setFillAfter(true);
+//            footerAnim.setDuration(200);
+//            footerAnim.setFillAfter(true);
+//            alphaAnimation.setDuration(200);
+//            alphaAnimation.setFillAfter(true);
+//            headerAnim.setInterpolator(new OvershootInterpolator());
+//            footerAnim.setInterpolator(new OvershootInterpolator());
+//            alphaAnimation.setInterpolator(new OvershootInterpolator());
+//            headerSet.setAnimationListener(mAnimationListener);
+//            footerSet.setAnimationListener(mAnimationListener);
+//            headerSet.addAnimation(headerAnim);
+//            headerSet.addAnimation(alphaAnimation);
+//            footerSet.addAnimation(footerAnim);
+//            footerSet.addAnimation(alphaAnimation);
+//            rlHeader.startAnimation(headerSet);
+//            rlFooter.startAnimation(footerSet);
+//        }
+//    }
 
     @OnClick({R.id.image_browse_back, R.id.image_browse_download})
     public void onClick(View view) {

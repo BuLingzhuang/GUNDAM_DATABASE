@@ -72,7 +72,7 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case R.layout.adapter_mobile_suit:
                 final MobileSuitEntity entity = (MobileSuitEntity) mList.get(position);
                 MobileSuitAdapterDefaultViewHolder viewHolder = (MobileSuitAdapterDefaultViewHolder) holder;
-                Glide.with(mContext).load(entity.getHeadImage()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).into(viewHolder.mIv);
+                Glide.with(mContext).load(entity.getHeadImage()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).crossFade().into(viewHolder.mIv);
                 viewHolder.mTvOriginalName.setText(mContext.getString(R.string.mobile_type) + entity.getOriginalName());
                 viewHolder.mTvModelSeries.setText(mContext.getString(R.string.mobile_model_series) + entity.getModelSeries());
                 viewHolder.mTvPrice.setText(mContext.getString(R.string.mobile_price) + entity.getPrice());

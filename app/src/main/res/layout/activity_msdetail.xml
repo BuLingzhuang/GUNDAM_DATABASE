@@ -1,214 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.blz.gundam_database.views.activitys.MSDetailActivity">
-    <include layout="@layout/head_toolbar"/>
-    <ScrollView
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scrollbars="none">
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"/>
 
-        <LinearLayout
+    <ImageView
+        android:id="@+id/msdetail_bgImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="?actionBarSize">
 
-            <LinearLayout
-                android:id="@+id/msdetail_H_ll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                android:padding="6dp">
-
-                <LinearLayout
-                    android:layout_width="240dp"
-                    android:layout_height="217dp"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/msdetail_H_boxImage"
-                        android:layout_width="240dp"
-                        android:layout_height="147dp"
-                        android:background="#55009587"
-                        android:contentDescription="@string/boxImage"/>
-                    <TextView
-                        android:id="@+id/msdetail_H_tvOriginalName"
-                        style="@style/msdetail_tv_style"
-                       android:layout_marginTop="5dp"
-                        android:text="型号：Mobile Suit GNT-0000"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_H_tvVersion"
-                        style="@style/msdetail_tv_style"
-                        android:text="版本：普通版"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_H_tvLaunchDate"
-                        style="@style/msdetail_tv_style"
-                        android:text="发售时间：NOV 2010"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="147dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:paddingLeft="10dp">
-
-
-
-
-                    <TextView
-                        android:id="@+id/msdetail_H_tvModelSeries"
-                        style="@style/msdetail_tv_style"
-                        android:text="系列：MG"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_H_tvScale"
-                        style="@style/msdetail_tv_style"
-                        android:text="比例：1/100"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_H_tvPrice"
-                        style="@style/msdetail_tv_style"
-                        android:text="价格：4500円"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_H_tvManufacturer"
-                        style="@style/msdetail_tv_style"
-                        android:text="厂商：万代"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_H_tvPrototypeMaster"
-                        style="@style/msdetail_tv_style"
-                        android:text="原型师：未知"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_H_tvItemNo"
-                        style="@style/msdetail_tv_style"
-                        android:text="编号：4543112-65654-4"/>
-
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/msdetail_V_ll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="6dp">
-
-                <ImageView
-                    android:id="@+id/msdetail_boxImage"
-                    android:layout_width="140dp"
-                    android:layout_height="217dp"
-                    android:background="#55009587"
-                    android:contentDescription="@string/boxImage"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="217dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:paddingLeft="10dp">
-
-                    <TextView
-                        android:id="@+id/msdetail_tvOriginalName"
-                        style="@style/msdetail_tv_style"
-                        android:text="型号：Mobile Suit GNT-0000"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_tvVersion"
-                        style="@style/msdetail_tv_style"
-                        android:text="版本：普通版"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_tvModelSeries"
-                        style="@style/msdetail_tv_style"
-                        android:text="系列：MG"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_tvScale"
-                        style="@style/msdetail_tv_style"
-                        android:text="比例：1/100"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_tvPrice"
-                        style="@style/msdetail_tv_style"
-                        android:text="价格：4500円"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_tvManufacturer"
-                        style="@style/msdetail_tv_style"
-                        android:text="厂商：万代"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_tvPrototypeMaster"
-                        style="@style/msdetail_tv_style"
-                        android:text="原型师：未知"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_tvItemNo"
-                        style="@style/msdetail_tv_style"
-                        android:text="编号：4543112-65654-4"/>
-
-                    <TextView
-                        android:id="@+id/msdetail_tvLaunchDate"
-                        style="@style/msdetail_tv_style"
-                        android:text="发售时间：NOV 2010"/>
-                </LinearLayout>
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="素组图片"
-                android:textColor="@color/black_light"
-                android:textSize="14sp"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/msdetail_recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="220dp"
-                    android:paddingLeft="6dp"
-                    android:paddingRight="6dp"/>
-                <ProgressBar
-                    android:id="@+id/msdetail_progressBar"
+                <ImageButton
+                    android:id="@+id/head_toolbar_back"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    />
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:scaleType="center"
+                    android:src="@mipmap/back"/>
+
+                <TextView
+                    android:id="@+id/head_toolbar_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
             </RelativeLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="玩家制作"
-                android:textColor="@color/black_light"
-                android:textSize="14sp"/>
+        </android.support.v7.widget.Toolbar>
+
+        <ScrollView
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/msdetail_a"
-                    android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:id="@+id/msdetail_H_ll"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/a_href"/>
+                    android:orientation="horizontal"
+                    android:padding="6dp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="240dp"
+                        android:layout_height="217dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/msdetail_H_boxImage"
+                            android:layout_width="240dp"
+                            android:layout_height="147dp"
+                            android:background="#55009587"
+                            android:contentDescription="@string/boxImage"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_H_tvOriginalName"
+                            style="@style/msdetail_tv_style"
+                            android:layout_marginTop="5dp"
+                            android:text="型号：Mobile Suit GNT-0000"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_H_tvVersion"
+                            style="@style/msdetail_tv_style"
+                            android:text="版本：普通版"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_H_tvLaunchDate"
+                            style="@style/msdetail_tv_style"
+                            android:text="发售时间：NOV 2010"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="147dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+
+                        <TextView
+                            android:id="@+id/msdetail_H_tvModelSeries"
+                            style="@style/msdetail_tv_style"
+                            android:text="系列：MG"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_H_tvScale"
+                            style="@style/msdetail_tv_style"
+                            android:text="比例：1/100"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_H_tvPrice"
+                            style="@style/msdetail_tv_style"
+                            android:text="价格：4500円"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_H_tvManufacturer"
+                            style="@style/msdetail_tv_style"
+                            android:text="厂商：万代"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_H_tvPrototypeMaster"
+                            style="@style/msdetail_tv_style"
+                            android:text="原型师：未知"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_H_tvItemNo"
+                            style="@style/msdetail_tv_style"
+                            android:text="编号：4543112-65654-4"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/msdetail_V_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:foreground="?attr/selectableItemBackground"
+
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="2dp">
+
+                        <ImageView
+                            android:id="@+id/msdetail_boxImage"
+                            android:layout_width="140dp"
+                            android:layout_height="217dp"
+                            android:background="#55009587"
+                            android:contentDescription="@string/boxImage"/>
+                    </android.support.v7.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="217dp"
+                        android:layout_margin="6dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/msdetail_tvOriginalName"
+                            style="@style/msdetail_tv_style"
+                            android:text="型号：Mobile Suit GNT-0000"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_tvVersion"
+                            style="@style/msdetail_tv_style"
+                            android:text="版本：普通版"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_tvModelSeries"
+                            style="@style/msdetail_tv_style"
+                            android:text="系列：MG"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_tvScale"
+                            style="@style/msdetail_tv_style"
+                            android:text="比例：1/100"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_tvPrice"
+                            style="@style/msdetail_tv_style"
+                            android:text="价格：4500円"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_tvManufacturer"
+                            style="@style/msdetail_tv_style"
+                            android:text="厂商：万代"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_tvPrototypeMaster"
+                            style="@style/msdetail_tv_style"
+                            android:text="原型师：未知"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_tvItemNo"
+                            style="@style/msdetail_tv_style"
+                            android:text="编号：4543112-65654-4"/>
+
+                        <TextView
+                            android:id="@+id/msdetail_tvLaunchDate"
+                            style="@style/msdetail_tv_style"
+                            android:text="发售时间：NOV 2010"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="6dp"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:text="素组图片"-->
+                <!--android:textColor="@color/black_light"-->
+                <!--android:textSize="14sp"/>-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="220dp"
+                    android:paddingBottom="3dp"
+                    android:paddingTop="3dp">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/msdetail_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="6dp"
+                        android:paddingRight="6dp"/>
+
+                    <ProgressBar
+                        android:id="@+id/msdetail_progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:padding="6dp"
+                    android:text="玩家制作"
+                    android:textColor="@color/black_light"
+                    android:textSize="14sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/msdetail_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/a_href"/>
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>
