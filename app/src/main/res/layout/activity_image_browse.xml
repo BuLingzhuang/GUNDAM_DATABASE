@@ -1,45 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fl_content"
+    android:background="@android:color/black"
     tools:context="com.blz.gundam_database.views.activitys.ImageBrowseActivity">
 
     <android.support.v4.view.ViewPager
-    android:id="@+id/image_browse_viewPager"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black"/>
+        android:id="@+id/image_browse_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"/>
 
     <RelativeLayout
         android:id="@+id/rl_header"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/alphaColorPrimaryDark"
+        android:transitionName="Image_Header"
         >
 
-        <ImageButton
+        <ImageView
             android:id="@+id/image_browse_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@null"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:scaleType="center"
+            android:padding="12dp"
             android:src="@mipmap/back"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/image_browse_download"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:background="@null"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:scaleType="center"
+            android:padding="8dp"
             android:src="@mipmap/download"/>
 
     </RelativeLayout>
@@ -47,8 +43,8 @@
     <RelativeLayout
         android:id="@+id/rl_footer"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_gravity="bottom"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/alphaColorPrimaryDark">
 
         <TextView
@@ -75,4 +71,4 @@
             android:textColor="@android:color/white"
             android:textSize="14sp"/>
     </RelativeLayout>
-</FrameLayout>
+</RelativeLayout>

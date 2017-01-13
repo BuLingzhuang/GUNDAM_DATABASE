@@ -28,12 +28,12 @@ public class AboutActivity extends SwipeBackActivity {
 
     @OnClick(R.id.about_head_back)
     public void onClick() {
-        onBackPressed();
+        finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        overridePendingTransition(0, R.anim.finish_activity_alpha);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        finish();
+//        overridePendingTransition(0, R.anim.finish_activity_alpha);
+//    }
 }

@@ -32,7 +32,7 @@ public class ImageBrowseAdapter extends PagerAdapter {
         for (int i = 0; i < list.size(); i++) {
             PhotoView photoView = new PhotoView(context);
             photoView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            Glide.with(context).load(list.get(i)).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).crossFade().into(photoView);
+            Glide.with(context).load(list.get(i)).error(R.mipmap.default_placeholder).crossFade().into(photoView);
             mPhotoViewList.add(photoView);
         }
     }

@@ -2,8 +2,10 @@ package com.blz.gundam_database.views.activitys;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +25,7 @@ import android.view.animation.OvershootInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,9 +50,9 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
     @Bind(R.id.image_browse_viewPager)
     ViewPager mViewPager;
     @Bind(R.id.image_browse_back)
-    ImageButton mBack;
+    ImageView mBack;
     @Bind(R.id.image_browse_download)
-    ImageButton mDownload;
+    ImageView mDownload;
     @Bind(R.id.image_browse_tvOriginalName)
     TextView mTvOriginalName;
     @Bind(R.id.image_browse_tvPageNumber)
@@ -59,7 +62,7 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
     @Bind(R.id.rl_footer)
     RelativeLayout rlFooter;
     @Bind(R.id.fl_content)
-    FrameLayout flContent;
+    RelativeLayout flContent;
     private ArrayList<String> mImageList;
     private String mOriginalName;
     private String mImageUrl;
@@ -73,7 +76,7 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
         }
     };
 
-    private Animation.AnimationListener mAnimationListener = new Animation.AnimationListener() {
+    /*private Animation.AnimationListener mAnimationListener = new Animation.AnimationListener() {
         @Override
         public void onAnimationStart(Animation animation) {
         }
@@ -96,7 +99,7 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
         @Override
         public void onAnimationRepeat(Animation animation) {
         }
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +125,10 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
         mViewPager.setAdapter(adapter);
         mViewPager.setCurrentItem(position);
         mTvPageNumber.setText((position + 1) + "/" + mImageList.size());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mViewPager.setTransitionGroup(true);
+            mViewPager.setTransitionName("Image_Browse");
+        }
     }
 
     private void init() {
@@ -130,65 +137,65 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
 
     /**
      * 显隐Header和Footer的方法
+     *
      * @param view
      */
-//    public void hideOShowHF() {
-//        if (isVis) {
-//            isVis = false;
-//            AnimationSet headerSet = new AnimationSet(true);
-//            AnimationSet footerSet = new AnimationSet(true);
-//            AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
-//            ScaleAnimation headerAnim = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
-//            ScaleAnimation footerAnim = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
-//            headerAnim.setDuration(200);
-//            headerAnim.setFillAfter(true);
-//            footerAnim.setDuration(200);
-//            footerAnim.setFillAfter(true);
-//            alphaAnimation.setDuration(200);
-//            alphaAnimation.setFillAfter(true);
-//            headerAnim.setInterpolator(new OvershootInterpolator());
-//            footerAnim.setInterpolator(new OvershootInterpolator());
-//            alphaAnimation.setInterpolator(new OvershootInterpolator());
-//            headerSet.setAnimationListener(mAnimationListener);
-//            footerSet.setAnimationListener(mAnimationListener);
-//            headerSet.addAnimation(headerAnim);
-//            headerSet.addAnimation(alphaAnimation);
-//            footerSet.addAnimation(footerAnim);
-//            footerSet.addAnimation(alphaAnimation);
-//            rlHeader.startAnimation(headerSet);
-//            rlFooter.startAnimation(footerSet);
-//        } else {
-//            isVis = true;
-//            AnimationSet headerSet = new AnimationSet(true);
-//            AnimationSet footerSet = new AnimationSet(true);
-//            AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
-//            ScaleAnimation headerAnim = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
-//            ScaleAnimation footerAnim = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
-//            headerAnim.setDuration(200);
-//            headerAnim.setFillAfter(true);
-//            footerAnim.setDuration(200);
-//            footerAnim.setFillAfter(true);
-//            alphaAnimation.setDuration(200);
-//            alphaAnimation.setFillAfter(true);
-//            headerAnim.setInterpolator(new OvershootInterpolator());
-//            footerAnim.setInterpolator(new OvershootInterpolator());
-//            alphaAnimation.setInterpolator(new OvershootInterpolator());
-//            headerSet.setAnimationListener(mAnimationListener);
-//            footerSet.setAnimationListener(mAnimationListener);
-//            headerSet.addAnimation(headerAnim);
-//            headerSet.addAnimation(alphaAnimation);
-//            footerSet.addAnimation(footerAnim);
-//            footerSet.addAnimation(alphaAnimation);
-//            rlHeader.startAnimation(headerSet);
-//            rlFooter.startAnimation(footerSet);
-//        }
-//    }
-
+    /*public void hideOShowHF() {
+        if (isVis) {
+            isVis = false;
+            AnimationSet headerSet = new AnimationSet(true);
+            AnimationSet footerSet = new AnimationSet(true);
+            AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+            ScaleAnimation headerAnim = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
+            ScaleAnimation footerAnim = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
+            headerAnim.setDuration(200);
+            headerAnim.setFillAfter(true);
+            footerAnim.setDuration(200);
+            footerAnim.setFillAfter(true);
+            alphaAnimation.setDuration(200);
+            alphaAnimation.setFillAfter(true);
+            headerAnim.setInterpolator(new OvershootInterpolator());
+            footerAnim.setInterpolator(new OvershootInterpolator());
+            alphaAnimation.setInterpolator(new OvershootInterpolator());
+            headerSet.setAnimationListener(mAnimationListener);
+            footerSet.setAnimationListener(mAnimationListener);
+            headerSet.addAnimation(headerAnim);
+            headerSet.addAnimation(alphaAnimation);
+            footerSet.addAnimation(footerAnim);
+            footerSet.addAnimation(alphaAnimation);
+            rlHeader.startAnimation(headerSet);
+            rlFooter.startAnimation(footerSet);
+        } else {
+            isVis = true;
+            AnimationSet headerSet = new AnimationSet(true);
+            AnimationSet footerSet = new AnimationSet(true);
+            AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+            ScaleAnimation headerAnim = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0);
+            ScaleAnimation footerAnim = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
+            headerAnim.setDuration(200);
+            headerAnim.setFillAfter(true);
+            footerAnim.setDuration(200);
+            footerAnim.setFillAfter(true);
+            alphaAnimation.setDuration(200);
+            alphaAnimation.setFillAfter(true);
+            headerAnim.setInterpolator(new OvershootInterpolator());
+            footerAnim.setInterpolator(new OvershootInterpolator());
+            alphaAnimation.setInterpolator(new OvershootInterpolator());
+            headerSet.setAnimationListener(mAnimationListener);
+            footerSet.setAnimationListener(mAnimationListener);
+            headerSet.addAnimation(headerAnim);
+            headerSet.addAnimation(alphaAnimation);
+            footerSet.addAnimation(footerAnim);
+            footerSet.addAnimation(alphaAnimation);
+            rlHeader.startAnimation(headerSet);
+            rlFooter.startAnimation(footerSet);
+        }
+    }*/
     @OnClick({R.id.image_browse_back, R.id.image_browse_download})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.image_browse_back:
-                onBackPressed();
+                finish();
                 break;
             case R.id.image_browse_download:
                 int currentItem = mViewPager.getCurrentItem();
@@ -222,11 +229,11 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        overridePendingTransition(0, R.anim.finish_activity_alpha);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        finish();
+//        overridePendingTransition(0, R.anim.finish_activity_alpha);
+//    }
 
     //ViewPager的滑动监听
     @Override
@@ -244,4 +251,5 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
     public void onPageScrollStateChanged(int state) {
 
     }
+
 }

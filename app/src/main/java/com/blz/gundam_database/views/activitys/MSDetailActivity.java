@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageButton;
@@ -35,6 +36,8 @@ import butterknife.OnClick;
 
 public class MSDetailActivity extends AppCompatActivity {
 
+    @Bind(R.id.msdetail_tb)
+    Toolbar mToolbar;
     @Bind(R.id.head_toolbar_back)
     ImageButton mHeadToolbarBack;
     @Bind(R.id.head_toolbar_title)
@@ -88,7 +91,7 @@ public class MSDetailActivity extends AppCompatActivity {
         Glide.with(this).load(data.getBoxImage()).crossFade().into(mBgImage);
         mBgImage.setAlpha(.075f);
 
-        mAdapter = new MSDetailAdapter(this, data.getOriginalName(), data.getImages());
+        mAdapter = new MSDetailAdapter(this,mToolbar, data.getOriginalName(), data.getImages());
         mMsdetailRecyclerView.setAdapter(mAdapter);
 
         prepareImageList(data.getImages());

@@ -27,6 +27,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/msdetail_tb"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize">
 
@@ -275,9 +276,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/a_href"/>
 
-                    <Switch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
