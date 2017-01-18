@@ -18,7 +18,7 @@
         android:id="@+id/rl_header"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/alphaColorPrimaryDark"
+        android:background="@color/colorPrimaryDark_alpha"
         android:transitionName="Image_Header"
         >
 
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/alphaColorPrimaryDark">
+        android:background="@color/colorPrimaryDark_alpha">
 
         <TextView
             android:id="@+id/image_browse_tvOriginalName"

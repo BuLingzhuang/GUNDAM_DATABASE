@@ -33,4 +33,6 @@
     <string name="menu_my_collection">我的收藏</string>
     <string name="menu_download">离线下载</string>
     <string name="mst_other_type">其他（Metal Build、SD、R魂...）\n1:??</string>
+    <string name="user_page_type_register">已有账号？去登录</string>
+    <string name="user_page_type_login">没有账号？去注册</string>
 </resources>

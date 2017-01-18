@@ -66,7 +66,7 @@ public class SplashScreenInteractorImpl extends FindCallback<AVObject> implement
             SplashScreenEntityDao dao = DBUtils.getDaoSession().getSplashScreenEntityDao();
             dao.deleteAll();
             dao.insertOrReplaceInTx(new SplashScreenEntity(imgUrl));
-            Tools.showLogE(this, "Request Successful，imgUrl：" + imgUrl);
+            Tools.showLogE("Request Successful，imgUrl：" + imgUrl);
         } else {
             Tools.showSnackBar(mContext, mContext.getString(R.string.base_network_error), mGenView);
         }

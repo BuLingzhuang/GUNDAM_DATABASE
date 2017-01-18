@@ -236,7 +236,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="220dp"
-                    android:paddingBottom="3dp"
+                    android:paddingBottom="12dp"
                     android:paddingTop="3dp">
 
                     <android.support.v7.widget.RecyclerView
@@ -254,29 +254,6 @@
                         />
                 </RelativeLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:padding="6dp"
-                    android:text="玩家制作"
-                    android:textColor="@color/black_light"
-                    android:textSize="14sp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/msdetail_a"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/a_href"/>
-
-                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

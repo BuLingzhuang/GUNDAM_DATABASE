@@ -46,8 +46,6 @@ public class MSDetailActivity extends AppCompatActivity {
     RecyclerView mMsdetailRecyclerView;
     @Bind(R.id.msdetail_progressBar)
     ProgressBar mMsdetailProgressBar;
-    @Bind(R.id.msdetail_a)
-    TextView mMsdetailA;
     @Bind(R.id.msdetail_H_ll)
     LinearLayout mMsdetailHLl;
     @Bind(R.id.msdetail_V_ll)
@@ -109,7 +107,7 @@ public class MSDetailActivity extends AppCompatActivity {
         //RecyclerView间隔着色
 //        mMsdetailRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
 
-        mMsdetailA.setMovementMethod(LinkMovementMethod.getInstance());
+//        mMsdetailA.setMovementMethod(LinkMovementMethod.getInstance());
         Intent intent = getIntent();
         MobileSuitEntity data = (MobileSuitEntity) intent.getSerializableExtra("MobileSuitEntity");
         changeLayout(data.getLlType());
@@ -164,15 +162,12 @@ public class MSDetailActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick({R.id.head_toolbar_back, R.id.msdetail_a})
+    @OnClick({R.id.head_toolbar_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.head_toolbar_back:
 //                onBackPressed();
                 finish();
-                break;
-            case R.id.msdetail_a:
-
                 break;
         }
     }

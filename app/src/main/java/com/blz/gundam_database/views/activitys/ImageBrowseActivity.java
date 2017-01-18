@@ -219,7 +219,7 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Tools.showLogE(this, grantResults.length + "" + Arrays.toString(permissions));
+        Tools.showLogE(grantResults.length + "" + Arrays.toString(permissions));
         if (requestCode == MY_PERMISSIONS_REQUEST_GROUP_STORAGE) {
             if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Tools.save2SDCard(this, mHandler, mImageUrl, mOriginalName, mCurrentItem);

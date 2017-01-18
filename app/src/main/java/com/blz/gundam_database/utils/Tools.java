@@ -29,9 +29,9 @@ import java.net.URL;
  */
 public class Tools {
 
-    public static void showLogE(Object obj, String str) {
+    public static void showLogE(String str) {
         if (Constants.DEBUG) {
-            Log.e(obj.getClass().getSimpleName(), str);
+            Log.e("blz", str);
         }
     }
 

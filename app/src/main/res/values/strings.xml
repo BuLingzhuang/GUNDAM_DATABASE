@@ -33,4 +33,6 @@
     <string name="menu_my_collection">Collection</string>
     <string name="menu_download">Download</string>
     <string name="mst_other_type">Other（Metal Build、SD、Robot…）\n1:??</string>
+    <string name="user_page_type_register">Existing account？To log in</string>
+    <string name="user_page_type_login">Haven’t account？Go to register</string>
 </resources>

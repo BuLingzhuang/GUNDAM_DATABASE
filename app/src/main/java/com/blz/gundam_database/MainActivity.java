@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Fade;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +30,7 @@ import com.blz.gundam_database.interfaces.presenters.MainPresenter;
 import com.blz.gundam_database.interfaces.views.MainView;
 import com.blz.gundam_database.utils.Tools;
 import com.blz.gundam_database.views.activitys.AboutActivity;
+import com.blz.gundam_database.views.activitys.UserActivity;
 import com.blz.gundam_database.views.adapters.MainListByWorksAdapter;
 
 import java.lang.reflect.Type;
@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.menu_header_icon:
+                startActivity(new Intent(this, UserActivity.class));
                 break;
             case R.id.menu_header_favorites:
                 break;
