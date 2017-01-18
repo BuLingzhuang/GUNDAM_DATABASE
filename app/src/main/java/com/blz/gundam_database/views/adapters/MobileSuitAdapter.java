@@ -14,6 +14,7 @@ import com.avos.avoscloud.AVAnalytics;
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MobileSuitEntity;
+import com.blz.gundam_database.utils.Tools;
 import com.blz.gundam_database.views.activitys.MSDetailActivity;
 import com.bumptech.glide.Glide;
 
@@ -77,6 +78,7 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 viewHolder.mTvModelSeries.setText(mContext.getString(R.string.mobile_model_series) + entity.getModelSeries());
                 viewHolder.mTvPrice.setText(mContext.getString(R.string.mobile_price) + entity.getPrice());
                 viewHolder.mTvLaunchDate.setText(mContext.getString(R.string.mobile_launch_date) + entity.getLaunchDate());
+                Tools.changeFont(mContext, viewHolder.mTvOriginalName, viewHolder.mTvModelSeries, viewHolder.mTvPrice, viewHolder.mTvLaunchDate);
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

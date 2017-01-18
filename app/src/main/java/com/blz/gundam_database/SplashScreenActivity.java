@@ -46,6 +46,7 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
         ButterKnife.bind(this);
+        Tools.changeFonts(this);
         mPresenter = new SplashScreenPresenterImpl(this, mGenView);
         mPresenter.start();
     }

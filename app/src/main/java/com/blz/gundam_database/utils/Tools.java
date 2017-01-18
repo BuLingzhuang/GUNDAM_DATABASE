@@ -1,14 +1,17 @@
 package com.blz.gundam_database.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
+import android.graphics.Typeface;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,43 +38,76 @@ public class Tools {
         }
     }
 
+    /**
+     * 白底绿字SnackBar
+     *
+     * @param context
+     * @param text
+     * @param genView
+     */
     public static void showSnackBar(Context context, String text, View genView) {
         Snackbar snackbar = Snackbar.make(genView, text, Snackbar.LENGTH_LONG);
         //白底的SnackBar样式的方法
         Snackbar.SnackbarLayout snackBarLayout = (Snackbar.SnackbarLayout) snackbar.getView();
-        snackBarLayout.setBackgroundColor(getColor(context, R.color.colorPrimary));
+        snackBarLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
         ((TextView) snackBarLayout.findViewById(android.support.design.R.id.snackbar_text)).setTextColor(Color.WHITE);
         snackbar.show();
     }
 
+    /**
+     * 短时长Toast
+     *
+     * @param context
+     * @param str
+     */
     public static void showToast(Context context, String str) {
         showToast(context, str, Toast.LENGTH_SHORT);
     }
 
+    /**
+     * 自定义时长Toast
+     *
+     * @param context
+     * @param str
+     * @param time
+     */
     public static void showToast(Context context, String str, int time) {
         Toast.makeText(context, str, time).show();
     }
 
-    public static int getColor(Context context, int RColor) {
-        int color;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = context.getResources().getColor(RColor, null);
-        } else {
-            color = context.getResources().getColor(RColor);
-        }
-        return color;
-    }
-
+    /**
+     * dp转px
+     *
+     * @param context
+     * @param dpValue
+     * @return
+     */
     public static int dp2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
+    /**
+     * px转dp
+     *
+     * @param context
+     * @param pxValue
+     * @return
+     */
     public static int px2dp(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
+    /**
+     * 图片保存本地方法
+     *
+     * @param context
+     * @param handler
+     * @param imageUrl
+     * @param originalName
+     * @param currentItem
+     */
     public static void save2SDCard(final Context context, final Handler handler, final String imageUrl, final String originalName, final int currentItem) {
         if (imageUrl != null) {
             new Thread(new Runnable() {
@@ -95,7 +131,7 @@ public class Tools {
                             }
                             fos.close();
                             is.close();
-                            message.obj =  context.getString(R.string.tools_save_success)+ file.getAbsolutePath();
+                            message.obj = context.getString(R.string.tools_save_success) + file.getAbsolutePath();
                             AVAnalytics.onEvent(context, context.getString(R.string.tools_download) + originalName);
                         } else {
                             message.obj = context.getString(R.string.tools_saved) + file.getAbsolutePath();
@@ -108,5 +144,54 @@ public class Tools {
                 }
             }).start();
         }
+    }
+
+    /**
+     * 修改字体
+     *
+     * @param context
+     * @param views
+     */
+    public static void changeFont(Context context, View... views) {
+        Typeface tf = Typeface.createFromAsset(context.getAssets(),
+                "PingFangRegular.ttf");
+        for (View view : views) {
+            if (view instanceof TextView) {
+                ((TextView) view).setTypeface(tf);
+            }
+        }
+    }
+
+    /**
+     * 遍历整个View树，修改文字(对外暴露方法)
+     *
+     * @param act
+     */
+    public static void changeFonts(Activity act) {
+        ViewGroup viewGroup = (ViewGroup) act.getWindow().getDecorView().findViewById(android.R.id.content);
+
+        changeFonts(viewGroup, act);
+    }
+
+    /**
+     * 遍历整个View树，修改文字(递归向下查找)
+     *
+     * @param root
+     * @param context
+     */
+    private static void changeFonts(ViewGroup root, Context context) {
+
+        Typeface tf = Typeface.createFromAsset(context.getAssets(),
+                "PingFangRegular.ttf");
+
+        for (int i = 0; i < root.getChildCount(); i++) {
+            View v = root.getChildAt(i);
+            if (v instanceof TextView) {
+                ((TextView) v).setTypeface(tf);
+            } else if (v instanceof ViewGroup) {
+                changeFonts((ViewGroup) v, context);
+            }
+        }
+
     }
 }

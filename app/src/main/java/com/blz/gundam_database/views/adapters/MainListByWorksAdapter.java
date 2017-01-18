@@ -18,6 +18,7 @@ import com.avos.avoscloud.AVAnalytics;
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MainListByWorkEntity;
+import com.blz.gundam_database.utils.Tools;
 import com.blz.gundam_database.views.activitys.MSTypeActivity;
 import com.bumptech.glide.Glide;
 
@@ -71,6 +72,7 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 Glide.with(mContext).load(entity.getIcon()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).into(viewHolder.mIvIcon);
                 viewHolder.mTvOriginalName.setText(entity.getOriginalName());
                 viewHolder.mTvStoryYear.setText(entity.getStoryYear());
+                Tools.changeFont(mContext, viewHolder.mTvOriginalName, viewHolder.mTvStoryYear);
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -79,7 +81,7 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         intent.putExtra(MainListByWorkEntity.class.getName(), entity);
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
 
-                            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation((AppCompatActivity) mContext, new Pair<View, String>(viewHolder.mIvIcon, "Image_MSType_Header"),new Pair<View, String>(viewHolder.mLl, "LinearLayout_MSType_bottom")).toBundle();
+                            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation((AppCompatActivity) mContext, new Pair<View, String>(viewHolder.mIvIcon, "Image_MSType_Header"), new Pair<View, String>(viewHolder.mLl, "LinearLayout_MSType_bottom")).toBundle();
                             mContext.startActivity(intent, bundle);
                         } else {
                             mContext.startActivity(intent);

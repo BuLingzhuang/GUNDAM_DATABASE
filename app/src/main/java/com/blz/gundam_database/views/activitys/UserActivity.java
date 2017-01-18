@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.transition.Fade;
 import android.transition.TransitionManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,6 +64,16 @@ public class UserActivity extends SwipeBackActivity {
     TextView btnSubmit;
     @Bind(R.id.activity_login)
     RelativeLayout activity;
+    @Bind(R.id.v_login_phone)
+    View vLoginPhone;
+    @Bind(R.id.v_login_password)
+    View vLoginPassword;
+    @Bind(R.id.v_register_userName)
+    View vRegisterUserName;
+    @Bind(R.id.v_register_phone)
+    View vRegisterPhone;
+    @Bind(R.id.v_register_password)
+    View vRegisterPassword;
 
     private boolean mIsRegister;
 
@@ -71,11 +82,26 @@ public class UserActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         ButterKnife.bind(this);
+        Tools.changeFonts(this);
         init();
     }
 
     private void init() {
         changePageType(true);
+
+        initListener();
+    }
+
+    /**
+     * 初始化相关监听器
+     */
+    private void initListener() {
+        MyFocusChangeListener myFocusChangeListener = new MyFocusChangeListener();
+        etLoginPhone.setOnFocusChangeListener(myFocusChangeListener);
+        etLoginPassword.setOnFocusChangeListener(myFocusChangeListener);
+        etRegisterUserName.setOnFocusChangeListener(myFocusChangeListener);
+        etRegisterPhone.setOnFocusChangeListener(myFocusChangeListener);
+        etRegisterPassword.setOnFocusChangeListener(myFocusChangeListener);
     }
 
     @Override
@@ -143,6 +169,38 @@ public class UserActivity extends SwipeBackActivity {
             llRegister.setVisibility(View.GONE);
             llLogin.setVisibility(View.VISIBLE);
             tvPageType.setText(getResources().getString(R.string.user_page_type_login));
+        }
+    }
+
+    private class MyFocusChangeListener implements View.OnFocusChangeListener {
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            View lineView = null;
+            switch (v.getId()) {
+                case R.id.et_login_phone:
+                    lineView = vLoginPhone;
+                    break;
+                case R.id.et_login_password:
+                    lineView = vLoginPassword;
+                    break;
+                case R.id.et_register_userName:
+                    lineView = vRegisterUserName;
+                    break;
+                case R.id.et_register_phone:
+                    lineView = vRegisterPhone;
+                    break;
+                case R.id.et_register_password:
+                    lineView = vRegisterPassword;
+                    break;
+            }
+            if (lineView != null) {
+                if (hasFocus) {//获得焦点
+                    lineView.setBackgroundResource(R.color.colorPrimary);
+                } else {//失去焦点
+                    lineView.setBackgroundResource(R.color.login_gray_light);
+                }
+            }
         }
     }
 }

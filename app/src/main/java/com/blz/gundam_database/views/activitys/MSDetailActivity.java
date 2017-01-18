@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.blz.gundam_database.R;
 import com.blz.gundam_database.entities.MSDetailImageEntity;
 import com.blz.gundam_database.entities.MobileSuitEntity;
+import com.blz.gundam_database.utils.Tools;
 import com.blz.gundam_database.views.adapters.MSDetailAdapter;
 import com.bumptech.glide.Glide;
 
@@ -69,6 +70,7 @@ public class MSDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_msdetail);
         ButterKnife.bind(this);
+        Tools.changeFonts(this);
         MobileSuitEntity data = init();
         initData(data);
     }

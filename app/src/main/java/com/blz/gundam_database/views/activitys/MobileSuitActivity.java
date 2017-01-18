@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -75,6 +76,7 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_suit);
         ButterKnife.bind(this);
+        Tools.changeFonts(this);
         init();
         initData();
     }
@@ -91,7 +93,7 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
 
     private void init() {
         mPresenter = new MobileSuitPresenterImpl(this);
-        mProgressBar.setDrawingCacheBackgroundColor(Tools.getColor(this, R.color.colorPrimary));
+        mProgressBar.setDrawingCacheBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
 
         //设置回退按钮
         setSupportActionBar(mToolbar);

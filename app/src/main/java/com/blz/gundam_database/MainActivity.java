@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
         }
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        Tools.changeFonts(this);
         init();
         initData();
     }
@@ -149,9 +150,9 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
             b = true;
         }
         switch (item.getItemId()){
-            case R.id.menu_message://消息
-
-                break;
+//            case R.id.menu_message://消息
+//
+//                break;
             case R.id.menu_about://关于
                 AVAnalytics.onEvent(this, getString(R.string.main_see_about));
                 startActivity(new Intent(this, AboutActivity.class));

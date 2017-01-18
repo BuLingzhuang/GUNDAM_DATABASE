@@ -108,6 +108,7 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_image_browse);
         ButterKnife.bind(this);
+        Tools.changeFonts(this);
         init();
         initData();
     }

@@ -6,6 +6,7 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.blz.gundam_database.R;
+import com.blz.gundam_database.utils.Tools;
 import com.blz.gundam_database.views.swipebacklayout.SwipeBackActivity;
 
 import butterknife.Bind;
@@ -24,6 +25,7 @@ public class AboutActivity extends SwipeBackActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
+        Tools.changeFonts(this);
     }
 
     @OnClick(R.id.about_head_back)

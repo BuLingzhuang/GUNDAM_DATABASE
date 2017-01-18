@@ -74,6 +74,7 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
             statusManager.setStatusBarAlpha(0);
         }
         ButterKnife.bind(this);
+        Tools.changeFonts(this);
         init();
     }
 
