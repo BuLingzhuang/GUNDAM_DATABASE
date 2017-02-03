@@ -23,19 +23,29 @@
         <!--<item name="android:actionOverflowMenuStyle" tools:targetApi="lollipop">@style/CustomOverFlow</item>-->
         <item name="android:actionOverflowButtonStyle">@style/CustomOverFlow</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:actionBarStyle">@style/AppTheme.ActionBarWithNoTitle</item>
+        <item name="android:actionBarStyle">@style/customActionBar</item>
+        <item name="android:actionMenuTextColor">@android:color/white</item>
+        <item name="android:actionMenuTextAppearance">@style/actionBarMenu</item>
+    </style>
+
+    <style name="actionBarMenu" parent="@android:style/TextAppearance.Holo.Large">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="customActionBar" parent="@android:style/Widget.DeviceDefault.ActionBar">
+        <item name="android:titleTextStyle">@style/actionBarTitle</item>
+        <item name="android:subtitleTextStyle">@style/actionBarTitle</item>
+    </style>
+    <style name="actionBarTitle" parent="@android:style/TextAppearance.Holo.Large">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <!-- 首页右侧隐藏按钮的样式 -->
     <style name="CustomOverFlow">
         <item name="android:src">@mipmap/moreoverflow</item>
         <item name="android:paddingRight">10dp</item>
-    </style>
-
-    <!-- 首页显示文字为首页 -->
-    <style name="AppTheme.ActionBarWithNoTitle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:text">首页</item>
-        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <!-- 右滑回退页面样式 -->
@@ -76,4 +86,8 @@
         <item name="android:background">@color/login_gray_light</item>
     </style>
 
+    <style name="anim_popup_window">
+        <item name="android:windowEnterAnimation">@anim/popup_window_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_window_out</item>
+    </style>
 </resources>

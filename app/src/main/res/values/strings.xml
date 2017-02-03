@@ -35,4 +35,10 @@
     <string name="mst_other_type">Other（Metal Build、SD、Robot…）\n1:??</string>
     <string name="user_page_type_register">Existing account？To log in</string>
     <string name="user_page_type_login">Haven’t account？Go to register</string>
+    <string name="e_code_202">Username has already been taken</string>
+    <string name="e_code_203">Email has already been taken</string>
+    <string name="e_code_205">A user with the specified email was not found</string>
+    <string name="e_code_210">The username and password mismatch</string>
+    <string name="e_code_211">Could not find user</string>
+    <string name="e_code_219">Login failed more than limit, please wait</string>
 </resources>

@@ -22,7 +22,7 @@
     <string name="mst_wrong_query">错误的查询：</string>
     <string name="main_see_series">查看系列：</string>
     <string name="mobile_model_series">系列：</string>
-    <string name="mobile_price">价格（含税）：</string>
+    <string name="mobile_price">价格(含税)：</string>
     <string name="mobile_type">型号：</string>
     <string name="mobile_launch_date">发布时间：</string>
     <string name="mobile_see_belong">查看机体,属于：</string>
@@ -35,4 +35,10 @@
     <string name="mst_other_type">其他（Metal Build、SD、R魂...）\n1:??</string>
     <string name="user_page_type_register">已有账号？去登录</string>
     <string name="user_page_type_login">没有账号？去注册</string>
+    <string name="e_code_202">账号已被占用</string>
+    <string name="e_code_203">邮箱地址已被占用</string>
+    <string name="e_code_205">找不到邮箱地址对应的用户</string>
+    <string name="e_code_210">账号和密码不匹配</string>
+    <string name="e_code_211">找不到对应用户</string>
+    <string name="e_code_219">登录失败次数超过限制，请稍候再试</string>
 </resources>

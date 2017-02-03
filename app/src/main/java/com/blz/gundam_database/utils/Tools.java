@@ -1,14 +1,22 @@
 package com.blz.gundam_database.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +24,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVAnalytics;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.LogUtil;
 import com.blz.gundam_database.R;
+import com.blz.gundam_database.views.activitys.UserActivity;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by BuLingzhuang
@@ -100,6 +114,20 @@ public class Tools {
     }
 
     /**
+     * 获取默认保存文件夹(待完善)
+     *
+     * @return
+     */
+    public static File getDefaultFileDir() {
+        File dir = new File(Environment.getExternalStorageDirectory() + "/GUNDAM_DataBase/");
+        if (!dir.exists()) {
+            showLogE("没有文件夹，创建");
+            dir.mkdirs();
+        }
+        return dir;
+    }
+
+    /**
      * 图片保存本地方法
      *
      * @param context
@@ -118,8 +146,7 @@ public class Tools {
                         URL m_url = new URL(imageUrl);
                         HttpURLConnection con = (HttpURLConnection) m_url.openConnection();
                         InputStream is = con.getInputStream();
-                        File directory = Environment.getExternalStorageDirectory();
-                        File file = new File(directory, originalName + "_" + (currentItem + 1) + ".jpg");
+                        File file = new File(getDefaultFileDir(), originalName + "_" + (currentItem + 1) + ".jpg");
                         boolean b = file.createNewFile();
                         FileOutputStream fos;
                         if (b) {
@@ -193,5 +220,133 @@ public class Tools {
             }
         }
 
+    }
+
+    /**
+     * 检查是否存在SDCard
+     *
+     * @return
+     */
+    public static boolean hasSdcard() {
+        String state = Environment.getExternalStorageState();
+        if (state.equals(Environment.MEDIA_MOUNTED)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 根据Uri获取图片实际地址
+     *
+     * @param context
+     * @param uri
+     * @return
+     */
+    public static String getRealFilePath(final Context context, final Uri uri) {
+        if (null == uri) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if (scheme == null)
+            data = uri.getPath();
+        else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+            data = uri.getPath();
+        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
+            if (null != cursor) {
+                if (cursor.moveToFirst()) {
+                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    if (index > -1) {
+                        data = cursor.getString(index);
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
+    }
+
+    /**
+     * 获取本机机器码
+     *
+     * @param context
+     * @return
+     */
+    public static String getAndroidIMEI(Context context) {
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        @SuppressLint("HardwareIds") String deviceId = telephonyManager.getDeviceId();
+        if (TextUtils.isEmpty(deviceId)) {
+            deviceId = "未知机器码";
+        }
+        return deviceId;
+    }
+
+    /**
+     * 把bitmap对象 进行jpeg格式压缩 并且输出到具体路径
+     *
+     * @param bitmap
+     * @param path
+     */
+    public static String saveBitmap(Bitmap bitmap, String path) {
+//		Log.i("info", "saveFile:" + path);
+        File file = new File(path);
+        // 若父目录不存在 则创建父目录
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                // 把bitmap输出到该文件中
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        // 把bitmap输出到该文件中
+        try {
+            boolean compress = bitmap.compress(Bitmap.CompressFormat.JPEG, 100,
+                    new FileOutputStream(file));
+            if (compress) {
+                return path;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 根据返回错误码，弹对应提示
+     *
+     * @param context
+     */
+    public static void leanCloudExceptionHadling(Context context, AVException e) {
+        int eCode = e.getCode();
+        String eStr;
+        switch (eCode) {
+            case 202:
+                eStr = context.getResources().getString(R.string.e_code_202);
+                break;
+            case 203:
+                eStr = context.getResources().getString(R.string.e_code_203);
+                break;
+            case 205:
+                eStr = context.getResources().getString(R.string.e_code_205);
+                break;
+            case 210:
+                eStr = context.getResources().getString(R.string.e_code_210);
+                break;
+            case 211:
+                eStr = context.getResources().getString(R.string.e_code_211);
+                break;
+            case 219:
+                eStr = context.getResources().getString(R.string.e_code_219);
+                break;
+            default:
+                eStr = e.getMessage();
+                break;
+        }
+        Tools.showToast(context, eStr);
     }
 }

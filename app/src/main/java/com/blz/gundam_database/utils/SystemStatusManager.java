@@ -75,7 +75,7 @@ public class SystemStatusManager
             TypedArray a = activity.obtainStyledAttributes(attrs);
             try {
                 mStatusBarAvailable = a.getBoolean(0, false);
-                // TODO: 2017/1/13 之前是1，改为0
+                //2017/1/13 之前是1，改为0
                 mNavBarAvailable = a.getBoolean(0, false);
             } finally {
                 a.recycle();

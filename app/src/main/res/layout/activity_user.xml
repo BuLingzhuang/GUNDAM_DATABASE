@@ -12,15 +12,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
+        android:paddingLeft="26dp"
+        android:paddingRight="26dp"
         android:paddingTop="16dp">
 
         <RelativeLayout
             android:layout_width="84dp"
             android:layout_height="84dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="64dp">
+            android:layout_marginTop="56dp">
+
+            <com.blz.gundam_database.views.ui.CircleImageView
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/default_placeholder"
+                app:border_color="@color/colorPrimary"
+                app:border_width="2.5dp"/>
 
             <com.blz.gundam_database.views.ui.CircleImageView
                 android:id="@+id/civ_icon"
@@ -28,9 +37,25 @@
                 android:layout_height="84dp"
                 android:layout_centerInParent="true"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/default_placeholder"
-                app:border_color="@color/colorPrimary"
-                app:border_width="2dp"/>
+                app:border_color="@android:color/transparent"
+                app:border_width="2dp"
+                android:src="@mipmap/default_placeholder"/>
+
+            <View
+                android:id="@+id/civ_icon_mask"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:background="@drawable/bg_user_icon_mask"/>
+            <TextView
+                android:id="@+id/tv_icon_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:visibility="gone"
+                android:text=""
+                android:layout_centerInParent="true"/>
 
             <ImageView
                 android:id="@+id/iv_icon_type"
@@ -43,10 +68,9 @@
         <LinearLayout
             android:id="@+id/ll_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="220dp"
+            android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingBottom="28dp"
-            android:paddingTop="28dp"
             android:visibility="gone">
 
             <View
@@ -59,9 +83,9 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="手机号"
-                android:inputType="phone"
-                android:maxLength="11"
+                android:hint="账号"
+                android:inputType="textEmailAddress"
+                android:maxLength="20"
                 android:minHeight="32dp"
                 android:text=""
                 android:textColor="@color/colorPrimary"
@@ -80,10 +104,12 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="密码"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ"
                 android:inputType="textPassword"
                 android:maxLength="15"
                 android:minHeight="32dp"
                 android:text=""
+                android:layout_marginTop="6dp"
                 android:textColor="@color/colorPrimary"
                 android:textColorHint="@color/login_gray_light"
                 android:textSize="16sp"
@@ -97,19 +123,38 @@
         <LinearLayout
             android:id="@+id/ll_register"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:layout_height="220dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
             <EditText
+                android:id="@+id/et_register_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="昵称"
+                android:inputType="text"
+                android:maxLength="20"
+                android:minHeight="32dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/login_gray_light"
+                android:textSize="16sp"
+                />
+
+            <View
+                android:id="@+id/v_register_nickname"
+                style="@style/view_horizontal_login"/>
+
+            <com.blz.gundam_database.views.ui.EditTextFilter
                 android:id="@+id/et_register_userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="用户名"
-                android:inputType="textPersonName"
+                android:hint="账号(字母和数字)"
+                android:inputType="textEmailAddress"
                 android:maxLength="20"
                 android:minHeight="32dp"
                 android:text=""
@@ -122,25 +167,6 @@
                 android:id="@+id/v_register_userName"
                 style="@style/view_horizontal_login"/>
 
-            <EditText
-                android:id="@+id/et_register_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:gravity="center_vertical"
-                android:hint="手机号(仅支持中国大陆号码)"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:minHeight="32dp"
-                android:text=""
-                android:textColor="@color/colorPrimary"
-                android:textColorHint="@color/login_gray_light"
-                android:textSize="16sp"
-                />
-
-            <View
-                android:id="@+id/v_register_phone"
-                style="@style/view_horizontal_login"/>
 
             <EditText
                 android:id="@+id/et_register_password"
@@ -149,6 +175,7 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="密码(不少于6位)"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ"
                 android:inputType="textPassword"
                 android:maxLength="15"
                 android:minHeight="32dp"
@@ -161,6 +188,27 @@
             <View
                 android:id="@+id/v_register_password"
                 style="@style/view_horizontal_login"/>
+
+            <EditText
+                android:id="@+id/et_register_checkPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请再次输入密码"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:minHeight="32dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/login_gray_light"
+                android:textSize="16sp"
+                />
+
+            <View
+                android:id="@+id/v_register_checkPassword"
+                style="@style/view_horizontal_login"/>
         </LinearLayout>
 
         <TextView
@@ -169,8 +217,8 @@
             android:layout_height="42dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_login_submit_alpha"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/user_submit_type"
             android:gravity="center"
             android:text="注册"
             android:textColor="@android:color/white"
@@ -195,7 +243,30 @@
                 android:textSize="15sp"
                 tools:targetApi="lollipop"/>
         </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_user_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="卜令壮_hhy"
+                android:textSize="16sp"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/colorPrimary"/>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/btn_user_logout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="登出"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"/>
 
     <ImageView
         android:id="@+id/btn_login_weibo"
@@ -209,6 +280,7 @@
         tools:targetApi="lollipop"/>
 
     <LinearLayout
+        android:id="@+id/ll_login_otherTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/btn_login_weibo"

@@ -17,12 +17,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVAnalytics;
+import com.avos.avoscloud.AVUser;
 import com.blz.gundam_database.entities.EmptyEntity;
 import com.blz.gundam_database.entities.MainListByWorkEntity;
 import com.blz.gundam_database.impl.presenters.MainPresenterImpl;
@@ -32,6 +32,8 @@ import com.blz.gundam_database.utils.Tools;
 import com.blz.gundam_database.views.activitys.AboutActivity;
 import com.blz.gundam_database.views.activitys.UserActivity;
 import com.blz.gundam_database.views.adapters.MainListByWorksAdapter;
+import com.blz.gundam_database.views.ui.CircleImageView;
+import com.bumptech.glide.Glide;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -49,17 +51,19 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
     @Bind(R.id.main_refresh)
     SwipeRefreshLayout mRefresh;
     @Bind(R.id.menu_header_icon)
-    ImageView mHeaderIcon;
-    @Bind(R.id.menu_header_favorites)
-    LinearLayout mHeaderFavorites;
-    @Bind(R.id.menu_header_download)
-    LinearLayout mHeaderDownload;
+    CircleImageView mHeaderIcon;
+    //    @Bind(R.id.menu_header_favorites)
+//    LinearLayout mHeaderFavorites;
+//    @Bind(R.id.menu_header_download)
+//    LinearLayout mHeaderDownload;
     @Bind(R.id.main_nv_listView)
     ListView mNvListView;
     @Bind(R.id.main_navigationView)
     NavigationView mNavigationView;
     @Bind(R.id.main_drawerLayout)
     DrawerLayout mDrawerLayout;
+    @Bind(R.id.menu_header_nickname)
+    TextView mHeaderNickname;
     private ActionBarDrawerToggle mToggle;
     private long firstTime = 0L;
     private MainListByWorksAdapter mAdapter;
@@ -96,15 +100,15 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
         mDrawerLayout.addDrawerListener(mToggle);
 
         HashMap<Type, Integer> map = new HashMap<>();
-        map.put(MainListByWorkEntity.class,R.layout.adapter_main_grid);
-        map.put(EmptyEntity.class,R.layout.adapter_main_empty);
+        map.put(MainListByWorkEntity.class, R.layout.adapter_main_grid);
+        map.put(EmptyEntity.class, R.layout.adapter_main_empty);
         GridLayoutManager layout = new GridLayoutManager(this, 2);
         layout.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if (position+1 == mAdapter.getItemCount()){
+                if (position + 1 == mAdapter.getItemCount()) {
                     return 2;
-                }else {
+                } else {
                     return 1;
                 }
             }
@@ -124,22 +128,43 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
         mNvListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list));
     }
 
-    @OnClick({R.id.menu_header_icon, R.id.menu_header_favorites, R.id.menu_header_download})
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            String userIcon = (String) currentUser.get("userIcon");
+            Tools.showLogE("头像地址："+userIcon);
+            Glide.with(this).load(userIcon).crossFade().error(R.mipmap.default_placeholder).into(mHeaderIcon);
+            String nickname = (String) currentUser.get("nickname");
+            Tools.showLogE("昵称："+nickname);
+            if (nickname != null) {
+                mHeaderNickname.setText(nickname);
+            }else {
+                mHeaderNickname.setText("null");
+            }
+        }else {
+            mHeaderNickname.setText("(未登录)");
+            mHeaderIcon.setImageResource(R.mipmap.default_placeholder);
+        }
+    }
+
+    @OnClick({R.id.menu_header_icon})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.menu_header_icon:
                 startActivity(new Intent(this, UserActivity.class));
                 break;
-            case R.id.menu_header_favorites:
-                break;
-            case R.id.menu_header_download:
-                break;
+//            case R.id.menu_header_favorites:
+//                break;
+//            case R.id.menu_header_download:
+//                break;
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.actionbar_default_menu,menu);
+        getMenuInflater().inflate(R.menu.actionbar_default_menu, menu);
         return true;
     }
 
@@ -149,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
         if (mToggle.onOptionsItemSelected(item)) {
             b = true;
         }
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 //            case R.id.menu_message://消息
 //
 //                break;
@@ -184,13 +209,13 @@ public class MainActivity extends AppCompatActivity implements MainView, SwipeRe
         }
         if (mRefresh.isRefreshing()) {
             mRefresh.setRefreshing(false);
-            Tools.showSnackBar(this,getString(R.string.main_refresh_succeed),mDrawerLayout);
+            Tools.showSnackBar(this, getString(R.string.main_refresh_succeed), mDrawerLayout);
         }
     }
 
     @Override
     public void updateError(String eText) {
-        Tools.showSnackBar(this,eText,mDrawerLayout);
+        Tools.showSnackBar(this, eText, mDrawerLayout);
     }
 
     @Override
