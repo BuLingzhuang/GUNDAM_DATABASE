@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,7 +30,7 @@ import java.util.Map;
  * on 2016/5/26
  * E-mail bulingzhuang@foxmail.com
  */
-public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private Context mContext;
     private List<Object> mList;
     private Map<Type, Integer> mMap;
@@ -78,7 +79,7 @@ public class MobileSuitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 viewHolder.mTvModelSeries.setText(mContext.getString(R.string.mobile_model_series) + entity.getModelSeries());
                 viewHolder.mTvPrice.setText(mContext.getString(R.string.mobile_price) + entity.getPrice());
                 viewHolder.mTvLaunchDate.setText(mContext.getString(R.string.mobile_launch_date) + entity.getLaunchDate());
-                Tools.changeFont(mContext, viewHolder.mTvOriginalName, viewHolder.mTvModelSeries, viewHolder.mTvPrice, viewHolder.mTvLaunchDate);
+                Tools.changeFont(viewHolder.mTvOriginalName, viewHolder.mTvModelSeries, viewHolder.mTvPrice, viewHolder.mTvLaunchDate);
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

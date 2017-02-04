@@ -88,12 +88,12 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
         mWebUrl = mMainListByWorkEntity.getWebUrl();
         mPresenter.getData(mMainListByWorkEntity.getWorkId(), mModelSeries);
         mCtl.setTitle(mMainListByWorkEntity.getOriginalName());
-        Glide.with(this).load(mMainListByWorkEntity.getIcon()).into(mToolbarImg);
+        Glide.with(this).load(mMainListByWorkEntity.getIcon()).crossFade().into(mToolbarImg);
     }
 
     private void init() {
         mPresenter = new MobileSuitPresenterImpl(this);
-        mProgressBar.setDrawingCacheBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
+        mProgressBar.setDrawingCacheBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
 
         //设置回退按钮
         setSupportActionBar(mToolbar);
@@ -122,7 +122,7 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
                 //判断是不是向下滑动 且 当前显示的最下面那一项是不是adapter中最后一个
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mAdapter.getItemCount() && hasNext) {
                     lastPullTimes++;
-                    mPresenter.getData(mMainListByWorkEntity.getWorkId(),mModelSeries, lastPullTimes * 10);
+                    mPresenter.getData(mMainListByWorkEntity.getWorkId(), mModelSeries, lastPullTimes * 10);
                 }
             }
 
@@ -192,7 +192,7 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
         if (mWebUrl.endsWith(".jpg")) {
             imageView.setVisibility(View.VISIBLE);
             webView.setVisibility(View.GONE);
-            Glide.with(this).load(mWebUrl).error(R.mipmap.ic_launcher_black).placeholder(R.mipmap.ic_launcher_black).into(imageView);
+            Glide.with(this).load(mWebUrl).error(R.mipmap.ic_launcher_black).placeholder(R.mipmap.ic_launcher_black).crossFade().into(imageView);
         } else {
             imageView.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);

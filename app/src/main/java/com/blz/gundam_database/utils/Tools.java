@@ -27,6 +27,7 @@ import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.LogUtil;
 import com.blz.gundam_database.R;
+import com.blz.gundam_database.base.BaseApplication;
 import com.blz.gundam_database.views.activitys.UserActivity;
 
 import java.io.File;
@@ -173,53 +174,47 @@ public class Tools {
         }
     }
 
+    /** 被封印的禁忌♂艺术 */
+
     /**
      * 修改字体
      *
-     * @param context
      * @param views
      */
-    public static void changeFont(Context context, View... views) {
-        Typeface tf = Typeface.createFromAsset(context.getAssets(),
-                "PingFangRegular.ttf");
+    public static void changeFont(View... views) {
         for (View view : views) {
             if (view instanceof TextView) {
-                ((TextView) view).setTypeface(tf);
+                ((TextView) view).setTypeface(BaseApplication.getInstance().getCustomTypeface());
             }
         }
     }
 
     /**
-     * 遍历整个View树，修改文字(对外暴露方法)
+     * 遍历整个View树，修改文字
      *
      * @param act
      */
     public static void changeFonts(Activity act) {
         ViewGroup viewGroup = (ViewGroup) act.getWindow().getDecorView().findViewById(android.R.id.content);
 
-        changeFonts(viewGroup, act);
+        changeFonts(viewGroup);
     }
 
     /**
      * 遍历整个View树，修改文字(递归向下查找)
      *
      * @param root
-     * @param context
      */
-    private static void changeFonts(ViewGroup root, Context context) {
-
-        Typeface tf = Typeface.createFromAsset(context.getAssets(),
-                "PingFangRegular.ttf");
+    private static void changeFonts(ViewGroup root) {
 
         for (int i = 0; i < root.getChildCount(); i++) {
             View v = root.getChildAt(i);
             if (v instanceof TextView) {
-                ((TextView) v).setTypeface(tf);
+                ((TextView) v).setTypeface(BaseApplication.getInstance().getCustomTypeface());
             } else if (v instanceof ViewGroup) {
-                changeFonts((ViewGroup) v, context);
+                changeFonts((ViewGroup) v);
             }
         }
-
     }
 
     /**

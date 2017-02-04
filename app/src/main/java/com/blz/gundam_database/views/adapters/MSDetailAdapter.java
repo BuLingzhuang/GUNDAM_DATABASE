@@ -10,6 +10,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +27,7 @@ import java.util.Collection;
  * on 2016/5/31
  * E-mail bulingzhuang@foxmail.com
  */
-public class MSDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MSDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private ArrayList<MSDetailImageEntity> mList;
     private Context mContext;
     private String mOriginalName;
@@ -63,7 +64,7 @@ public class MSDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         MSDetailImageEntity entity = mList.get(position);
         final MSDetailAdapterViewHolder viewHolder = (MSDetailAdapterViewHolder) holder;
 
-        Glide.with(mContext).load(entity.getImageUri()).placeholder(R.mipmap.default_placeholder).crossFade().error(R.mipmap.default_placeholder).into(viewHolder.mImage);
+        Glide.with(mContext).load(entity.getImageUri()).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).crossFade().into(viewHolder.mImage);
 
         ViewGroup.LayoutParams params = viewHolder.itemView.getLayoutParams();
         params.height = entity.getHeight();

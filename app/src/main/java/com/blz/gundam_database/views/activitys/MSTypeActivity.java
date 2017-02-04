@@ -90,7 +90,7 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
 
         Intent intent = getIntent();
         mEntity = (MainListByWorkEntity) intent.getSerializableExtra(MainListByWorkEntity.class.getName());
-        Glide.with(this).load(mEntity.getIcon()).error(R.mipmap.default_placeholder).into(mImHeader);
+        Glide.with(this).load(mEntity.getIcon()).error(R.mipmap.default_placeholder).crossFade().into(mImHeader);
         presenter.getDataMap(mBooleanMap, mEntity.getWorkId());
     }
 
@@ -113,7 +113,7 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
                 start4MSA(Constants.MS_MODEL_SERIES_OTHER);
                 break;
             case R.id.mstype_btnBack:
-                onBackPressed();
+                finish();
                 break;
         }
     }
@@ -125,11 +125,11 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
         startActivity(intent);
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
+//    @Override
+//    public void onBackPressed() {
+//        finish();
 //        overridePendingTransition(0, R.anim.finish_activity_alpha);
-    }
+//    }
 
     @SuppressLint("DefaultLocale")
     @Override

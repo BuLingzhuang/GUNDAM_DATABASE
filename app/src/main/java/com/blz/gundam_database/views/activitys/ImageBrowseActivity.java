@@ -103,9 +103,9 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_browse);
         ButterKnife.bind(this);
         Tools.changeFonts(this);
@@ -196,7 +196,7 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.image_browse_back:
-                finish();
+                onBackPressed();
                 break;
             case R.id.image_browse_download:
                 int currentItem = mViewPager.getCurrentItem();
@@ -206,6 +206,12 @@ public class ImageBrowseActivity extends SwipeBackActivity implements View.OnCli
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(0, R.anim.finish_activity_alpha);
     }
 
     private void loadImage(String imageUrl, int currentItem) {

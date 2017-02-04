@@ -10,6 +10,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -69,10 +70,10 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             case R.layout.adapter_main_grid:
                 final MainListByWorkEntity entity = (MainListByWorkEntity) mList.get(position);
                 final MainListByWorksAdapterViewHolder viewHolder = (MainListByWorksAdapterViewHolder) holder;
-                Glide.with(mContext).load(entity.getIcon()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).into(viewHolder.mIvIcon);
+                Glide.with(mContext).load(entity.getIcon()).error(R.mipmap.default_placeholder).placeholder(R.mipmap.default_placeholder).crossFade().into(viewHolder.mIvIcon);
                 viewHolder.mTvOriginalName.setText(entity.getOriginalName());
                 viewHolder.mTvStoryYear.setText(entity.getStoryYear());
-                Tools.changeFont(mContext, viewHolder.mTvOriginalName, viewHolder.mTvStoryYear);
+                Tools.changeFont(viewHolder.mTvOriginalName, viewHolder.mTvStoryYear);
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -101,6 +102,7 @@ public class MainListByWorksAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public int getItemViewType(int position) {
         return mMap.get(mList.get(position).getClass());
     }
+
 
     public static class MainListByWorksAdapterViewHolder extends RecyclerView.ViewHolder {
 

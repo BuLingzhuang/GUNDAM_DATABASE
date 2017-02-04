@@ -87,7 +87,7 @@ public class MSDetailActivity extends AppCompatActivity {
         mMsdetailTvItemNo.setText("编号：" + data.getItemNo());
         mMsdetailTvLaunchDate.setText("发售时间：" + data.getLaunchDate());
         mMsdetailBoxImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        Glide.with(this).load(data.getBoxImage()).crossFade().placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).into(mMsdetailBoxImage);
+        Glide.with(this).load(data.getBoxImage()).placeholder(R.mipmap.default_placeholder).error(R.mipmap.default_placeholder).crossFade().into(mMsdetailBoxImage);
         Glide.with(this).load(data.getBoxImage()).crossFade().into(mBgImage);
         mBgImage.setAlpha(.075f);
 

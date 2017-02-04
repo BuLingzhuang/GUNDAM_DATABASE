@@ -83,7 +83,7 @@ public class SelectPopUtil {
         TextView list_1 = (TextView) menuView.findViewById(R.id.tv_list_1);
         TextView cancel = (TextView) menuView.findViewById(R.id.tv_cancel);
 
-        Tools.changeFont(mContext, list_0, list_1, cancel);
+        Tools.changeFont(list_0, list_1, cancel);
 
         list_0.setText(text0);
         if (TextUtils.isEmpty(text1)) {

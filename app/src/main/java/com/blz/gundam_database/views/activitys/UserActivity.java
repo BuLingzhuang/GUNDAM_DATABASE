@@ -106,6 +106,12 @@ public class UserActivity extends SwipeBackActivity {
     TextView btnUserLogout;
     @Bind(R.id.ll_login_otherTitle)
     LinearLayout llLoginOtherTitle;
+    @Bind(R.id.btn_tips)
+    RelativeLayout btnTips;
+    @Bind(R.id.rl_user_nickname)
+    RelativeLayout rlUserNickname;
+    @Bind(R.id.tv_user_tips)
+    TextView tvUserTips;
 
     private boolean mIsRegister;
     private boolean mIsUser;
@@ -151,7 +157,7 @@ public class UserActivity extends SwipeBackActivity {
             btnPageType.setVisibility(View.GONE);
             btnLoginWeibo.setVisibility(View.GONE);
             llLoginOtherTitle.setVisibility(View.GONE);
-            tvUserNickname.setVisibility(View.VISIBLE);
+            rlUserNickname.setVisibility(View.VISIBLE);
             btnUserLogout.setVisibility(View.VISIBLE);
 
             etLoginUserName.setText("");
@@ -265,25 +271,25 @@ public class UserActivity extends SwipeBackActivity {
                                     public void done(AVUser avUser, AVException e) {
                                         if (e == null) {
                                             if (!TextUtils.isEmpty(name)) {
-                                                avUser.put("nickname",name);
-                                            }else {
-                                                avUser.put("nickname",avUser.getUsername());
+                                                avUser.put("nickname", name);
+                                            } else {
+                                                avUser.put("nickname", avUser.getUsername());
                                             }
                                             if (!TextUtils.isEmpty(avatar_hd)) {
-                                                avUser.put("userIcon",avatar_hd);
+                                                avUser.put("userIcon", avatar_hd);
                                             }
                                             avUser.saveInBackground(new SaveCallback() {
                                                 @Override
                                                 public void done(AVException e) {
                                                     if (e == null) {
                                                         checkCurrentStatus(true);
-                                                    }else {
-                                                        Tools.leanCloudExceptionHadling(getApplicationContext(),e);
+                                                    } else {
+                                                        Tools.leanCloudExceptionHadling(getApplicationContext(), e);
                                                     }
                                                 }
                                             });
-                                        }else {
-                                            Tools.leanCloudExceptionHadling(getApplicationContext(),e);
+                                        } else {
+                                            Tools.leanCloudExceptionHadling(getApplicationContext(), e);
                                         }
                                     }
                                 });
@@ -300,7 +306,7 @@ public class UserActivity extends SwipeBackActivity {
     }
 
 
-    @OnClick({R.id.civ_icon, R.id.btn_submit, R.id.btn_pageType, R.id.btn_login_weibo, R.id.btn_back, R.id.btn_user_logout})
+    @OnClick({R.id.civ_icon, R.id.btn_submit, R.id.btn_pageType, R.id.btn_login_weibo, R.id.btn_back, R.id.btn_user_logout,R.id.btn_tips})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.civ_icon://头像(注册时可上传，登录时不可上传隐藏右上角图标)
@@ -321,14 +327,14 @@ public class UserActivity extends SwipeBackActivity {
                 finish();
                 break;
             case R.id.btn_user_logout://退出登录
-                SNS.logout(this,SNSType.AVOSCloudSNSSinaWeibo);
+                SNS.logout(this, SNSType.AVOSCloudSNSSinaWeibo);
                 AVUser.logOut();
                 if (AVUser.getCurrentUser() == null) {
                     mIsUser = false;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                         TransitionManager.beginDelayedTransition(activity, new Fade());
                     }
-                    tvUserNickname.setVisibility(View.GONE);
+                    rlUserNickname.setVisibility(View.GONE);
                     btnUserLogout.setVisibility(View.GONE);
                     btnSubmit.setVisibility(View.VISIBLE);
                     btnPageType.setVisibility(View.VISIBLE);
@@ -338,6 +344,16 @@ public class UserActivity extends SwipeBackActivity {
                     Glide.with(getApplicationContext()).load(R.mipmap.default_placeholder).crossFade().into(civIcon);
                 } else {
                     Tools.showToast(this, "登出失败(可能是服务器炸了吧)");
+                }
+                break;
+            case R.id.btn_tips://显示隐藏tips
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    TransitionManager.beginDelayedTransition(activity, new Fade());
+                }
+                if (tvUserTips.getVisibility()== View.VISIBLE) {
+                    tvUserTips.setVisibility(View.GONE);
+                }else {
+                    tvUserTips.setVisibility(View.VISIBLE);
                 }
                 break;
         }
