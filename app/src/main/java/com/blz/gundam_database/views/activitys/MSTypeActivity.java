@@ -113,7 +113,7 @@ public class MSTypeActivity extends AppCompatActivity implements MSTypeView {
                 start4MSA(Constants.MS_MODEL_SERIES_OTHER);
                 break;
             case R.id.mstype_btnBack:
-                finish();
+                onBackPressed();
                 break;
         }
     }
