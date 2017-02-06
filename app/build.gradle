@@ -13,15 +13,17 @@ android {
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.blz.gundam_database"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 25
-        versionCode 4
-        versionName "1.3"
+        versionCode 5
+        versionName "1.4"
         manifestPlaceholders = [CHANNEL_VALUE: "default_channel"]
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
+            zipAlignEnabled true
+
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
@@ -31,10 +33,17 @@ android {
     }
     productFlavors {
         default_channel{}
-        wandoujia {}
+        alibaba {}
         baidu {}
         tencent {}
         smartisan {}
+        flyme {}
+        mi {}
+        googlePlay {}
+        mi {}
+        le {}
+        samsung {}
+        coolapk {}
     }
     productFlavors.all {
         flavor ->
@@ -47,9 +56,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:cardview-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:cardview-v7:25.1.1'
+    compile 'com.android.support:design:25.1.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'de.greenrobot:greendao:2.1.0'
     compile files('libs/avoscloud-sdk-v3.15.7.jar')

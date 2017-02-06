@@ -3,6 +3,7 @@ package com.blz.gundam_database.views.activitys;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -17,6 +18,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -188,6 +191,9 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
         mMobileSuitBtnContent.setImageResource(R.mipmap.btn_hidden);
         @SuppressLint("InflateParams") View inflate = LayoutInflater.from(this).inflate(R.layout.popup_window_mobile_suit, null);
         WebView webView = (WebView) inflate.findViewById(R.id.popup_window_mobile_suit_webView);
+        webView.removeJavascriptInterface("searchBoxJavaBridge_");
+        webView.removeJavascriptInterface("accessibility");
+        webView.removeJavascriptInterface("accessibilityTraversal");
         ImageView imageView = (ImageView) inflate.findViewById(R.id.popup_window_mobile_suit_iv);
         if (mWebUrl.endsWith(".jpg")) {
             imageView.setVisibility(View.VISIBLE);
@@ -203,6 +209,11 @@ public class MobileSuitActivity extends AppCompatActivity implements MobileSuitV
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
                     view.loadUrl(url);
                     return true;
+                }
+
+                @Override
+                public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                    super.onReceivedSslError(view, handler, error);
                 }
             });
         }
